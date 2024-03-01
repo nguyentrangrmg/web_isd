@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+header {
+  float: left;
+  width: 100%;
+  background-color: #ccc;
+  margin-bottom: 5px;
+  padding: 20px;
+}
+.main {
+  float: left;
+  width: calc(100% -100px);
+  padding: 0px 50px;
+}
+th,
+td {
+  padding: 10px 20px;
+  border: 1px #ccc solid;
+}
+th {
+  background-color: #999;
+}
+ul.admin_menu {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+ul.admin_menu li {
+  float: left;
+  margin: 0;
+}
+h2 {
+  text-align: center;
+}
+.wrapper {
+  border: 1px solid #000;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+}
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #234;
+  padding-top: 0px;
+}
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: flex;
+}
+.sidebar a:hover {
+  background: #0062cc;
+  z-index: 1;
+}
+
+.ten_admin {
+  margin-top: 10px;
+  padding: 10px 15px;
+  color: #ff7610;
+  font-size: 20px;
+  text-align: Left;
+}
+.trangadmin {
+  margin-left: 0;
+  text-align: center;
+  z-index: 1;
+}
+.line_menu {
+  width: 100%;
+}
+@media screen and (max-width: 550px) {
+  .trangadmin {
+    position: absolute;
+    left: 202px;
+  }
+}
