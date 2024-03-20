@@ -2,6 +2,7 @@
     session_start();
     if(!isset($_SESSION['login'])){
         header('Location:login.php');
+        exit;
     }
     if(isset($_GET['dangxuat'])&&$_GET['dangxuat']==1){
         unset($_SESSION['login']);
@@ -14,10 +15,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href= "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <script src= "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> 
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <title>Trang Quản Lý</title>   
 </head>
 <body>
-    <h2 class="trangadmin">Trang Admin</h2>
     <?php //lấy tên Admin từ csdl
         $conn = new mysqli('localhost', 'root', '','web_isd');
         $sql = "SELECT name FROM user";
@@ -26,18 +30,10 @@
             $ten_admin = $row['name'];
         }
     ?>
-    <div class="sidebar" id="Administrators" style="display:flex">
-    <ul class="admin_menu">
-        <div class="ten_admin">
-            <img src="images/iconadmin3.jpg" style="width: 20px; height: auto;">
-            <?php if(isset($ten_admin)&&($ten_admin!="")){
-                echo "<span><strong>$ten_admin</strong></span>";
-            } ?></div>
-        <li class="line_menu"><a href="">Quản lý học viên </a></li> <br>
-        <li class="line_menu"><a href="">Danh sách học viên </a></li> <br>
-        <li class="line_menu"><a href="index.php?dangxuat=1" style="color: red;">Đăng xuất </a></li><br>
+    <?php 
+    if(isset($_SESSION['login']))
+        include 'trangquanly.php';
     
-    </ul></div>
-    
+?>
 </body>
 </html>
