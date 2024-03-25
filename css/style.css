@@ -1,139 +1,128 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-body {
-  position: relative;
-  width: 100%;
-}
-
-nav {
-  position: fixed;
-  width: 250px;
-  height: 100%;
-  background: #f1f1f1;
-  display: flex;
-  align-items: center;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  /* transition: linear 0.5s; */
-}
-nav .logo {
-  position: absolute;
-  right: 120px;
-  top: 40px;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-nav.hide {
-  width: 0;
-}
-nav ul {
-  width: 100%;
-  list-style: none;
-  overflow: hidden;
-  align-items: center;
-}
-.bt {
   border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif, sans-serif;
 }
-.line_menu {
-  width: 100%;
-  color: #1e90ff;
-  font-size: 1.2em;
+body {
+  display: flex;
+}
+.sidebar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 110px;
+  height: 100vh;
+  padding: 0 1.5rem;
+  color: #fff;
+  overflow: hidden;
+  transition: all 0.5s linear;
+  background: rgba(21, 144, 202, 244);
+}
+.sidebar:hover {
+  width: 240px;
+  transition: 0.5s;
+}
+.logo {
+  height: 140px;
+  padding: 10px;
+}
+.logo img {
+  max-width: 100%;
+  height: auto;
+  transition: all 0.5s ease-in-out;
+}
+.sidebar:hover .logo img {
+  max-width: 90%;
+  top: 20px;
+}
+.menu {
+  height: 88%;
+  position: relative;
+  list-style: none;
+  padding: 0;
+}
+.menu li {
+  padding: 1rem;
+  margin: 8px 0;
+  border-radius: 8px;
+  transition: all 0.5s ease-in-out;
+}
+.menu li:hover,
+.active {
+  background: #e0e0e058;
+}
+.menu a {
+  color: #fff;
+  font-size: 14px;
   text-decoration: none;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  padding: 15px;
-  transition: linear 0.5s;
+  gap: 1.5rem;
+  white-space: nowrap;
 }
-nav ul li a {
+.menu a span {
+  overflow: hidden;
+}
+.menu a i {
+  font-size: 1.2rem;
+}
+.logout {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
   width: 100%;
-  color: #1e90ff;
-  font-size: 1.2em;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  padding: 15px;
-  transition: linear 0.5s;
+  overflow: hidden;
+  white-space: nowrap;
 }
-nav ul li .ten_admin {
-  width: 100%;
-  color: #000000;
-  font-size: 1.2em;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  padding: 15px;
-  transition: linear 0.5s;
-}
-.line_menu:hover {
-  background: #1e90ff;
-  color: white;
-}
-nav ul li a:hover {
-  background: #b0d0f1;
-  color: rgb(255, 255, 255);
+.logout a {
+  overflow: hidden;
 }
 .content {
-  position: absolute;
+  position: relative;
   top: 0;
-  left: 250px;
   width: calc(100% - 250px);
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  transition: ease-in-out 0.5s;
+  padding: 10px;
+  /* font-size: 80%; */
 }
-.content.expand {
-  width: calc(100%-50px);
-  left: 50px;
+@media only screen and (max-width: 1201px) {
+  .content {
+    font-size: 12px; /* Giảm kích thước chữ xuống 12px */
+  }
 }
-.content h2 {
-  font-size: 4.5em;
-  color: #1e90ff;
-  text-emphasis: uppercase;
-}
-nav .click_menu {
-  position: absolute;
-  top: 20px;
-  right: -46px;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #f1f1f1;
-  border-radius: 0 10px 10px 0;
-  cursor: pointer;
-  transition: linear 0.5s;
-}
-nav .click_menu ion-icon {
-  color: #1e90ff;
-  font-size: 1.5em;
-  transition: linear 0.2s;
-}
-nav .click_menu:hover {
-  background: #1e90ff;
-}
-nav .click_menu:hover ion-icon {
+.dele {
+  background-color: #dd1f1f;
   color: white;
+  margin: 8px 0;
+  border: none;
+  text-align: center;
+  width: auto;
+  padding: 5px;
+}
+.add {
+  background-color: #4a9b44;
+  color: white;
+  margin: 8px 0;
+  border: none;
+  text-align: center;
+  width: auto;
+  padding: 5px;
+}
+.edit {
+  background-color: #518ee9;
+  color: white;
+  margin: 8px 0;
+  border: none;
+  text-align: center;
+  width: auto;
+  padding: 5px;
 }
 
-nav.hide {
-  width: 0;
-}
-.sidebar {
-  display: flex;
-}
-.content {
-  flex-grow: 1;
+button:hover {
+  opacity: 0.8;
 }
