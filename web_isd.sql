@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2024 at 06:43 PM
+-- Generation Time: Mar 25, 2024 at 06:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `web_isd`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jporder`
+--
+
+CREATE TABLE `jporder` (
+  `mdh` varchar(20) NOT NULL,
+  `ngay_nhan` date NOT NULL,
+  `so_luong_hv` int(100) NOT NULL,
+  `ngay_DKXC` date DEFAULT NULL,
+  `nghiep_doan` varchar(50) NOT NULL,
+  `luong_du_kien` bigint(20) DEFAULT NULL,
+  `mo_ta` varchar(1000) DEFAULT NULL,
+  `yeu_cau` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -56,15 +73,49 @@ CREATE TABLE `student` (
 INSERT INTO `student` (`mhv`, `ho_ten`, `ngay_sinh`, `ho_chieu`, `CCCD`, `que_quan`, `sdt`, `ngay_thi`, `co_quan`, `ngay_DKXC`, `ngayXC`, `dukien_venuoc`, `nganh_nghe`, `xi_nghiep`, `nghiep_doan`, `noi_lam_viec`, `note`, `sdt_nguoigiamho`, `trang_thai`) VALUES
 ('MHV002', 'Trần Thị B', '1995-10-10', '87654321', 'CCCD654321', 'Hồ Chí Minh', '0123456789', '2024-03-20', 'Công ty XYZ', '2024-02-01', '2024-03-01', '2024-05-01', 'Chuyên viên marketing', 'Công ty XYZ', 'Nhân viên', 'Hồ Chí Minh', 'Ghi chú 2', 0, '');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(12) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `email` varchar(50) NOT NULL,
+  `user` varchar(20) NOT NULL,
+  `pass` varchar(20) NOT NULL,
+  `role` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `email`, `user`, `pass`, `role`) VALUES
+(1, 'Admin', 'admin@gmail.com', 'admin', '123', 1);
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `jporder`
+--
+ALTER TABLE `jporder`
+  ADD PRIMARY KEY (`mdh`);
 
 --
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`mhv`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
