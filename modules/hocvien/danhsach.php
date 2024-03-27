@@ -7,8 +7,8 @@ $res=mysqli_query($mysqli, "select * from student");
 <div>
 <a href="javascript:void(0)" onclick="add()"><button class="add">Them moi</button></a>
 <a href="javascript:void(0)" onclick="delete_all()"><button class="dele">Xoa</button></a>
-<a href="javascript:void(0)" onclick="import()"><button class="add">Nhập Excel</button></a>
-<a href="javascript:void(0)" onclick="xuatfile()"><button class="add">Xuất Excel</button></a>
+<a href="javascript:void(0)" onclick="import()"><button class="import">Nhập Excel</button></a>
+<a href="javascript:void(0)" onclick="xuatfile()"><button class="export">Xuất Excel</button></a>
 
   <form method="post" id="frm">
     <table class="table">
@@ -82,6 +82,8 @@ $res=mysqli_query($mysqli, "select * from student");
     } else {
         alert("Chọn ít nhất 1 checkbox để xóa.");
     }
+  }
+  function add(){
     
   }
 </script>
