@@ -1,1 +1,1 @@
-<?php echo "dashboard" ?>
+<?php echo "day la dashboard"?>
