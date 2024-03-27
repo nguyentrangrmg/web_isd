@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2024 at 06:53 PM
+-- Generation Time: Mar 27, 2024 at 09:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,8 +35,16 @@ CREATE TABLE `jporder` (
   `nghiep_doan` varchar(50) NOT NULL,
   `luong_du_kien` bigint(20) DEFAULT NULL,
   `mo_ta` varchar(1000) DEFAULT NULL,
-  `yeu_cau` varchar(100) DEFAULT NULL
+  `yeu_cau` varchar(100) DEFAULT NULL,
+  `nganh_nghe` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jporder`
+--
+
+INSERT INTO `jporder` (`mdh`, `ngay_nhan`, `so_luong_hv`, `ngay_DKXC`, `nghiep_doan`, `luong_du_kien`, `mo_ta`, `yeu_cau`, `nganh_nghe`) VALUES
+('984382', '0000-00-00', 5, '0000-00-00', 'Katsunaka', 60, NULL, 'Tiếng Nhật N4, Tốt nghiệp cấp 3', NULL);
 
 -- --------------------------------------------------------
 
@@ -71,6 +79,8 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`mhv`, `ho_ten`, `ngay_sinh`, `ho_chieu`, `CCCD`, `que_quan`, `sdt`, `ngay_thi`, `co_quan`, `ngay_DKXC`, `ngayXC`, `dukien_venuoc`, `nganh_nghe`, `xi_nghiep`, `nghiep_doan`, `noi_lam_viec`, `note`, `sdt_nguoigiamho`, `trang_thai`) VALUES
+('202309', 'Nguyễn Bảo Trâm', '0000-00-00', '10848237', '03389247832', 'Hà Nam', '0932873232', '0000-00-00', 'TVC', '0000-00-00', '0000-00-00', '0000-00-00', 'Chăm cây', 'Nagaoka', 'Kaibuki-chou Co.', 'Osaka', NULL, 287239743, 'Chưa xuất cảnh'),
+('848723', 'Nguyễn Ngọc Tâm', '0000-00-00', '39275284', '0288472942', 'Bắc Giang', '0238486862', '0000-00-00', 'TVC', '0000-00-00', '0000-00-00', '0000-00-00', 'Xây dựng', 'Karabuki', 'Okinawa Co.', 'Kawasaki', '', 24872325, 'Học viên'),
 ('MHV002', 'Trần Thị B', '1995-10-10', '87654321', 'CCCD654321', 'Hồ Chí Minh', '0123456789', '2024-03-20', 'Công ty XYZ', '2024-02-01', '2024-03-01', '2024-05-01', 'Chuyên viên marketing', 'Công ty XYZ', 'Nhân viên', 'Hồ Chí Minh', 'Ghi chú 2', 0, '');
 
 -- --------------------------------------------------------
