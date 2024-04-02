@@ -6,4 +6,5 @@ if(isset($_POST['checkbox'][0])){
         mysqli_query($mysqli,"DELETE from student where mhv='$id'");
     }
 }
+
 ?>

@@ -44,16 +44,6 @@
                 </button>
                 </input></form>
             </div></li>
-            <li><div>
-                <form method="get" action="#">
-                    <input name = "chucnang" value="giaovien" style="display:none">
-                    <button class="bt" style="width: 100%">
-                    <div class ="line_menu">Giáo Viên</div>
-                </button>
-                </input></form>
-            </div></li>
-
-           
             <li class="logout">
                     <a href="index.php?dangxuat=1" style="color: red;">
                     Đăng xuất 
@@ -71,9 +61,6 @@
                     break;
                 case 'donhang':
                     include 'modules/donhang/danhsachdonhang.php';
-                    break;
-                case 'giaovien':
-                    include 'modules/giaovien/danhsachgv.php';
                     break;
                 case 'dashboard':
                     include 'modules/menu.php';
