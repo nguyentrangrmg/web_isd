@@ -1,7 +1,7 @@
 <?php
 require 'config.php';
 
-$res = mysqli_query($mysqli, "SELECT * FROM student WHERE type_hv='1' ORDER BY CONCAT(SUBSTRING(mhv, 1, 2), SUBSTRING(mhv, -3)) ASC;");
+$res = mysqli_query($mysqli, "SELECT * FROM student WHERE type_hv='dd' ORDER BY CONCAT(SUBSTRING(mhv, 1, 2), SUBSTRING(mhv, -3)) ASC;");
 
 if ($res === false) {
     echo "Error: " . mysqli_error($mysqli);
@@ -11,13 +11,13 @@ if ($res === false) {
     <div class="loai_hv">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="?type=1">Thực tập sinh số 1</a>
+                <a class="nav-link" href="?type=1">Thực tập sinh số 1</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?type=3">Thực tập sinh số 3</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?type=dd">Kỹ năng đặc định</a>
+                <a class="nav-link  active" href="?type=dd">Kỹ năng đặc định</a>
             </li>
         </ul>
     </div>
@@ -67,7 +67,7 @@ if ($res === false) {
                                     <form action="?sua=<?php echo $row['mhv']; ?>" method="GET">
                                       <input type="hidden" name="edit" value="<?php echo $row['mhv']; ?>">
                                       <button class="dropdown-item" type="submit">Sửa</button>
-                                    </form>
+                                  </form>
                                         <a class="dropdown-item" href="#">Xóa</a>
                                     </div>
                                 </div>
