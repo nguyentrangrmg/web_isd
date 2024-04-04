@@ -52,7 +52,7 @@ if ($res === false) {
                             <td><input type="checkbox" id="<?php echo $row['mhv']?>" name="checkbox[]" value="<?php echo $row['mhv']?>"/></td>
                             <td><?php echo $row['mhv'] ?></td>
                             <td><?php echo $row['ho_ten'] ?></td>
-                            <td><?php echo $row['ngay_sinh'] ?></td>
+                            <td><?php echo date('d/m/Y', strtotime($row['ngay_sinh'])) ?></td>
                             <td><?php echo $row['sdt'] ?></td>
                             <td><?php echo $row['ngay_thi'] ?></td>
                             <td><?php echo $row['ngay_nhaphoc'] ?></td>

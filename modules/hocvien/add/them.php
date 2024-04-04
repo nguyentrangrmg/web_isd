@@ -10,13 +10,15 @@
 <body>
 <div class="container">
   <div class="add-form">
-    <a href="?type=1" class="btn btn-primary mb-3">Trở về</a>
-    <h2>Tạo Mới Học Viên</h2>
-    <?php if (isset($_GET['error_message'])) {
-    $error_message = $_GET['error_message'];
-    echo "<p style='color: red;'>$error_message</p>";
-}
-?>
+    <a href="?type=1" class="btn btn-primary mb-3">Trở về</a><br>
+    <a style="font-size: 25px;">Tạo Mới Học Viên</a>
+    <a>
+      <?php if (isset($_GET['error_message'])) {
+      $error_message = $_GET['error_message'];
+      echo "<p style='color: red;'>$error_message</p>";
+      }
+      ?>
+    </a>
     <form action="modules/hocvien/add/add.php" method="POST">
       <div class="row">
         <div class="col-md-4">

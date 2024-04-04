@@ -35,7 +35,14 @@
     <?php 
     if(isset($_SESSION['login']))
         include 'trangquanly.php';
-    
+
+    if (isset($_GET['error_message'])) {
+        $error_message = $_GET['error_message'];
+        echo "<p style='color: red;'>$error_message</p>";
+            
+        include 'trangquanly.php';
+        }
+
 ?>
 
 </body>

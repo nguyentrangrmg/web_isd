@@ -142,19 +142,18 @@
             } 
             if(isset($_GET['type'])) {
               $type = $_GET['type'];
-              // Dựa vào giá trị của 'type', include trang tương ứng
               switch($type) {
                   case 1:
-                      include 'modules/hocvien/danhsach.php'; // Trang "Thực tập sinh số 1"
+                      include 'modules/hocvien/danhsach.php';
                       break;
                   case 3:
-                      include 'modules/hocvien/danhsachtt3.php'; // Trang "Thực tập sinh số 3"
+                      include 'modules/hocvien/danhsachtt3.php';
                       break;
                   case 'dd':
-                      include 'modules/hocvien/danhsachdd.php'; // Trang "Kỹ năng đặc định"
+                      include 'modules/hocvien/danhsachdd.php';
                       break;
                   default:
-                      include 'modules/hocvien/danhsach.php'; // Trang mặc định
+                      include 'modules/hocvien/danhsach.php';
                       break;
               }
           }
@@ -168,6 +167,10 @@
         }
         if(isset($_GET['edit'])) {
           include 'modules/hocvien/edit/editfform.php';
+      } 
+      if (isset($_GET['error_message'])) {
+          $error_message = $_GET['error_message'];
+          include 'modules/hocvien/add/them.php';
       }
             ?>
           </div>
