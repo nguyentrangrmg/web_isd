@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 09:30 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Apr 09, 2024 at 06:44 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,16 +35,16 @@ CREATE TABLE `jporder` (
   `nghiep_doan` varchar(50) NOT NULL,
   `luong_du_kien` bigint(20) DEFAULT NULL,
   `mo_ta` varchar(1000) DEFAULT NULL,
-  `yeu_cau` varchar(100) DEFAULT NULL,
-  `nganh_nghe` varchar(20) DEFAULT NULL
+  `yeu_cau` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `jporder`
 --
 
-INSERT INTO `jporder` (`mdh`, `ngay_nhan`, `so_luong_hv`, `ngay_DKXC`, `nghiep_doan`, `luong_du_kien`, `mo_ta`, `yeu_cau`, `nganh_nghe`) VALUES
-('984382', '0000-00-00', 5, '0000-00-00', 'Katsunaka', 60, NULL, 'Tiếng Nhật N4, Tốt nghiệp cấp 3', NULL);
+INSERT INTO `jporder` (`mdh`, `ngay_nhan`, `so_luong_hv`, `ngay_DKXC`, `nghiep_doan`, `luong_du_kien`, `mo_ta`, `yeu_cau`) VALUES
+('MDH001', '2024-03-27', 100, '2024-04-05', 'Nghề đoàn A', 5000000, 'Mô tả đơn hàng 1', 'Yêu cầu đơn hàng 1'),
+('MDH002', '2024-03-28', 150, '2024-04-10', 'Nghề đoàn B', 7000000, 'Mô tả đơn hàng 2', 'Yêu cầu đơn hàng 2');
 
 -- --------------------------------------------------------
 
@@ -53,13 +53,13 @@ INSERT INTO `jporder` (`mdh`, `ngay_nhan`, `so_luong_hv`, `ngay_DKXC`, `nghiep_d
 --
 
 CREATE TABLE `student` (
-  `mhv` varchar(6) NOT NULL,
-  `ho_ten` varchar(50) NOT NULL,
+  `mhv` varchar(9) NOT NULL,
+  `ho_ten` varchar(50) DEFAULT NULL,
   `ngay_sinh` date DEFAULT NULL,
   `ho_chieu` varchar(8) DEFAULT NULL,
   `CCCD` varchar(12) DEFAULT NULL,
   `que_quan` varchar(50) DEFAULT NULL,
-  `sdt` varchar(10) NOT NULL,
+  `sdt` varchar(10) DEFAULT NULL,
   `ngay_thi` date DEFAULT NULL,
   `co_quan` varchar(50) DEFAULT NULL,
   `ngay_DKXC` date DEFAULT NULL,
@@ -70,18 +70,31 @@ CREATE TABLE `student` (
   `nghiep_doan` varchar(50) DEFAULT NULL,
   `noi_lam_viec` varchar(50) DEFAULT NULL,
   `note` varchar(200) DEFAULT NULL,
-  `sdt_nguoigiamho` int(11) NOT NULL,
-  `trang_thai` varchar(50) NOT NULL
+  `type_hv` varchar(2) NOT NULL,
+  `ngay_nhaphoc` date NOT NULL,
+  `order_name` varchar(20) NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`mhv`, `ho_ten`, `ngay_sinh`, `ho_chieu`, `CCCD`, `que_quan`, `sdt`, `ngay_thi`, `co_quan`, `ngay_DKXC`, `ngayXC`, `dukien_venuoc`, `nganh_nghe`, `xi_nghiep`, `nghiep_doan`, `noi_lam_viec`, `note`, `sdt_nguoigiamho`, `trang_thai`) VALUES
-('202309', 'Nguyễn Bảo Trâm', '0000-00-00', '10848237', '03389247832', 'Hà Nam', '0932873232', '0000-00-00', 'TVC', '0000-00-00', '0000-00-00', '0000-00-00', 'Chăm cây', 'Nagaoka', 'Kaibuki-chou Co.', 'Osaka', NULL, 287239743, 'Chưa xuất cảnh'),
-('848723', 'Nguyễn Ngọc Tâm', '0000-00-00', '39275284', '0288472942', 'Bắc Giang', '0238486862', '0000-00-00', 'TVC', '0000-00-00', '0000-00-00', '0000-00-00', 'Xây dựng', 'Karabuki', 'Okinawa Co.', 'Kawasaki', '', 24872325, 'Học viên'),
-('MHV002', 'Trần Thị B', '1995-10-10', '87654321', 'CCCD654321', 'Hồ Chí Minh', '0123456789', '2024-03-20', 'Công ty XYZ', '2024-02-01', '2024-03-01', '2024-05-01', 'Chuyên viên marketing', 'Công ty XYZ', 'Nhân viên', 'Hồ Chí Minh', 'Ghi chú 2', 0, '');
+INSERT INTO `student` (`mhv`, `ho_ten`, `ngay_sinh`, `ho_chieu`, `CCCD`, `que_quan`, `sdt`, `ngay_thi`, `co_quan`, `ngay_DKXC`, `ngayXC`, `dukien_venuoc`, `nganh_nghe`, `xi_nghiep`, `nghiep_doan`, `noi_lam_viec`, `note`, `type_hv`, `ngay_nhaphoc`, `order_name`, `status`) VALUES
+('2424001', '11111', '2024-04-18', 'qưeqưe', '123123', '13123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0000-00-00', '', ''),
+('DD2416001', 'sadasdsa', '2016-07-02', 'adsasd', 'asdasd', '', '13132', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', 'dd', '0000-00-00', '13', 'option1'),
+('DD2420002', 'sadasdsa', '2020-10-04', 'adsasd', 'asdasd', '', '13132', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', 'dd', '0000-00-00', '13', 'option1'),
+('DD2424003', '1adsá', '2024-04-25', '', '', '', '', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', 'dd', '0000-00-00', '', 'option1'),
+('T12405002', '3123123132', '2024-04-05', '1231231', 'ddd', '', '13132', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '0000-00-00', '', 'option1'),
+('T12424001', '11111', '2024-04-25', 'qưeqưe', '123123', '13123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '0000-00-00', '', ''),
+('T12424008', '123123', '2024-04-19', '', '', '', '', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '0000-00-00', '', 'option1'),
+('T12424009', '123213123123', '2024-04-04', '', '', '', '31312', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '0000-00-00', '', 'option1'),
+('T12470000', '123123', '0000-00-00', NULL, NULL, NULL, '', '0000-00-00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '0000-00-00', '', 'option1'),
+('T32424000', '123123', '2024-04-11', NULL, NULL, NULL, 'áđá', '0000-00-00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '0000-00-00', '', 'option1'),
+('T32424008', 'sadasdsa', '2024-04-19', '', '', '', '', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '3', '0000-00-00', '', 'option1'),
+('T32424009', '123123', '2024-04-19', '', '', '', '', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '3', '0000-00-00', '', 'option1'),
+('T32425006', '123123', '2024-04-25', '1', 'áđásadsađáád', '', 'áđá', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '3', '0000-00-00', '', 'option1'),
+('T32427010', '123123', '2027-10-12', '', '', '', '', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '3', '0000-00-00', '', 'option1');
 
 -- --------------------------------------------------------
 
@@ -108,12 +121,6 @@ INSERT INTO `user` (`id`, `name`, `email`, `user`, `pass`, `role`) VALUES
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `jporder`
---
-ALTER TABLE `jporder`
-  ADD PRIMARY KEY (`mdh`);
 
 --
 -- Indexes for table `student`
