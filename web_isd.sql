@@ -3,9 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Generation Time: Apr 11, 2024 at 04:37 AM
+=======
+-- Generation Time: Apr 09, 2024 at 11:32 PM
+>>>>>>> e726b8173005ed282aeb613a4aecee2b7c0f9ca1
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +22,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `web_isd`
+-- Database: `tvc_1`
 --
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `baolanh`
 --
 
@@ -39,6 +44,8 @@ CREATE TABLE `baolanh` (
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> e726b8173005ed282aeb613a4aecee2b7c0f9ca1
 -- Table structure for table `enterprise`
 --
 
@@ -54,12 +61,58 @@ CREATE TABLE `enterprise` (
   `so_luong_don_hang` int(11) DEFAULT NULL,
   `so_luong_hv` int(11) DEFAULT NULL,
   `ghi_chu` varchar(255) DEFAULT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+>>>>>>> e726b8173005ed282aeb613a4aecee2b7c0f9ca1
 
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `jporder`
+=======
+-- Table structure for table `lsxkld`
+--
+
+CREATE TABLE `lsxkld` (
+  `lich_su_XKLD_id` varchar(255) NOT NULL,
+  `ngay_XC` varchar(255) DEFAULT NULL,
+  `thoi_gian_lam_viec` varchar(255) DEFAULT NULL,
+  `xi_nghiep` varchar(20) NOT NULL,
+  `nganh_nghe` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migration`
+--
+
+CREATE TABLE `migration` (
+  `version` varchar(180) NOT NULL,
+  `apply_time` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `migration`
+--
+
+INSERT INTO `migration` (`version`, `apply_time`) VALUES
+('m000000_000000_base', 1712698127),
+('m130524_201442_init', 1712698134),
+('m190124_110200_add_verification_token_column_to_user_table', 1712698134),
+('m240408_033659_student', 1712698134),
+('m240408_040547_order', 1712698134),
+('m240408_041822_enterprise', 1712698278),
+('m240409_192433_lsxkld', 1712698278);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order`
+>>>>>>> e726b8173005ed282aeb613a4aecee2b7c0f9ca1
 --
 
 CREATE TABLE `jporder` (
@@ -84,12 +137,17 @@ CREATE TABLE `jporder` (
   `nganh_nghe` varchar(20) NOT NULL,
   `noi_lam_viec` varchar(255) DEFAULT NULL,
   `mo_ta` varchar(1000) DEFAULT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+>>>>>>> e726b8173005ed282aeb613a4aecee2b7c0f9ca1
 --
 -- Dumping data for table `jporder`
 --
 
+<<<<<<< HEAD
 INSERT INTO `jporder` (`mdh`, `ten_dh`, `ngay_dktt`, `ngay_nhan`, `ngay_pv`, `hinh_thuc_tt`, `ngay_DKXC`, `ngay_dukien_VN`, `so_luong_hv`, `yeu_cau`, `noi lam viec`, `luong_du_kien`, `che_do_phu_cap`, `thoi_gian_lam_viec`, `trang_thai`, `ghi_chu`, `nghiep_doan`, `xi_nghiep`, `nganh_nghe`, `noi_lam_viec`, `mo_ta`) VALUES
 ('984382', '', NULL, '0000-00-00', NULL, NULL, '0000-00-00', NULL, 5, 'Tiếng Nhật N4, Tốt nghiệp cấp 3', NULL, 60, NULL, NULL, NULL, NULL, 'Katsunaka', '', '', NULL, NULL),
 ('MDH001', '', NULL, '2024-03-27', NULL, NULL, '2024-04-05', NULL, 100, 'Yêu cầu đơn hàng 1', NULL, 5000000, NULL, NULL, NULL, NULL, 'Nghề đoàn A', '', '', NULL, 'Mô tả đơn hàng 1'),
@@ -109,6 +167,12 @@ CREATE TABLE `lsxkld` (
   `nganh_nghe` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+=======
+INSERT INTO `jporder` (`mdh`, `ngay_nhan`, `so_luong_hv`, `ngay_DKXC`, `nghiep_doan`, `luong_du_kien`, `mo_ta`, `yeu_cau`) VALUES
+('984382', '2023-00-00', 5, '0000-00-00', 'Katsunaka', 60, NULL ,'Tiếng Nhật N4, Tốt nghiệp cấp 3'),
+('MDH001', '2024-03-27', 100, '2024-04-05', 'Nghề đoàn A', 5000000, 'Mô tả đơn hàng 1', 'Yêu cầu đơn hàng 1'),
+('MDH002', '2024-03-28', 150, '2024-04-10', 'Nghề đoàn B', 7000000, 'Mô tả đơn hàng 2', 'Yêu cầu đơn hàng 2');
+>>>>>>> e726b8173005ed282aeb613a4aecee2b7c0f9ca1
 -- --------------------------------------------------------
 
 --
@@ -117,9 +181,10 @@ CREATE TABLE `lsxkld` (
 
 CREATE TABLE `student` (
   `mhv` varchar(9) NOT NULL,
-  `ho_ten` varchar(50) DEFAULT NULL,
+  `ho_ten` varchar(50) NOT NULL,
   `ngay_sinh` date DEFAULT NULL,
   `gioi_tinh` varchar(5) NOT NULL,
+<<<<<<< HEAD
   `file_anh` varchar(200) NOT NULL,
   `ho_chieu` varchar(8) DEFAULT NULL,
   `CCCD` varchar(12) DEFAULT NULL,
@@ -136,13 +201,34 @@ CREATE TABLE `student` (
   `xi_nghiep` varchar(50) DEFAULT NULL,
   `nghiep_doan` varchar(50) DEFAULT NULL,
   `noi_lam_viec` varchar(50) DEFAULT NULL,
+=======
+  `ho_chieu` varchar(9) DEFAULT NULL,
+  `CCCD` int(12) NOT NULL,
+  `sdt` varchar(10) NOT NULL,
+  `que_quan` varchar(255) NOT NULL,
+  `dia_chi_tt` varchar(255) NOT NULL,
+  `ng_bao_lanh` varchar(50) NOT NULL,
+  `sdt_ng_bao_lanh` varchar(10) NOT NULL,
+  `ngayXC` varchar(255) DEFAULT NULL,
+  `ngay_ve_nươc` date DEFAULT NULL,
+>>>>>>> e726b8173005ed282aeb613a4aecee2b7c0f9ca1
   `note` varchar(200) DEFAULT NULL,
+  `anh_hv` varchar(255) NOT NULL,
   `type_hv` varchar(2) NOT NULL,
+  `mdh` varchar(7) DEFAULT NULL,
+  `ngay_thi` date DEFAULT NULL,
   `ngay_nhaphoc` date NOT NULL,
+  `ngay_DKXC` date DEFAULT NULL,
+  `dukien_venuoc` date DEFAULT NULL,
+  `nganh_nghe` varchar(255) DEFAULT NULL,
+  `xi_nghiep` varchar(255) DEFAULT NULL,
+  `nghiep_doan` varchar(255) DEFAULT NULL,
+  `noi_lam_viec` varchar(255) DEFAULT NULL,
+  `lich_su_XKLD_id` varchar(255) DEFAULT NULL,
+  `co_quan` varchar(50) DEFAULT NULL,
   `order_name` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 --
 -- Dumping data for table `student`
 --
@@ -168,30 +254,53 @@ INSERT INTO `student` (`mhv`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `file_anh`, `h
 --
 
 CREATE TABLE `user` (
-  `id` int(12) NOT NULL,
+`id` int(12) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
   `user` varchar(20) NOT NULL,
   `pass` varchar(20) NOT NULL,
   `role` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `user`, `pass`, `role`) VALUES
 (1, 'Admin', 'admin@gmail.com', 'admin', '123', 1);
-
 --
 -- Indexes for dumped tables
 --
 
 --
+<<<<<<< HEAD
 -- Indexes for table `baolanh`
 --
 ALTER TABLE `baolanh`
   ADD PRIMARY KEY (`mhv`);
+=======
+-- Indexes for table `enterprise`
+--
+ALTER TABLE `enterprise`
+  ADD PRIMARY KEY (`mdn`);
+
+--
+-- Indexes for table `lsxkld`
+--
+ALTER TABLE `lsxkld`
+  ADD PRIMARY KEY (`lich_su_XKLD_id`);
+
+--
+-- Indexes for table `migration`
+--
+ALTER TABLE `migration`
+  ADD PRIMARY KEY (`version`);
+
+--
+-- Indexes for table `order`
+--
+ALTER TABLE `jporder`
+  ADD PRIMARY KEY (`mdh`);
+>>>>>>> e726b8173005ed282aeb613a4aecee2b7c0f9ca1
 
 --
 -- Indexes for table `student`
@@ -204,6 +313,14 @@ ALTER TABLE `student`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
+ 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `user`
+--
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
