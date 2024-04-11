@@ -5820,11 +5820,7 @@ button:visited {
     width: 100%;
   }
 }
-.loai_hv {
-  position: absolute;
-  height: fit-content;
-  left: 10px;
-}
+
 .content-wrapper {
   background: #f4f7fa;
   position: absolute;
@@ -5849,20 +5845,10 @@ button:visited {
   height: 60px;
   font-size: 10px; /* Khoảng cách nội dung từ các viền */
 }
-.function {
-  position: absolute;
-  height: fit-content;
-  top: 60px;
-  left: 620px;
-  width: calc(100%-50px);
+.main-content {
+  position: relative;
 }
-.content {
-  background: #f4f7fa;
-  position: absolute;
-  top: 100px;
-  left: 20px;
-  width: calc(100% - 50px);
-}
+
 /* Sidebar */
 .sidebar {
   background: #374375;

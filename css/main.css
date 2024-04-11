@@ -1,0 +1,226 @@
+main > .container {
+  padding: 70px 15px 20px;
+}
+
+.list-group {
+  padding: 0;
+}
+
+.bt {
+  display: flex;
+  align-items: center;
+}
+.container {
+  display: flex;
+}
+
+.site-index {
+  flex: 1;
+  word-wrap: break-word; /* Tự động wrap các từ khi cần thiết */
+  word-break: break-all; /* Phá vỡ từng từ khi cần thiết */
+  overflow-y: auto; /* Tạo thanh cuộn nếu nội dung dài hơn */
+  max-height: 100vh;
+  height: calc(100%-50px);
+  padding: 10px;
+  background-color: #f5f5f5;
+  /* height: 680px; */
+}
+
+.table-container {
+  position: relative;
+  max-height: 500px; /* Đặt giới hạn chiều cao của vùng chứa */
+  overflow-y: auto; /* Cho phép thanh cuộn dọc */
+}
+
+.sidebar {
+  flex-shrink: 0;
+  width: 200px; /* Chiều rộng của thanh bên */
+  overflow-y: auto; /* Tạo thanh cuộn nếu thanh bên dài hơn */
+  max-height: 100vh; /* Giữ cho thanh bên không vượt quá chiều cao của màn hình */
+  transition: width 0.5s; /* Thêm hiệu ứng chuyển động khi thay đổi kích thước của sidebar */
+  overflow-x: hidden;
+  height: 800px;
+}
+
+.bt i {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.bt span {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.collapsed .bt span {
+  opacity: 0;
+}
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+  transition: width 0.5s;
+}
+.container-fluid {
+  display: flex;
+  height: 100%;
+  padding: 0;
+}
+.navbar {
+  padding: 0;
+  height: 50px;
+  width: 100%;
+}
+.main-content {
+  width: calc(100% - 200px);
+  height: 740px;
+  float: left;
+  margin: 0;
+  transition: width 0.3s ease;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border: none;
+  height: 60px;
+  text-align: center;
+  padding: 0;
+  white-space: nowrap;
+}
+.item {
+  white-space: nowrap;
+}
+.list-group-item:hover {
+  background-color: rgba(240, 240, 240, 0.5);
+}
+.logo {
+  height: 100px;
+  transition: width 0.5s ease;
+}
+
+.sidebar {
+  background: #374375;
+  width: 200px;
+}
+
+.bt {
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.admin-right {
+  background: #f5f5f5;
+  padding: 0px;
+}
+
+.wrapfull {
+  background-color: aqua;
+}
+.not-set {
+  color: #c55;
+  font-style: italic;
+}
+ul {
+  padding: 10px;
+}
+/* add sorting icons to gridview sort links */
+a.asc:after,
+a.desc:after {
+  content: "";
+  left: 3px;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: solid 5px transparent;
+  margin: 4px 4px 2px 4px;
+  background: transparent;
+}
+
+a.asc:after {
+  border-bottom: solid 7px #212529;
+  border-top-width: 0;
+}
+
+a.desc:after {
+  border-top: solid 7px #212529;
+  border-bottom-width: 0;
+}
+
+.grid-view th,
+.grid-view td:last-child {
+  white-space: nowrap;
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+  min-width: 50px;
+}
+
+.hint-block {
+  display: block;
+  margin-top: 5px;
+  color: #999;
+}
+.navbar > .container {
+  padding: 0;
+  margin: 0;
+}
+.error-summary {
+  color: #a94442;
+  background: #fdf7f7;
+  border-left: 3px solid #eed3d7;
+  padding: 10px 20px;
+  margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+  padding-top: 7px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 767px) {
+  .nav li > form > button.logout {
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 10px 0;
+  }
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.nav > li > form > button.logout:focus {
+  outline: none;
+}
+/*  icon */
+.trash {
+  color: red;
+}
+.trash:hover {
+  color: darkred; /* Màu khi hover */
+}
+.edit {
+  color: rgb(38, 115, 163);
+}
+.edit:hover {
+  color: rgb(8, 65, 130); /* Màu khi hover */
+}
+.action-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.action-buttons form {
+  margin-right: 2px;
+}

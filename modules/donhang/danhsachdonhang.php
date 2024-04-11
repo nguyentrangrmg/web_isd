@@ -14,12 +14,18 @@ $res=mysqli_query($mysqli, "select * from jporder");
     <table class="table">
       <tr>
           <th><input type="checkbox" onclick="select_all()" id="select-all-checkbox"/></th>
-          <th>MDH</th>
-          <th>Ngày Nhận</th>
-          <th>Số lượng học viên</th>
-          <th>Ngày DKXC</th>
-          <th>Nghiệp Đoàn</th>
-          <th>Lương dự kiến</th>
+          <th style="white-space: nowrap;">MDH</th>
+          <th style="white-space: nowrap;"style="white-space: nowrap;">Ngày Nhận</th>
+          <th style="white-space: nowrap;">Số lượng học viên</th>
+          <th style="white-space: nowrap;">Ngày DKXC</th>
+          <th style="white-space: nowrap;">Nghiệp Đoàn</th>
+          <th style="white-space: nowrap;">Lương dự kiến</th>
+          <th style="white-space: nowrap;">Ngày DKXC</th>
+          <th style="white-space: nowrap;">Nghiệp Đoàn</th>
+          <th style="white-space: nowrap;">Lương dự kiến</th>
+          <th style="white-space: nowrap;">Ngày DKXC</th>
+          <th style="white-space: nowrap;">Nghiệp Đoàn</th>
+          <th style="white-space: nowrap;">Lương dự kiến</th>
           
           <th></th>
       </tr>    
@@ -28,7 +34,7 @@ $res=mysqli_query($mysqli, "select * from jporder");
                 ?>
             <tr id="box<?php echo $row['mdh']?>">
             <td><input type="checkbox" id="<?php echo $row['mdh']?>" name="checkbox[]" value="<?php echo $row['mdh']?>"/></td>
-            <td><?php echo $row['mdh'] ?></td>
+            <td style="white-space: nowrap;"><?php echo $row['mdh'] ?></td>
             <td><?php echo $row['ngay_nhan'] ?></td>
             <td><?php echo $row['so_luong_hv'] ?></td>
             <td><?php echo $row['ngay_DKXC'] ?></td>

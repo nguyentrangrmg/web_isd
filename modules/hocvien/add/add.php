@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ngay_sinh = $_POST['ngay_sinh'];
     $sdt = $_POST['sdt'];
     $ho_chieu = isset($_POST['ho_chieu']) ? $_POST['ho_chieu'] : null;
-    $cmnd = isset($_POST['cmnd']) ? $_POST['cmnd'] : null;
+    $cccd = isset($_POST['cccd']) ? $_POST['cccd'] : null;
     $que_quan = isset($_POST['que_quan']) ? $_POST['que_quan'] : null;
     $ngay_thi = isset($_POST['ngay_thi']) ? $_POST['ngay_thi'] : null;
     $co_quan = isset($_POST['co_quan']) ? $_POST['co_quan'] : null;
@@ -23,6 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $order_name = $_POST['order_name'];
     $status = $_POST['status'];
 
+    //upload anhhv
+    $anh_path=basename($_FILES['file_anh']['name']);
+    $target_dir = "../anhhv/";
+    $target_file = $target_dir.$anh_path;
+
+    if (move_uploaded_file($_FILES['file_anh']['tmp_name'], $target_file)){
+        echo "Hình đã được upload";
+    } else {
+        echo "Ảnh bị làm sao ý. Lỗi: " . $_FILES['file_anh']['error'];
+    }
     if (empty($ngay_sinh)) {
             $error_message = "Ngày sinh không được bỏ trống.";
             header("Location: ../../../index.php?error_message=" . urlencode($error_message));
@@ -73,13 +83,18 @@ if(mysqli_num_rows($result) > 0) {
     exit;
 }
 
-$themsql = "INSERT INTO student (mhv, ho_ten, ngay_sinh, sdt, ho_chieu, CCCD, que_quan, ngay_thi, co_quan, ngay_DKXC, ngayXC, dukien_venuoc, nganh_nghe, xi_nghiep, nghiep_doan, noi_lam_viec, note, type_hv, ngay_nhaphoc, order_name, status)
-    VALUES ('$mhv', '$ho_ten', '$ngay_sinh', '$sdt', '$ho_chieu', '$cmnd', '$que_quan', '$ngay_thi', '$co_quan', '$ngay_DKXC', '$ngayXC', '$dukien_venuoc', '$nganh_nghe', '$xi_nghiep', '$nghiep_doan', '$noi_lam_viec', '$note', '$type_hv', '$ngay_nhaphoc', '$order_name', '$status')";
+$themsql = "INSERT INTO student (mhv, ho_ten, ngay_sinh, sdt, ho_chieu, CCCD, que_quan, ngay_thi, 
+co_quan, ngay_DKXC, ngayXC, dukien_venuoc, nganh_nghe, xi_nghiep, nghiep_doan, noi_lam_viec, note, type_hv, 
+ngay_nhaphoc, order_name, status, file_anh)
+    VALUES ('$mhv', '$ho_ten', '$ngay_sinh', '$sdt', '$ho_chieu', '$cccd', '$que_quan', '$ngay_thi', 
+    '$co_quan', '$ngay_DKXC', '$ngayXC', '$dukien_venuoc', '$nganh_nghe', '$xi_nghiep', '$nghiep_doan', 
+    '$noi_lam_viec', '$note', '$type_hv', '$ngay_nhaphoc', '$order_name', '$status','$anh_path')";
 
 $result = mysqli_query($mysqli, "SELECT * FROM student");
 
 if(mysqli_query($mysqli, $themsql)) {
-    header("Location: ../../../index.php?type=$type_hv&success=1"); //add thành công thì show cái danh sách hv của loại đó
+    // Chuyển hướng đến trang hiển thị thông tin học viên sau khi tạo thành công
+    header("Location: ../../../index.php?action=view&mhv=$mhv");
     exit;
 } else {
     $error_message = "Lỗi khi thêm học viên: " . mysqli_error($mysqli);

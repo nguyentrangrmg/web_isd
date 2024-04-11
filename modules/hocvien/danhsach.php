@@ -1,12 +1,12 @@
 <?php
-require 'config.php';
-
+include 'config.php';
 $res = mysqli_query($mysqli, "SELECT * FROM student WHERE type_hv='1' ORDER BY CONCAT(SUBSTRING(mhv, 1, 2), SUBSTRING(mhv, -3)) ASC;");
 
 if ($res === false) {
     echo "Error: " . mysqli_error($mysqli);
 } else {
     ?>
+    
     <!-- Menu -->
     <div class="loai_hv">
         <ul class="nav nav-tabs">
@@ -21,22 +21,24 @@ if ($res === false) {
             </li>
         </ul>
     </div>
-    <div class="function">
+    <div class="function" style="text-align: right;">
+        
         <a href="?function=them"><button class="btn btn-primary btn-add" >Thêm mới</button></a>
         <a href="javascript:void(0)" onclick="delete_all()"><button class="btn btn-danger">Xóa</button></a>
-        <a href="javascript:void(0)" onclick="import()"><button class="btn btn-success">Nhập Excel</button></a>
-        <a href="javascript:void(0)" onclick="xuatfile()"><button class="btn btn-secondary">Xuất Excel</button></a>
+        <a href="javascript:void(0)" onclick="import()"><button class="btn btn-danger">Nhập Excel</button></a>
+        <a href="javascript:void(0)" onclick="xuatfile()"><button class="btn btn-secondary">Xuất Excel</button></a>  
         <input type="text" class="search">
     </div>
     <div class="content">
-        <div>
+    <div class="table-container" style="max-height: 500px; overflow: auto;">
             <form method="post" id="frm">
                 <table class="table">
                     <tr>
                         <th><input type="checkbox" onclick="select_all()" id="select-all-checkbox"/></th>
                         <th>Mã học viên</th>
                         <th>Họ và Tên</th>
-                        <th>Ngày Sinh</th>
+                        <th style="white-space: nowrap;">Ngày Sinh</th>
+                        <th>Ảnh</th>
                         <th>Số điện thoại</th>
                         <th>Ngày thi tuyển</th>
                         <th>Ngày nhập học</th>
@@ -53,24 +55,36 @@ if ($res === false) {
                             <td><?php echo $row['mhv'] ?></td>
                             <td><?php echo $row['ho_ten'] ?></td>
                             <td><?php echo date('d/m/Y', strtotime($row['ngay_sinh'])) ?></td>
+                            <td><?php 
+                            $anh_path = $row['file_anh'];           
+                            $target_dir = "modules/hocvien/anhhv/";
+                            $target_file = $target_dir.$anh_path;
+                            echo "<img src='".$target_file."' width='80px'>" ?></td>
                             <td><?php echo $row['sdt'] ?></td>
-                            <td><?php echo $row['ngay_thi'] ?></td>
-                            <td><?php echo $row['ngay_nhaphoc'] ?></td>
+                            <td><?php echo date('d/m/Y', strtotime($row['ngay_thi'])) ?></td>
+                            <td><?php echo date('d/m/Y', strtotime($row['ngay_nhaphoc'])) ?></td>
                             <td><?php echo $row['order_name'] ?></td>
                             <td><?php echo $row['status'] ?></td>
                             <td><?php echo $row['note'] ?></td>
                             <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <form action="?sua=<?php echo $row['mhv']; ?>" method="GET">
-                                      <input type="hidden" name="edit" value="<?php echo $row['mhv']; ?>">
-                                      <button class="dropdown-item" type="submit">Sửa</button>
-                                    </form>
-                                        <a class="dropdown-item" href="#">Xóa</a>
-                                    </div>
-                                </div>
+                            
+                            <div style="display:flex" class="action-buttons">
+                                <form action="#" method="#"> <!-- bỏ cái này thì nút edit dòng đầu tiên sẽ không hoạt động -->
+                                    <button type="hidden"style="padding:0px;border: none; background: none; color: inherit;"></button>
+                                </form>
+                                <a href="index.php?action=view&mhv=<?php echo $row['mhv']; ?>" class="view" style="text-decoration: none;">
+                                    <span class="btn btn-sm"><i class="fas fa-eye"></i></span>
+                                </a>
+                                <form action="?edit=sua&mhv=<?php echo $row['mhv']; ?>" method="GET">
+                                    <input type="hidden" name="edit" value="<?php echo $row['mhv']; ?>">
+                                    <button class="sua" style="border: none; background: none; color: inherit;"><i class="fas fa-pen edit"></i></button>
+                                </form>
+                                <form action="modules/hocvien/delete.php" method="POST">
+                                    <input type="hidden" name="delete" value="<?php echo $row['mhv']; ?>">
+                                    <button type="submit" class="xoa" style="border: none; background: none; color: inherit;"><i class="fas fa-trash trash"></i></button>
+                                </form>
+                            </div>
+
                             </td>
                         </tr>
                         <?php 
@@ -83,6 +97,7 @@ if ($res === false) {
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
        <script>
+        //checkbox
         function select_all(){
             var isChecked = jQuery('#select-all-checkbox').prop("checked");
             jQuery('input[type=checkbox]').prop('checked', isChecked);
@@ -102,7 +117,7 @@ if ($res === false) {
 
         function delete_all(){
             if (jQuery('input[type=checkbox]:checked').length > 0) {
-                var check = confirm("Are you sure?");
+                var check = confirm("Bạn chắc chắn muốn xóa học viên này?");
                 if (check == true) {
                     jQuery.ajax({
                         url: 'modules/hocvien/delete.php',
@@ -121,7 +136,27 @@ if ($res === false) {
                 alert("Chọn ít nhất 1 checkbox để xóa.");
             }
         }
+        //icon xoa
+        jQuery('.xoa').click(function(e) {
+        e.preventDefault();
+        var confirmation = confirm("Bạn chắc chắn muốn xóa học viên này?");
+        if (confirmation) {
+            var form = jQuery(this).closest('form');
+            jQuery.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                success: function(result) {
+                    form.closest('tr').remove();
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    });
     </script>
+    
     <?php
 }
 ?>
