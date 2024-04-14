@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Detail</title>
+  <link rel="stylesheet" href="vendors/feather/feather.css">
+  <link rel="stylesheet" href="vendors/base/base.css">
+  <link rel="stylesheet" href="css/newstyle.css">
+  <link rel="shortcut icon" href="/images/logo TVC.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- navbar -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo"><img src="/images/logo TVC.png" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <h2 class="text-dark font-weight-bold mb-2" style="margin-left: 10px; ">
+          Quản lý học viên
+        </h2>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown mr-4 d-lg-flex d-none">
+            <a class="nav-link count-indicatord-flex align-item s-center justify-content-center" href="#">
+              <i class="icon-search"></i>
+            </a>
+          </li>
+          <li class="nav-item dropdown mr-4 d-lg-flex d-none">
+            <a class="nav-link count-indicatord-flex align-item s-center justify-content-center" href="#">
+              <i class="fa-solid fa-bell"></i>
+            </a>
+          </li>
+          <li class="nav-item dropdown d-flex mr-4 ">
+            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
+              id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="fa-solid fa-circle-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+              aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
+              <a class="dropdown-item preview-item">
+                <i class="icon-head"></i> Profile
+              </a>
+              <a class="dropdown-item preview-item" href="login.html">
+                <i class="icon-outbox"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- sidebar  -->
+    <!-- Link -->
+    <div class="container-fluid page-body-wrapper">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="icon-bar-graph-2 menu-icon "></i>
+              <span class="menu-title">Báo cáo</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="collapse" href="#" aria-expanded="false" aria-controls="auth">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Học viên</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Đơn hàng</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="icon-briefcase menu-icon"></i>
+              <span class="menu-title">Xí nghiệp</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- Content -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border "> -->
+              <ul class="nav nav-tabs tab-transparent" role="tablist">
+                <li class="nav-item active">
+                  <a class="nav-link" data-toggle="tab" href="#" role="tab" aria-selected="true">Thực
+                    tập sinh số 1</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#" role="tab" aria-selected="false">Thực
+                    tập sinh số 3</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#" role="tab" aria-selected="false">Kỹ
+                    năng mặc định</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="d-sm-flex justify-content-between align-items-start transaparent-tab-border ml-auto">
+                <ul class="nav nav-tabs tab-transparent" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-sublink" data-toggle="tab" href="#" role="tab" aria-selected="true">
+                      Tạo mới</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-sublink" data-toggle="tab" href="#" role="tab" aria-selected="false">Sửa</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-sublink" data-toggle="tab" href="#" role="tab" aria-selected="false">Nhập
+                      excel</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-sublink" data-toggle="tab" href="#" role="tab" aria-selected="false">Xuất
+                      excel</a>
+                  </li>
+                  <div class="navbar-nav mr-0" href="#">
+                    <li class="nav-item nav-search">
+                      <div class="input-group" style="cursor: pointer;">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="search">
+                            <i class="icon-search"></i>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Search..." aria-label="search"
+                          aria-describedby="search">
+                      </div>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+              <div class="card mb-2">
+                <!-- <div class="card-body"> -->
+                <div class="table-responsive">
+                  <table class="table table-striped">
+
+                    <thead>
+                      <tr>
+                        <th><input type="checkbox" id="check-all" class="flat"></th>
+                        <th style="font-weight: bold;">Mã học viên</th>
+                        <th style="font-weight: bold;">Họ và Tên</th>
+                        <th style="font-weight: bold;">Ngày sinh</th>
+                        <th style="font-weight: bold;">Số điện thoại</th>
+                        <th style="font-weight: bold;">Ngày thi tuyển</th>
+                        <th style="font-weight: bold;">Ngày nhập học</th>
+                        <th style="font-weight: bold;">Tên đơn hàng</th>
+                        <th style="font-weight: bold;">Trạng thái</th>
+                        <th style="font-weight: bold;">Ghi chú</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>T012345678
+                        </td>
+                        <td>
+                          Nguyễn Thị Mai Phương
+                        </td>
+                        <td>
+                          10/1/1999
+                        </td>
+                        <td>
+                          1234567890
+                        </td>
+                        <td>30/3/2024
+                        </td>
+                        <td>
+                          01/01/2021 </td>
+                        <td>
+                          TVC12345
+                        </td>
+                        <td>
+                          Đang đào tạo
+                        </td>
+                        <td>
+                          Đang đào tạo
+                        </td>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>T012345678
+                        </td>
+                        <td>
+                          Nguyễn Vân Anh
+                        </td>
+                        <td>
+                          02/20/2000
+                        </td>
+                        <td>
+                          0123456789
+                        </td>
+                        <td>30/3/1024
+                        </td>
+                        <td>
+                          01/01/2021
+                        </td>
+                        <td>
+                          TVC123456
+                        </td>
+                        <td>
+                          Đang đào tạo
+                        </td>
+                        <td>
+                          Đang đào tạo
+                        </td>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                          <i class="fa-regular fa-trash-can"></i>
+                        </td>
+
+                      </tr>
+                      <!--  
+                        <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                       
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+
+                        <td> <i class="icon-edit"></i>
+                        </td>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td> <i class="icon-edit"></i>
+                        </td>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td> <i class="icon-edit"></i>
+                        </td>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td> <i class="icon-edit"></th>
+                        </td>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td> <i class="icon-edit"></i>
+                        </td>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td> <i class="icon-edit"></th>
+                        </td>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td> <i class="icon-edit"></ti>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td> <i class="icon-edit"></th>
+                        </td>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="checkbox" id="check-all" class="flat"></th>
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td>
+                          Text
+                        </td>
+                        <td> <i class="icon-edit"></th>
+                        </td>
+                        </td>
+                </div>
+              </div>
+            </div>
+          </div> -->
+                      <!-- content-wrapper ends -->
+                      <script src="vendors/base/vendor.bundle.base.js"></script>
+                      <script src="js/off-canvas.js"></script>
+                      <script src="js/hoverable-collapse.js"></script>
+                      <script src="js/template.js"></script>
+                      <script src="js/login.js"></script>
+                      <script src="js/stsManage.js"> </script>
+
+</body>
+
+</html>
