@@ -538,8 +538,8 @@ mark,
 }
 
 code {
-  font-size: 87.5%;
-  color: #374375;
+  font-size: 100%;
+  color: red;
   word-wrap: break-word;
 }
 
@@ -2342,7 +2342,7 @@ textarea.tt-hint {
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .form-text {
@@ -9038,8 +9038,7 @@ code {
   color: #fc381d;
   font-family: "Karla", sans-serif;
   font-weight: 300;
-  font-size: 0.875rem;
-  border-radius: 4px;
+  font-size: 1.5rem;
 }
 
 /* Utilities */
@@ -9412,7 +9411,7 @@ code {
   color: #001737;
   margin-bottom: .5rem;
   text-transform: capitalize;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
@@ -9428,6 +9427,7 @@ code {
   color: #76838f;
 }
 
+/* 
 .card.card-outline-success {
   border: 1px solid #51c81c;
 }
@@ -9531,7 +9531,7 @@ code {
   background: rgba(0, 23, 55, 0.2);
   border: 1px solid #001533;
   color: #00112a;
-}
+} */
 
 /* Checkboxes and Radios */
 .form-check {
@@ -9739,76 +9739,6 @@ code {
   background: #374375;
 }
 
-.form-check-secondary.form-check label input[type="checkbox"]+.input-helper:before,
-.form-check-secondary.form-check label input[type="radio"]+.input-helper:before {
-  border-color: #e4e6f6;
-}
-
-.form-check-secondary.form-check label input[type="checkbox"]:checked+.input-helper:before,
-.form-check-secondary.form-check label input[type="radio"]:checked+.input-helper:before {
-  background: #e4e6f6;
-}
-
-.form-check-success.form-check label input[type="checkbox"]+.input-helper:before,
-.form-check-success.form-check label input[type="radio"]+.input-helper:before {
-  border-color: #51c81c;
-}
-
-.form-check-success.form-check label input[type="checkbox"]:checked+.input-helper:before,
-.form-check-success.form-check label input[type="radio"]:checked+.input-helper:before {
-  background: #51c81c;
-}
-
-.form-check-info.form-check label input[type="checkbox"]+.input-helper:before,
-.form-check-info.form-check label input[type="radio"]+.input-helper:before {
-  border-color: #3794fc;
-}
-
-.form-check-info.form-check label input[type="checkbox"]:checked+.input-helper:before,
-.form-check-info.form-check label input[type="radio"]:checked+.input-helper:before {
-  background: #3794fc;
-}
-
-.form-check-warning.form-check label input[type="checkbox"]+.input-helper:before,
-.form-check-warning.form-check label input[type="radio"]+.input-helper:before {
-  border-color: #fcb41d;
-}
-
-.form-check-warning.form-check label input[type="checkbox"]:checked+.input-helper:before,
-.form-check-warning.form-check label input[type="radio"]:checked+.input-helper:before {
-  background: #fcb41d;
-}
-
-.form-check-danger.form-check label input[type="checkbox"]+.input-helper:before,
-.form-check-danger.form-check label input[type="radio"]+.input-helper:before {
-  border-color: #fc381d;
-}
-
-.form-check-danger.form-check label input[type="checkbox"]:checked+.input-helper:before,
-.form-check-danger.form-check label input[type="radio"]:checked+.input-helper:before {
-  background: #fc381d;
-}
-
-.form-check-light.form-check label input[type="checkbox"]+.input-helper:before,
-.form-check-light.form-check label input[type="radio"]+.input-helper:before {
-  border-color: #dee5ef;
-}
-
-.form-check-light.form-check label input[type="checkbox"]:checked+.input-helper:before,
-.form-check-light.form-check label input[type="radio"]:checked+.input-helper:before {
-  background: #dee5ef;
-}
-
-.form-check-dark.form-check label input[type="checkbox"]+.input-helper:before,
-.form-check-dark.form-check label input[type="radio"]+.input-helper:before {
-  border-color: #001737;
-}
-
-.form-check-dark.form-check label input[type="checkbox"]:checked+.input-helper:before,
-.form-check-dark.form-check label input[type="radio"]:checked+.input-helper:before {
-  background: #001737;
-}
-
 /* Dropdowns */
 .dropdown .dropdown-toggle:after {
   border-top: 0;
@@ -9867,7 +9797,7 @@ code {
 .tt-query,
 .tt-hint {
   border: 1px solid #374375;
-  border-radius: 10px;
+  border-radius: 5px;
   font-weight: 400;
   font-size: 0.875rem;
   height: auto;
@@ -9881,8 +9811,8 @@ select.tt-query,
 select.tt-hint {
   padding: .875rem .75rem;
   border: 0;
-  outline: 1px solid #e4e6f6;
-  color: #666666;
+  outline: 1px solid #374375;
+  color: #373737;
 }
 
 select.form-control:focus,
@@ -11186,6 +11116,7 @@ dl li {
 /* Sidebar */
 .sidebar {
   min-height: calc(100vh - 60px);
+  /* position: fixed; */
   background: #374375;
   font-family: "Karla", sans-serif;
   font-weight: normal;
