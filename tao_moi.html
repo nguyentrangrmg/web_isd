@@ -101,8 +101,7 @@
                         <div class="col-md-14">
                             <ul class="nav nav-tabs tab-transparent" role="tablist">
                                 <li class="nav-item active">
-                                    <a class="nav-link" data-toggle="tab" href="thuc_tap_sinh_1.html" role="tab"
-                                        aria-selected="true">Thực
+                                    <a class="nav-link" data-toggle="tab" href="#" role="tab" aria-selected="true">Thực
                                         tập sinh số 1</a>
                                 </li>
                                 <li class="nav-item">
@@ -164,9 +163,10 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
-                                    <label class=" card-title col-sm-9 ">Chọn loại học
-                                        viên<code>*</code></label>
+                                <div class="col-md-6">
+                                    <label class=" card-title col-sm-12">Chọn loại đơn hàng<code>*</code> <span
+                                            class="font-weight-normal mb2 text-muted" style="font-style: italic;">(Vui
+                                            lòng nhập các trường thông tin bắt buộc) (<code>*</code>)</span></label>
                                     <div class="form-group ">
                                         <select class="form-control" required>
                                             <option>Thực tập sinh số 1</option>
@@ -301,7 +301,10 @@
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <div class="form-group row ">
-                                                        <label class="col-sm-9">Ảnh học viên <code>*</code></label>
+                                                        <label class="col-sm-9">Ảnh học viên <code>*</code> <span
+                                                                class="card-description"
+                                                                style="font-style: italic;">(Ảnh 4x6, kích thước tối đa
+                                                                50MB)</span></label>
                                                         <input type="file" name="img[]" class="file-upload-default">
                                                         <div class="input-group col-sm-12 ">
                                                             <span class="input-group-append">
@@ -315,6 +318,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <p class="card-description col-form-label">
                                                 Địa chỉ
                                             </p>
@@ -616,8 +620,7 @@
                                 <div class="row d-flex justify-content-end">
                                     <a href="#" class="btn btn-light" type="button">Huỷ</a>
                                     <!-- huỷ thì sẽ clear all inform -->
-                                    <a href="forgot-password.html" class="btn btn-primary" type="button"
-                                        id="forgotPasswordButton">Tạo mới</a>
+                                    <a href="#" class="btn btn-primary" type="button" id="createButton">Tạo mới</a>
                                     <!-- demo link forgot pw-->
                                 </div>
                             </div>
@@ -628,11 +631,19 @@
             </div>
         </div>
     </div>
+
     <script>
-        const forgotPasswordButton = document.getElementById('forgotPasswordButton');
-        forgotPasswordButton.addEventListener('click', handleForgotPassword);
-        function handleForgotPassword(odd) {
-            window.location.href = 'forgot-password.htm';
+        const createButton = document.getElementById('createButton');
+
+        createButton.addEventListener('click', handleCreate);
+
+        function handleCreate(event) {
+            event.preventDefault();
+            const confirmation = confirm('Xác nhận học viên');
+            if (confirmation) {
+                form.submit();
+            } else {
+            }
         }
     </script>
     <script src="../../vendors/base/vendor.bundle.base.js"></script>
