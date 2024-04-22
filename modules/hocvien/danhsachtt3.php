@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-$res = mysqli_query($mysqli, "SELECT * FROM student WHERE type_hv='3' ORDER BY CONCAT(SUBSTRING(mhv, 1, 2), SUBSTRING(mhv, -3)) ASC;");
+$res = mysqli_query($mysqli, "SELECT * FROM student WHERE type_hv='3' ORDER BY CONCAT(SUBSTRING(mhv, 3, 2), SUBSTRING(mhv, -3)) ASC;");
 
 if ($res === false) {
     echo "Error: " . mysqli_error($mysqli);
@@ -11,33 +11,33 @@ if ($res === false) {
     <div class="loai_hv">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="?type=1">Thực tập sinh số 1</a>
+                <a class="nav-link" href="?type=1" style="text-decoration: none;color:black" >Thực tập sinh số 1</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="?type=3">Thực tập sinh số 3</a>
+                <a class="nav-link active" href="?type=3" style="text-decoration: none;color:black" >Thực tập sinh số 3</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?type=dd">Kỹ năng đặc định</a>
+                <a class="nav-link" href="?type=dd" style="text-decoration: none;color:black" >Kỹ năng đặc định</a>
             </li>
         </ul>
     </div>
     <div class="function" style="text-align: right;">
-        <a href="?function=them"><button class="btn btn-primary btn-add" >Thêm mới</button></a>
-        <a href="javascript:void(0)" onclick="delete_all()"><button class="btn btn-danger">Xóa</button></a>
-        <a href="javascript:void(0)" onclick="import()"><button class="btn btn-success">Nhập Excel</button></a>
-        <a href="javascript:void(0)" onclick="xuatfile()"><button class="btn btn-secondary">Xuất Excel</button></a>
-        <input type="text" class="search">  
+    <a href="?function=them" ><button class="nut-them">Tạo mới</button></a>
+        <a href="javascript:void(0)" onclick="delete_all()"><button class="nut-xoa">Xóa</button></a>
+        <a href="javascript:void(0)" onclick="xuatfile()"><button class="nut-xuat">Xuất Excel</button></a>  
+        <input type="text" class="search-input" placeholder="Search...">
+        <i class="fas fa-search search-icon"></i>  
     </div>
     <div class="content">
     <div class="table-container" style="max-height: 500px; overflow: auto;">
             <form method="post" id="frm">
-                <table class="table">
+                <table class="table table-hover table-stripe">
+                <thead class="color-head">
                     <tr>
                         <th><input type="checkbox" onclick="select_all()" id="select-all-checkbox"/></th>
                         <th>Mã học viên</th>
                         <th>Họ và Tên</th>
                         <th>Ngày Sinh</th>
-                        <th>Ảnh</th>
                         <th>Số điện thoại</th>
                         <th>Ngày thi tuyển</th>
                         <th>Ngày nhập học</th>
@@ -46,19 +46,17 @@ if ($res === false) {
                         <th>Ghi chú</th>
                         <th></th>
                     </tr>
+                    </thead>
                     <?php 
                     while ($row = mysqli_fetch_assoc($res)) {
                         ?>
                         <tr id="box<?php echo $row['mhv']?>">
                             <td><input type="checkbox" id="<?php echo $row['mhv']?>" name="checkbox[]" value="<?php echo $row['mhv']?>"/></td>
                             <td><?php echo $row['mhv'] ?></td>
-                            <td><?php echo $row['ho_ten'] ?></td>
+                            <td><a href="index.php?action=view&mhv=<?php echo $row['mhv']; ?>" 
+                            class="view" style="text-decoration: none;color:black" >
+                            <?php echo $row['ho_ten'] ?></a></td>
                             <td><?php echo date('d/m/Y', strtotime($row['ngay_sinh'])) ?></td>
-                            <td><?php 
-                            $anh_path = $row['file_anh'];           
-                            $target_dir = "modules/hocvien/anhhv/";
-                            $target_file = $target_dir.$anh_path;
-                            echo "<img src='".$target_file."' width='80px'>" ?></td>
                             <td><?php echo $row['sdt'] ?></td>
                             <td><?php echo date('d/m/Y', strtotime($row['ngay_thi'])) ?></td>
                             <td><?php echo date('d/m/Y', strtotime($row['ngay_nhaphoc'])) ?></td>
@@ -116,7 +114,7 @@ if ($res === false) {
 
         function delete_all(){
             if (jQuery('input[type=checkbox]:checked').length > 0) {
-                var check = confirm("Bạn chắc chắn muốn xóa học viên này?");
+                var check = confirm("Bạn có muốn chuyển học viên này vào thùng rác? (Dữ liệu của học viên sẽ bị xóa sau 30 ngày)");
                 if (check == true) {
                     jQuery.ajax({
                         url: 'modules/hocvien/delete.php',
@@ -138,7 +136,7 @@ if ($res === false) {
         //icon xoa
         jQuery('.xoa').click(function(e) {
         e.preventDefault();
-        var confirmation = confirm("Bạn chắc chắn muốn xóa học viên này?");
+        var confirmation = confirm("Bạn có muốn chuyển học viên này vào thùng rác? (Dữ liệu của học viên sẽ bị xóa sau 30 ngày)");
         if (confirmation) {
             var form = jQuery(this).closest('form');
             jQuery.ajax({

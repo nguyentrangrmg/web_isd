@@ -1,0 +1,139 @@
+/* Image and basic information */
+.student-image {
+  width: 200px;
+  height: 266px;
+  background-color: #d9d9d9;
+  margin-left: 970px;
+  margin-top: 40px;
+  position: fixed;
+}
+
+.student-image img {
+  width: 200px;
+  height: 266px;
+}
+
+.in4-below-img {
+  margin-left: 970px;
+  margin-top: 320px;
+  position: fixed;
+  color: #0b2c4d;
+  font-size: 15px;
+}
+
+.in4-below-img div.mhv-title {
+  font-weight: bolder;
+  padding-bottom: 5px;
+}
+
+.in4-below-img div.mhv {
+  padding-bottom: 10px;
+}
+
+.in4-below-img div.ho-va-ten {
+  padding-bottom: 10px;
+  display: flex;
+  position: fixed;
+  margin-left: 100px;
+  margin-top: 0px;
+}
+
+.in4-below-img div.trang-thai-title {
+  font-weight: bolder;
+  padding-bottom: 5px;
+}
+
+/* Student's information display */
+.boxes {
+  margin-top: 40px;
+}
+
+.background-container {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 700px;
+  margin-left: 100px;
+  margin-bottom: 30px;
+}
+
+.info-container {
+  max-width: 700px;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+/* Hide content when not expanded */
+.info-container:not(.expanded) .info-content {
+  max-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Title styling */
+.info-title {
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #0b2c4d;
+}
+
+/* Down arrow styling */
+.down-arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+  margin-left: 5px;
+  transition: transform 0.3s ease-out;
+  /* Smooth transition animation */
+}
+
+/* Rotate down arrow when content is expanded */
+.expanded .down-arrow {
+  transform: rotate(180deg);
+}
+
+/* Individual item styling */
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding: 8px 0;
+  padding-right: 5px;
+}
+
+/* Field name styling */
+.field-name {
+  color: #0b2c4d;
+  margin-left: 10px;
+  margin-top: 10px;
+  white-space: nowrap;
+}
+
+/* Information styling */
+.information {
+  padding: 8px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.sub-field {
+  margin-left: 0px;
+  text-align: right;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-content-wrapper {
+  border: 1px solid #9f9f9f;
+  border-radius: 5px;
+  background-color: white;
+}

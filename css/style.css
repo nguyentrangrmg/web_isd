@@ -5841,7 +5841,7 @@ button:visited {
 }
 .add-form {
   width: 100%; /* Đặt kích thước tối đa */
-  padding: 20px;
+  padding: 5px;
   height: 60px;
   font-size: 10px; /* Khoảng cách nội dung từ các viền */
 }

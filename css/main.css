@@ -19,19 +19,119 @@ main > .container {
   word-wrap: break-word; /* Tự động wrap các từ khi cần thiết */
   word-break: break-all; /* Phá vỡ từng từ khi cần thiết */
   overflow-y: auto; /* Tạo thanh cuộn nếu nội dung dài hơn */
-  max-height: 100vh;
-  height: calc(100%-50px);
+  height: 690px;
   padding: 10px;
   background-color: #f5f5f5;
-  /* height: 680px; */
 }
-
+/* table */
 .table-container {
+  margin-top: 4px;
   position: relative;
   max-height: 500px; /* Đặt giới hạn chiều cao của vùng chứa */
   overflow-y: auto; /* Cho phép thanh cuộn dọc */
 }
+.color-head {
+  background: rgb(218, 226, 253);
+}
+.table th,
+td {
+  padding: 6px;
+  text-align: left;
+}
+.table.table-hover tbody tr:hover {
+  background: rgb(196, 200, 234);
+}
+.table.table-hover tbody tr.striped:hover {
+  background: rgb(196, 200, 234);
+}
 
+.table.table-stripe tbody tr:nth-child(even) {
+  background: #f6f6f9;
+}
+/* may cai nut */
+.function a {
+  padding-top: 6px;
+  color: #9f9f9f;
+  font-weight: bold;
+  font-size: 15px;
+  text-decoration: none;
+}
+.function .nut-them {
+  color: #9f9f9f;
+  background: inherit;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}
+.function .nut-xoa {
+  color: #9f9f9f;
+  background: inherit;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}
+.function .nut-re {
+  color: #9f9f9f;
+  background: inherit;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}
+.function .nut-xuat {
+  color: #9f9f9f;
+  background: inherit;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}
+.function .nut-back {
+  color: #9f9f9f;
+  background: inherit;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}
+.function .nut-them:hover {
+  background: #9f9f9f;
+  color: #0b2c4d;
+}
+.function .nut-back:hover {
+  color: #0b2c4d;
+}
+.function .nut-xoa:hover {
+  background: #9f9f9f;
+  color: #e10000;
+}
+.function .nut-re:hover {
+  background: #9f9f9f;
+  color: #078f00;
+}
+.function .nut-xuat:hover {
+  background: #9f9f9f;
+  color: #00277b;
+}
+
+/*Search */
+.search-input {
+  width: 250px;
+  padding: 5px 30px 5px 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  margin-top: 4px;
+  margin-right: 4px;
+}
+.search-icon {
+  color: #666;
+  margin-right: 20px;
+}
+/*Form */
+.form-label {
+  font-size: 15px;
+  font-weight: bold;
+  color: #374375;
+}
+/*sidebar */
 .sidebar {
   flex-shrink: 0;
   width: 200px; /* Chiều rộng của thanh bên */
@@ -73,6 +173,9 @@ main > .container {
   height: 50px;
   width: 100%;
 }
+.nav-link:hover {
+  background-color: rgba(192, 192, 192, 0.5);
+}
 .main-content {
   width: calc(100% - 200px);
   height: 740px;
@@ -89,12 +192,39 @@ main > .container {
   padding: 0;
   white-space: nowrap;
 }
+.thung-rac {
+  background-color: transparent;
+  border: none;
+  height: 60px;
+  text-align: center;
+  padding: 0;
+  white-space: nowrap;
+}
+.list-groupul {
+  position: absolute;
+  width: 200px;
+  padding: 0;
+}
+.trash-button {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  align-content: center;
+}
+.trash-button:hover {
+  color: #e10000;
+}
 .item {
   white-space: nowrap;
 }
 .list-group-item:hover {
   background-color: rgba(240, 240, 240, 0.5);
 }
+/* .thung-rac:hover {
+  background-color: rgba(255, 173, 173, 0.5);
+} */
 .logo {
   height: 100px;
   transition: width 0.5s ease;
@@ -103,6 +233,7 @@ main > .container {
 .sidebar {
   background: #374375;
   width: 200px;
+  position: relative;
 }
 
 .bt {
@@ -120,7 +251,7 @@ main > .container {
 }
 
 .wrapfull {
-  background-color: aqua;
+  background-color: rgb(255, 255, 255);
 }
 .not-set {
   color: #c55;

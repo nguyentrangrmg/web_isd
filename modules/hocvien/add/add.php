@@ -5,23 +5,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ho_ten = $_POST['ho_ten'];
     $ngay_sinh = $_POST['ngay_sinh'];
     $sdt = $_POST['sdt'];
+    $gioi_tinh = $_POST['gioi_tinh'];
+
     $ho_chieu = isset($_POST['ho_chieu']) ? $_POST['ho_chieu'] : null;
     $cccd = isset($_POST['cccd']) ? $_POST['cccd'] : null;
-    $que_quan = isset($_POST['que_quan']) ? $_POST['que_quan'] : null;
+    $ngay_cap_cccd = isset($_POST['ngay_cap_cccd']) ? $_POST['ngay_cap_cccd'] : null;
+    $ho_khau = isset($_POST['ho_khau']) ? $_POST['ho_khau'] : null;
+    $dia_chi = isset($_POST['dia_chi']) ? $_POST['dia_chi'] : null;
+    
     $ngay_thi = isset($_POST['ngay_thi']) ? $_POST['ngay_thi'] : null;
     $co_quan = isset($_POST['co_quan']) ? $_POST['co_quan'] : null;
     $ngay_DKXC = isset($_POST['ngay_DKXC']) ? $_POST['ngay_DKXC'] : null;
     $ngayXC = isset($_POST['ngayXC']) ? $_POST['ngayXC'] : null;
     $dukien_venuoc = isset($_POST['dukien_venuoc']) ? $_POST['dukien_venuoc'] : null;
     $nganh_nghe = isset($_POST['nganh_nghe']) ? $_POST['nganh_nghe'] : null;
-    $xi_nghiep = isset($_POST['xi_nghiep']) ? $_POST['xi_nghiep'] : null;
+    
     $nghiep_doan = isset($_POST['nghiep_doan']) ? $_POST['nghiep_doan'] : null;
     $noi_lam_viec = isset($_POST['noi_lam_viec']) ? $_POST['noi_lam_viec'] : null;
     $note = isset($_POST['note']) ? $_POST['note'] : null;
     $type_hv = $_POST['type_hv'];
     $ngay_nhaphoc = $_POST['ngay_nhaphoc'];
-    $order_name = $_POST['order_name'];
     $status = $_POST['status'];
+    //don hang
+    $order_name = $_POST['order_name'];
+    //xi nghiep
+    $xi_nghiep = isset($_POST['xi_nghiep']) ? $_POST['xi_nghiep'] : null;
+    $sdt_xn = $_POST['sdt_xn'];
+    $dia_chi_xn = $_POST['dia_chi_xn'];
+    //bao lanh
+    $ten = $_POST['ten'];
+    $dob = $_POST['dob'];
+    $sdt_bl = $_POST['sdt_bl'];
+    $ho_khau_bl = $_POST['ho_khau_bl'];
+    $dia_chi_bl = $_POST['dia_chi_bl'];
+    $quan_he = $_POST['quan_he'];
 
     //upload anhhv
     $anh_path=basename($_FILES['file_anh']['name']);
@@ -38,10 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../../../index.php?error_message=" . urlencode($error_message));
             exit;
     }
-
     $mhv_prefix = "";
     $year_last_two = date('y');
-    $dob_last_two = substr($ngay_sinh,2, 2); // vì trong csdl bị để theo dạng yyyy/mm/dd
+    $dob_last_two = substr($ngay_sinh, 2, 2); // trong csdl để dạng yyyy/mm/dd
     
     switch ($type_hv) {
         case '1':
@@ -57,24 +73,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
     }
     
-    $query_last_three = "SELECT SUBSTRING(mhv, 8) AS last_three FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two' ORDER BY last_three DESC LIMIT 1";
-    $result_last_three = mysqli_query($mysqli, $query_last_three);
+    $order_index = "001"; // Bắt đầu với số cuối cùng là 001
     
-    if ($result_last_three) {
-        if(mysqli_num_rows($result_last_three) > 0) {
-            $row_last_three = mysqli_fetch_assoc($result_last_three);
-            $last_three = $row_last_three['last_three'];
-            $order_index = sprintf('%03d', intval($last_three) + 1);
-        } else {
-            $order_index = "001";
+    // Kiểm tra xem đã tồn tại mhv với 3 số cuối cùng là 001 hay chưa
+    $query_check_exists = "SELECT COUNT(*) AS count FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two' AND SUBSTRING(mhv, -3) = '$order_index'";
+    $result_check_exists = mysqli_query($mysqli, $query_check_exists);
+    
+    if ($result_check_exists) {
+        $row_check_exists = mysqli_fetch_assoc($result_check_exists);
+        $count = intval($row_check_exists['count']);
+        
+        // Nếu đã tồn tại mhv có 3 số cuối của order-index, tăng giá trị cho đến khi không còn tồn tại
+        while ($count > 0) {
+            $order_index = sprintf('%03d', intval($order_index) + 1);
+            $query_check_exists = "SELECT COUNT(*) AS count FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two' AND SUBSTRING(mhv, -3) = '$order_index'";
+            $result_check_exists = mysqli_query($mysqli, $query_check_exists);
+            if ($result_check_exists) {
+                $row_check_exists = mysqli_fetch_assoc($result_check_exists);
+                $count = intval($row_check_exists['count']);
+            } else {
+                echo "Error: " . mysqli_error($mysqli);
+                break;
+            }
         }
-    } else {
-        echo "Error: " . mysqli_error($mysqli);
     }
     
     // Tạo mã mhv hoàn chỉnh
     $mhv = $mhv_prefix . $year_last_two . $dob_last_two . $order_index;
-}
+}    
 // Kiểm tra xem học viên đã tồn tại trong cơ sở dữ liệu chưa
 $result = mysqli_query($mysqli, "SELECT * FROM student WHERE mhv = '$mhv'");
 
@@ -83,16 +109,25 @@ if(mysqli_num_rows($result) > 0) {
     exit;
 }
 
-$themsql = "INSERT INTO student (mhv, ho_ten, ngay_sinh, sdt, ho_chieu, CCCD, que_quan, ngay_thi, 
-co_quan, ngay_DKXC, ngayXC, dukien_venuoc, nganh_nghe, xi_nghiep, nghiep_doan, noi_lam_viec, note, type_hv, 
-ngay_nhaphoc, order_name, status, file_anh)
-    VALUES ('$mhv', '$ho_ten', '$ngay_sinh', '$sdt', '$ho_chieu', '$cccd', '$que_quan', '$ngay_thi', 
-    '$co_quan', '$ngay_DKXC', '$ngayXC', '$dukien_venuoc', '$nganh_nghe', '$xi_nghiep', '$nghiep_doan', 
-    '$noi_lam_viec', '$note', '$type_hv', '$ngay_nhaphoc', '$order_name', '$status','$anh_path')";
+$themsql = "INSERT INTO student (mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, CCCD, ngay_cap_cccd, 
+            ho_khau, dia_chi, ngay_thi, co_quan, ngay_DKXC, ngayXC, dukien_venuoc, 
+            nganh_nghe, xi_nghiep, nghiep_doan, noi_lam_viec, note, type_hv, 
+            ngay_nhaphoc, order_name, status, file_anh)
+            VALUES ('$mhv', '$ho_ten', '$ngay_sinh', '$gioi_tinh', '$sdt', '$ho_chieu', '$cccd', '$ngay_cap_cccd',
+            '$ho_khau', '$dia_chi', '$ngay_thi', '$co_quan', '$ngay_DKXC', '$ngayXC', '$dukien_venuoc',
+            '$nganh_nghe', '$xi_nghiep', '$nghiep_doan','$noi_lam_viec', '$note', '$type_hv', 
+            '$ngay_nhaphoc', '$order_name', '$status','$anh_path')";
 
+$thembl = "INSERT INTO baolanh (mhv, ten, dob, sdt_bl, ho_khau_bl, dia_chi_bl, quan_he)
+        VALUES ('$mhv','$ten', '$dob', '$sdt_bl','$ho_khau_bl', '$dia_chi_bl', '$quan_he') ";
+
+$themxn = "INSERT INTO enterprise (mdn, xi_nghiep, nganh_nghe, sdt_xn, dia_chi_xn)
+        VALUES ('$mdn','$xi_nghiep', '$nganh_nghe', '$sdt_xn','$dia_chi_xn') ";
 $result = mysqli_query($mysqli, "SELECT * FROM student");
+$re = mysqli_query($mysqli, "SELECT * FROM baolanh");
+$res = mysqli_query($mysqli, "SELECT * FROM enterprise");
 
-if(mysqli_query($mysqli, $themsql)) {
+if((mysqli_query($mysqli, $themsql)) && mysqli_query($mysqli,$thembl) && mysqli_query($mysqli,$themxn) ){
     // Chuyển hướng đến trang hiển thị thông tin học viên sau khi tạo thành công
     header("Location: ../../../index.php?action=view&mhv=$mhv");
     exit;
@@ -102,5 +137,4 @@ if(mysqli_query($mysqli, $themsql)) {
     exit;
 }
 
-// header("Location: modules/hocvien/add/them.php");
 ?>
