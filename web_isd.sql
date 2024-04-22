@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Generation Time: Apr 22, 2024 at 02:36 AM
+=======
+-- Generation Time: Apr 13, 2024 at 07:00 AM
+>>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -142,6 +146,7 @@ CREATE TABLE `enterprise` (
   `so_luong_hv` int(11) DEFAULT NULL,
   `ghi_chu` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+<<<<<<< HEAD
 
 --
 -- Dumping data for table `enterprise`
@@ -149,6 +154,8 @@ CREATE TABLE `enterprise` (
 
 INSERT INTO `enterprise` (`mdn`, `xi_nghiep`, `ten_giam_doc`, `nganh_nghe`, `nghiep_doan`, `sdt_xn`, `dia_chi_xn`, `noi_lam_viec`, `so_luong_don_hang`, `so_luong_hv`, `ghi_chu`) VALUES
 ('', 'ưeqe', '', '', '', '321312', '312312', NULL, NULL, NULL, NULL);
+=======
+>>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
 
 -- --------------------------------------------------------
 
@@ -173,16 +180,22 @@ CREATE TABLE `jporder` (
   `nghiep_doan` varchar(50) NOT NULL,
   `xi_nghiep` varchar(20) NOT NULL,
   `nganh_nghe` varchar(20) NOT NULL,
+<<<<<<< HEAD
   `gioi_tinh` varchar(11) NOT NULL,
   `do_tuoi` varchar(9) NOT NULL,
   `type_hv` varchar(2) NOT NULL,
   `ngay_tt` date DEFAULT NULL
+=======
+  `noi_lam_viec` varchar(255) DEFAULT NULL,
+  `mo_ta` varchar(1000) DEFAULT NULL
+>>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `jporder`
 --
 
+<<<<<<< HEAD
 INSERT INTO `jporder` (`mdh`, `ten_dh`, `ngay_xc`, `ngay_vn`, `ngay_pv`, `hinh_thuc_tt`, `so_luong_tuyen`, `yeu_cau`, `muc_luong`, `che_do_phu_cap`, `thoi_gian_lam_viec`, `du_kien_tt`, `trang_thai`, `nghiep_doan`, `xi_nghiep`, `nganh_nghe`, `gioi_tinh`, `do_tuoi`, `type_hv`, `ngay_tt`) VALUES
 ('DD24001', '123', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', '1231231', '13231', '', '', '', 'dd', '0000-00-00'),
 ('T124001', '23123', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', '123123', '', '', '', '', '1', '0000-00-00'),
@@ -190,6 +203,12 @@ INSERT INTO `jporder` (`mdh`, `ten_dh`, `ngay_xc`, `ngay_vn`, `ngay_pv`, `hinh_t
 ('T124003', '123', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', '1231231', '13231', '', '', '', '1', '0000-00-00'),
 ('T124004', '123', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', '1231231', '13231', '', '', '', '1', '0000-00-00'),
 ('T324001', 'e12312', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', 'ưqeqưe', 'ưqeqưe', '', '', '', '3', '0000-00-00');
+=======
+INSERT INTO `jporder` (`mdh`, `ten_dh`, `ngay_dktt`, `ngay_nhan`, `ngay_pv`, `hinh_thuc_tt`, `ngay_DKXC`, `ngay_dukien_VN`, `so_luong_hv`, `yeu_cau`, `noi lam viec`, `luong_du_kien`, `che_do_phu_cap`, `thoi_gian_lam_viec`, `trang_thai`, `ghi_chu`, `nghiep_doan`, `xi_nghiep`, `nganh_nghe`, `noi_lam_viec`, `mo_ta`) VALUES
+('984382', '', NULL, '0000-00-00', NULL, NULL, '0000-00-00', NULL, 5, 'Tiếng Nhật N4, Tốt nghiệp cấp 3', NULL, 60, NULL, NULL, NULL, NULL, 'Katsunaka', '', '', NULL, NULL),
+('MDH001', '', NULL, '2024-03-27', NULL, NULL, '2024-04-05', NULL, 100, 'Yêu cầu đơn hàng 1', NULL, 5000000, NULL, NULL, NULL, NULL, 'Nghề đoàn A', '', '', NULL, 'Mô tả đơn hàng 1'),
+('MDH002', '', NULL, '2024-03-28', NULL, NULL, '2024-04-10', NULL, 150, 'Yêu cầu đơn hàng 2', NULL, 7000000, NULL, NULL, NULL, NULL, 'Nghề đoàn B', '', '', NULL, 'Mô tả đơn hàng 2');
+>>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
 
 -- --------------------------------------------------------
 
@@ -239,8 +258,12 @@ CREATE TABLE `student` (
   `type_hv` varchar(2) NOT NULL,
   `ngay_nhaphoc` date NOT NULL,
   `order_name` varchar(20) NOT NULL,
+<<<<<<< HEAD
   `status` varchar(20) NOT NULL,
   `tinh` text NOT NULL
+=======
+  `status` varchar(20) NOT NULL
+>>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -291,10 +314,17 @@ INSERT INTO `user` (`id`, `name`, `email`, `user`, `pass`, `role`) VALUES
 --
 
 --
+<<<<<<< HEAD
 -- Indexes for table `jporder`
 --
 ALTER TABLE `jporder`
   ADD PRIMARY KEY (`mdh`);
+=======
+-- Indexes for table `baolanh`
+--
+ALTER TABLE `baolanh`
+  ADD PRIMARY KEY (`mhv`);
+>>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
 
 --
 -- Indexes for table `student`
@@ -307,6 +337,7 @@ ALTER TABLE `student`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
+<<<<<<< HEAD
 
 DELIMITER $$
 --
@@ -315,6 +346,8 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` EVENT `delete_old_bin_data` ON SCHEDULE EVERY 1 DAY STARTS '2024-04-17 03:36:26' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Delete records from bin_student after 30 days' DO DELETE FROM bin_student WHERE created_at <= DATE_SUB(NOW(), INTERVAL 30 DAY)$$
 
 DELIMITER ;
+=======
+>>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
