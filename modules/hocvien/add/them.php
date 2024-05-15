@@ -206,6 +206,7 @@
                 </div>
             </div>
         </div>
+        <br>
         <div class="col-14 grid-margin">
             <div class="card">
                 <div class="card-body">
@@ -279,6 +280,7 @@
             echo "Error: " . mysqli_error($mysqli);
         } else {
         ?>
+        <br>
                             <!-- Chỗ chọn đơn hàng cần sửa lại 1 chút, chỉ hiển thị đơn hàng vẫn đang hoạt động -->
                             <div class="col-14 grid-margin">
                                 <div class="card">
@@ -415,6 +417,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <div class="col-14 grid-margin">
                                 <div class="card">
                                     <div class="card-body">

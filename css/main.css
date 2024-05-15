@@ -28,7 +28,7 @@ main > .container {
   margin-top: 4px;
   position: relative;
   max-height: 500px; /* Đặt giới hạn chiều cao của vùng chứa */
-  overflow-y: auto; /* Cho phép thanh cuộn dọc */
+  /* overflow-y: auto; */
 }
 .color-head {
   background: rgb(218, 226, 253);
@@ -49,6 +49,13 @@ td {
   background: #f6f6f9;
 }
 /* may cai nut */
+button.search-button {
+  border: none; /* Xóa viền */
+  background: none; /* Xóa nền nếu có */
+  padding: 0; /* Xóa khoảng trắng xung quanh nút */
+  cursor: pointer; /* Đổi con trỏ chuột thành dấu nhấp */
+}
+
 .function a {
   padding-top: 6px;
   color: #9f9f9f;
@@ -136,10 +143,12 @@ td {
   flex-shrink: 0;
   width: 200px; /* Chiều rộng của thanh bên */
   overflow-y: auto; /* Tạo thanh cuộn nếu thanh bên dài hơn */
-  max-height: 100vh; /* Giữ cho thanh bên không vượt quá chiều cao của màn hình */
-  transition: width 0.5s; /* Thêm hiệu ứng chuyển động khi thay đổi kích thước của sidebar */
+  max-height: 100%; /* Giữ cho thanh bên không vượt quá chiều cao của màn hình */
+  transition: width 0.5s;
   overflow-x: hidden;
-  height: 800px;
+  height: auto;
+  background: #374375;
+  position: relative;
 }
 
 .bt i {
@@ -228,12 +237,6 @@ td {
 .logo {
   height: 100px;
   transition: width 0.5s ease;
-}
-
-.sidebar {
-  background: #374375;
-  width: 200px;
-  position: relative;
 }
 
 .bt {

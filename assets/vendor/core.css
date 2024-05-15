@@ -15086,6 +15086,7 @@ body {
 .container-xxl {
   padding-right: 1rem;
   padding-left: 1rem;
+  background: #374375;
 }
 @media (min-width: 992px) {
   .container,

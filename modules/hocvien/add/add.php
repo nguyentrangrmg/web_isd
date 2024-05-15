@@ -73,31 +73,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
     }
     
-    $order_index = "001"; // Bắt đầu với số cuối cùng là 001
+    // $order_index = "001"; // Bắt đầu với số cuối cùng là 001
     
-    // Kiểm tra xem đã tồn tại mhv với 3 số cuối cùng là 001 hay chưa
-    $query_check_exists = "SELECT COUNT(*) AS count FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two' AND SUBSTRING(mhv, -3) = '$order_index'";
-    $result_check_exists = mysqli_query($mysqli, $query_check_exists);
+    // // Kiểm tra xem đã tồn tại mhv với 3 số cuối cùng là 001 hay chưa
+    // $query_check_exists = "SELECT COUNT(*) AS count FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two' AND SUBSTRING(mhv, -3) = '$order_index'";
+    // $result_check_exists = mysqli_query($mysqli, $query_check_exists);
     
-    if ($result_check_exists) {
-        $row_check_exists = mysqli_fetch_assoc($result_check_exists);
-        $count = intval($row_check_exists['count']);
+    // if ($result_check_exists) {
+    //     $row_check_exists = mysqli_fetch_assoc($result_check_exists);
+    //     $count = intval($row_check_exists['count']);
         
-        // Nếu đã tồn tại mhv có 3 số cuối của order-index, tăng giá trị cho đến khi không còn tồn tại
-        while ($count > 0) {
-            $order_index = sprintf('%03d', intval($order_index) + 1);
-            $query_check_exists = "SELECT COUNT(*) AS count FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two' AND SUBSTRING(mhv, -3) = '$order_index'";
-            $result_check_exists = mysqli_query($mysqli, $query_check_exists);
-            if ($result_check_exists) {
-                $row_check_exists = mysqli_fetch_assoc($result_check_exists);
-                $count = intval($row_check_exists['count']);
-            } else {
-                echo "Error: " . mysqli_error($mysqli);
-                break;
-            }
-        }
+    //     // Nếu đã tồn tại mhv có 3 số cuối của order-index, tăng giá trị cho đến khi không còn tồn tại
+    //     while ($count > 0) {
+    //         $order_index = sprintf('%03d', intval($order_index) + 1);
+    //         $query_check_exists = "SELECT COUNT(*) AS count FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two' AND SUBSTRING(mhv, -3) = '$order_index'";
+    //         $result_check_exists = mysqli_query($mysqli, $query_check_exists);
+    //         if ($result_check_exists) {
+    //             $row_check_exists = mysqli_fetch_assoc($result_check_exists);
+    //             $count = intval($row_check_exists['count']);
+    //         } else {
+    //             echo "Error: " . mysqli_error($mysqli);
+    //             break;
+    //         }
+    //     }
+    // }
+    function getMaxLastThreeDigits($mysqli, $mhv_prefix, $year_last_two)
+    {
+        $max_last_three_digits = 0;
+
+        // Lấy 3 số cuối lớn nhất từ bảng student
+        $query_student = "SELECT MAX(CAST(SUBSTRING(mhv, -3) AS UNSIGNED)) AS max_digits FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two'";
+        $result_student = mysqli_query($mysqli, $query_student);
+        $row_student = mysqli_fetch_assoc($result_student);
+        $max_last_three_digits_student = intval($row_student['max_digits']);
+
+        // Lấy 3 số cuối lớn nhất từ bảng bin_student
+        $query_bin_student = "SELECT MAX(CAST(SUBSTRING(mhv, -3) AS UNSIGNED)) AS max_digits FROM bin_student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two'";
+        $result_bin_student = mysqli_query($mysqli, $query_bin_student);
+        $row_bin_student = mysqli_fetch_assoc($result_bin_student);
+        $max_last_three_digits_bin_student = intval($row_bin_student['max_digits']);
+
+        // So sánh và lấy số lớn hơn
+        $max_last_three_digits = max($max_last_three_digits_student, $max_last_three_digits_bin_student);
+
+        return $max_last_three_digits;
     }
+    $order_index = getMaxLastThreeDigits($mysqli, $mhv_prefix, $year_last_two) + 1;
     
+    // Nếu không tìm thấy bản ghi nào thỏa mãn điều kiện, gán giá trị mặc định là "001"
+    if ($order_index === null || $order_index < 1) {
+        $order_index = 1;
+    }
+    $order_index = sprintf('%03d', $order_index);
     // Tạo mã mhv hoàn chỉnh
     $mhv = $mhv_prefix . $year_last_two . $dob_last_two . $order_index;
 }    

@@ -204,6 +204,24 @@
                                         break;
                                     }
                                 }
+                                //search đơn hàng
+                                if (isset($_GET['search_dh'])){
+                                    $type = $_GET['type_dh'];
+                                    switch($type) {
+                                        case 1:
+                                            include 'modules/donhang/donhang1.php';
+                                            break;
+                                        case 3:
+                                            include 'modules/donhang/donhang3.php';
+                                            break;
+                                        case 'dd':
+                                            include 'modules/donhang/donhangdd.php';
+                                            break;
+                                        case 'bin_dh':
+                                            include 'modules/thung-rac/bin_dh/bin_order.php';
+                                            break;
+                                        }
+                                }
                                 // thùng rác
                                 if(isset($_GET['typebin'])) {
                                 $type = $_GET['typebin'];
@@ -238,22 +256,27 @@
                                     if(isset($_GET['edit'])) {
                                     include 'modules/hocvien/edit/form-sua.php';
                                     } 
+                                    // sửa đơn hàng
+                                    if(isset($_GET['edit_dh'])) {
+                                    include 'modules/donhang/edit/form-editdh.php';
+                                    } 
                                     // xem pv học viên
                                     if(isset($_GET['action']) && $_GET['action'] === 'view' 
                                     && isset($_GET['mhv'])) {
                                       include 'modules/hocvien/view.php';
                                     }
-                                    // ???
-                                    // if (isset($_GET['error_message'])) {
-                                    //     $error_message = $_GET['error_message'];
-                                    //     include 'modules/hocvien/add/them.php';
-                                    // }
+                                    if(isset($_GET['action']) && $_GET['action'] === 'view' 
+                                    && isset($_GET['mdh'])) {
+                                      include 'modules/donhang/viewod.php';
+                                    }
                                     // mặc định hiển thị menu.php
                                     if(!(isset($_GET['chucnang']) || isset($_GET['type']) || 
                                         isset($_GET['typedh']) || isset($_GET['typebin']) || 
                                         isset($_GET['function']) || isset($_GET['edit']) || 
                                     (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mhv'])) || 
-                                    isset($_GET['error_message'])) && isset($_SESSION['login'])) {
+                                    (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mdh'])) || 
+                                    isset($_GET['error_message']) && isset($_SESSION['login']) || isset($_GET['edit_dh']) ||
+                                    isset($_GET['search_dh']) )) {
                                         include 'modules/menu.php';
                                     }
                                 ?>

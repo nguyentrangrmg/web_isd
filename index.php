@@ -26,16 +26,17 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/style-pv.css">
+  <!-- <link rel="stylesheet" href="css/style-ov.css"> -->
 </head>
 <body>
-    <?php //lấy tên Admin từ csdl
+    <!-- <?php //lấy tên Admin từ csdl
         $conn = new mysqli('localhost', 'root', '','web_isd');
         $sql = "SELECT name FROM user";
         $result = $conn->query($sql);
         while ($row = $result ->fetch_assoc()){
             $ten_admin = $row['name'];
         }
-    ?>
+    ?> -->
     <?php 
     if(isset($_SESSION['login']))
         include 'trangquanly.php';

@@ -59,147 +59,7 @@
     
     </a>
     <form action="modules/hocvien/edit/edit.php?edit=sua&mhv=<?php echo $row['mhv']; ?>" method="POST" style="width: 1100px;" enctype="multipart/form-data">
-    <!-- <div class="row">
-        <div class="col-md-4">
-            <label for="ho_ten" class="form-label">Mã học viên:</label>
-            <input name="mhv" class="form-control" id="mhv" value="<?php echo $row['mhv']; ?>" disabled>
-        </div>
-        <div class="col-md-4">
-              <label for="type_hv" class="form-label">Kiểu học viên:</label>
-              <select class="form-select" id="type_hv" name="type_hv" style="width:180px"disabled>
-                    <option value="1" <?php if ($row['type_hv'] == '1') echo 'selected'; ?>>Thực tập sinh số 1</option>
-                    <option value="3" <?php if ($row['type_hv'] == '3') echo 'selected'; ?>>Thực tập sinh số 3</option>
-                    <option value="dd" <?php if ($row['type_hv'] == 'dd') echo 'selected'; ?>>Kỹ năng đặc định</option>
-              </select>
-            </div>
-        <div class="col-md-4">
-            <label for="file_anh" class="form-label">Chọn file ảnh học viên:</label>
-            <input type="file" class="form-control" id="file_anh" name="file_anh" accept="image/*">
-        </div>
-        <div class="col-md-4">
-        <label for="file_anh" class="form-label"></label>
-              <p><?php
-              $anh_path = $row['file_anh'];           
-              $target_dir = "modules/hocvien/anhhv/";
-              $target_file = $target_dir.$anh_path;
-               echo "<img src='".$target_file."' width='80px'>" ?></p>
-        </div>
-        <div class="col-md-4">
-            <label for="ng_bao_lanh" class="form-label">Người bảo lãnh:</label>
-            <input type="text" class="form-control" id="ng_bao_lanh" name="ng_bao_lanh">
-        </div>
-        <div class="col-md-4">
-            <label for="gioi_tinh" class="form-label">Giới tính</label>
-            <input type="text" class="form-control" id="gioi_tinh" name="gioi_tinh" maxlength="10">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ho_ten" class="form-label">Họ và tên:</label>
-            <input type="text" class="form-control" id="ho_ten" name="ho_ten" value="<?php echo $row['ho_ten']; ?>">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ngay_sinh" class="form-label">Ngày sinh:</label>
-            <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" value="<?php echo $row['ngay_sinh']; ?>">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="sdt" class="form-label">Số điện thoại:</label>
-            <input type="text" class="form-control" id="sdt" name="sdt" value="<?php echo $row['sdt']; ?>">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ho_chieu" class="form-label">Hộ chiếu:</label>
-            <input type="text" class="form-control" id="ho_chieu" name="ho_chieu" value="<?php echo $row['ho_chieu']; ?>">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ngay_cap_hc" class="form-label">Ngày cấp Hộ chiếu:</label>
-            <input type="date" class="form-control" id="ngay_cap_hc" name="ngay_cap_hc">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="noi_cap_hc" class="form-label">Nơi cấp Hộ chiếu:</label>
-            <input type="text" class="form-control" id="noi_cap_hc" name="noi_cap_hc">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="CCCD" class="form-label">Căn cước công dân:</label>
-            <input type="text" class="form-control" id="CCCD" name="CCCD" value="<?php echo $row['CCCD']; ?>">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ngay_cap_cccd" class="form-label">Ngày cấp CCCD:</label>
-            <input type="date" class="form-control" id="ngay_cap_cccd" name="ngay_cap_cccd">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="noi_cap_cccd" class="form-label">Nơi cấp CCCD:</label>
-            <input type="text" class="form-control" id="noi_cap_cccd" name="noi_cap_cccd">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ho_khau" class="form-label">Hộ khẩu:</label>
-            <input type="text" class="form-control" id="ho_khau" name="ho_khau">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="dia_chi" class="form-label">Địa chỉ thường trú:</label>
-            <input type="text" class="form-control" id="dia_chi" name="dia_chi">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="row">
-            <div class="col-md-5">
-              <label for="status" class="form-label">Trạng thái:</label>
-              <select class="form-select" id="status" name="status" style="width:130px">
-                <option value="Đang đào tạo" <?php if ($row['status'] == 'Đang đào tạo') echo 'selected'; ?>>Đang đào tạo</option>
-                <option value="Đang làm việc" <?php if ($row['status'] == 'Đang làm việc') echo 'selected'; ?>>Đang làm việc</option>
-                <option value="Đã về nước" <?php if ($row['status'] == 'Đã về nước') echo 'selected'; ?>>Đã về nước</option>
-              </select>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-    <div class="col-md-4">
-        <div class="mb-3">
-            <label for="ngay_thi" class="form-label">Ngày thi tuyển:</label>
-            <input type="date" class="form-control" id="ngay_thi" name="ngay_thi" value="<?php echo $row['ngay_thi']; ?>">
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="mb-3">
-            <label for="ngay_nhaphoc" class="form-label">Ngày nhập học:</label>
-            <input type="date" class="form-control" id="ngay_nhaphoc" name="ngay_nhaphoc" value="<?php echo $row['ngay_nhaphoc']; ?>">
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="mb-3">
-            <label for="order_name" class="form-label">Tên đơn hàng:</label>
-            <input type="text" class="form-control" id="order_name" name="order_name" value="<?php echo $row['order_name']; ?>">
-        </div>
-    </div>
-    </div> -->
+    
     <div class="row">
     <div class="col-md-4">
             <label for="ho_ten" class="form-label">Mã học viên:</label>
@@ -353,7 +213,7 @@
                                         class="card-description"
                                         style="font-style: italic;">(Ảnh 4x6, kích thước tối đa
                                         50MB)</span></label>
-                                        <div class="anh"><input type="file" class="form-control" name="file_anh" id="file_anh" required></div>
+                                        <div class="anh"><input type="file" class="form-control" name="file_anh" id="file_anh"></div>
                             </div>
                         </div>
                     </div>
@@ -383,6 +243,7 @@
                 </div>
             </div>
         </div>
+        <br>
                             <!-- Chưa link form -->
                             <div class="col-14 grid-margin">
                                 <div class="card">
@@ -449,6 +310,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <!-- Bên dưới dùng php nhưng mà lười code quá -->
                             <div class="col-14 grid-margin">
                                 <div class="card">

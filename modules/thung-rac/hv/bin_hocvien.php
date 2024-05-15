@@ -53,13 +53,13 @@ if ($res === false) {
                         ?>
                         <tr id="box<?php echo $row['mhv']?>">
                         <td>
-    <!-- Input hidden để lưu trữ các giá trị mhv -->
-    <input type="hidden" name="mhv[]" value="<?php echo $row['mhv']?>">
-    <!-- Input hidden để lưu trữ các giá trị created_at -->
-    <input type="hidden" name="created_at[]" value="<?php echo $row['created_at']?>">
-    <!-- Checkbox để chọn học viên -->
-    <input type="checkbox" id="<?php echo $row['mhv']?>" name="checkbox[]" value="<?php echo $row['created_at']?>">
-</td>
+                            <!-- Input hidden để lưu trữ các giá trị mhv -->
+                            <input type="hidden" name="mhv[]" value="<?php echo $row['mhv']?>">
+                            <!-- Input hidden để lưu trữ các giá trị created_at -->
+                            <input type="hidden" name="created_at[]" value="<?php echo $row['created_at']?>">
+                            <!-- Checkbox để chọn học viên -->
+                            <input type="checkbox" id="<?php echo $row['mhv']?>" name="checkbox[]" value="<?php echo $row['created_at']?>">
+                        </td>
 
                             <td><?php echo $row['mhv'] ?></td>
                             <td><a href="index.php?action=view&mhv=<?php echo $row['mhv']; ?>" 
@@ -81,7 +81,7 @@ if ($res === false) {
                                 <form action="modules/thung-rac/hv/restore_bin.php" method="POST">
                                 <input type="hidden" name="restore" value="<?php echo $row['mhv']; ?>">
                                 <input type="hidden" name="created_at" value="<?php echo $row['created_at']; ?>">
-                                    <button type="submit" class="khoi-phuc" style="border: none; background: none; color: inherit;"><i class="fas fa-pen edit"></i></button>
+                                    <button type="submit" class="khoi-phuc" style="border: none; background: none; color: inherit;"><i class="fas fa-undo-alt edit"></i></button>
                                 </form>
                                 <form action="modules/thung-rac/hv/delete_bin.php" method="POST">
                                 <input type="hidden" name="delete" value="<?php echo $row['mhv']; ?>">
@@ -100,7 +100,7 @@ if ($res === false) {
                 if (mysqli_num_rows($res) == 0) {
                     echo "<div style='text-align: center; 
                     margin-top: 20px; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;'>
-                    Thùng rác của bạn sạch thật đấy!</div>";
+                    Không có gì ở đây cả!</div>";
                 } ?>
             </form>
         </div>
