@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-<<<<<<< HEAD
--- Generation Time: Apr 22, 2024 at 02:36 AM
-=======
--- Generation Time: Apr 13, 2024 at 07:00 AM
->>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
+-- Generation Time: May 17, 2024 at 06:07 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -59,7 +55,20 @@ INSERT INTO `baolanh` (`mhv`, `ten`, `quan_he`, `dob`, `dia_chi_bl`, `sdt_bl`, `
 ('T12424005', 'dasdas', '', '2024-04-13', '', '321', ''),
 ('T12424006', 'dasdas', '', '2024-04-19', '', '321', ''),
 ('T12424007', 'dasdas', '', '2024-04-17', '', '321', ''),
-('T12424008', 'dasdas', '', '2024-04-18', '', '321', '');
+('T12424008', 'dasdas', '', '2024-04-18', '', '321', ''),
+('T12424009', 'dasdas', '', '2024-04-11', '', '321', ''),
+('T12424010', 'dasdas', '', '2024-04-18', '', '321', ''),
+('T12424001', 'dasdas', '', '2024-04-11', '', '321', ''),
+('T12424002', 'dasdas', '', '2024-05-17', '', '321', ''),
+('T12424001', 'dasdas', '', '2024-05-10', '', '321', ''),
+('T12424004', 'cvb', '', '2024-05-09', '', '1313', ''),
+('T12424005', 'vcc', '', '2024-05-04', '', '1313', ''),
+('T12424006', 'vcc', '', '2024-05-08', '', '1313', ''),
+('T32424002', 'Khá Bảnh', 'anh trai', '2024-05-24', 'đâu đó trên trái đất này', '2222', 'gò vấp'),
+('DD2424001', 'Khá Bảnh', 'anh trai', '2024-05-09', 'đâu đó trên trái đất này', '2222', 'gò vấp'),
+('DD2424002', 'Khá Bảnh', 'anh trai', '2024-05-08', 'đâu đó trên trái đất này', '2222', 'gò vấp'),
+('T32424003', 'Khá Bảnh', 'anh trai', '2024-05-08', 'đâu đó trên trái đất này', '2222', 'gò vấp'),
+('T12424007', 'Khá Bảnh', 'anh trai', '2024-05-08', 'đâu đó trên trái đất này', '2222', 'gò vấp');
 
 -- --------------------------------------------------------
 
@@ -68,28 +77,41 @@ INSERT INTO `baolanh` (`mhv`, `ten`, `quan_he`, `dob`, `dia_chi_bl`, `sdt_bl`, `
 --
 
 CREATE TABLE `bin_order` (
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `mdh` varchar(7) NOT NULL,
-  `ten_dh` varchar(20) DEFAULT NULL,
+  `ten_dh` varchar(20) NOT NULL,
   `ngay_xc` date DEFAULT NULL,
-  `ngay_vn` date DEFAULT NULL,
-  `ngay_pv` date DEFAULT NULL,
+  `ngay_vn` date NOT NULL,
   `hinh_thuc_tt` varchar(255) DEFAULT NULL,
-  `so_luong_tuyen` int(100) DEFAULT NULL,
+  `so_luong_tuyen` int(100) NOT NULL,
   `yeu_cau` varchar(100) DEFAULT NULL,
-  `muc_luong` bigint(20) DEFAULT NULL,
+  `luong_co_ban` varchar(30) NOT NULL,
+  `luong_thuc_te` varchar(30) NOT NULL,
   `che_do_phu_cap` varchar(255) DEFAULT NULL,
-  `thoi_gian_lam_viec` varchar(255) DEFAULT NULL,
   `du_kien_tt` date DEFAULT NULL,
   `trang_thai` varchar(255) DEFAULT NULL,
-  `nghiep_doan` varchar(50) DEFAULT NULL,
-  `xi_nghiep` varchar(20) DEFAULT NULL,
-  `nganh_nghe` varchar(20) DEFAULT NULL,
-  `gioi_tinh` varchar(11) DEFAULT NULL,
-  `do_tuoi` varchar(9) DEFAULT NULL,
-  `type_hv` varchar(2) DEFAULT NULL,
+  `nghiep_doan` varchar(50) NOT NULL,
+  `xi_nghiep` varchar(20) NOT NULL,
+  `nganh_nghe` varchar(20) NOT NULL,
+  `sl_nam` int(20) NOT NULL,
+  `sl_nu` int(20) NOT NULL,
+  `do_tuoi_nam` varchar(20) NOT NULL,
+  `do_tuoi_nu` varchar(20) NOT NULL,
+  `type_hv` varchar(2) NOT NULL,
   `ngay_tt` date DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `noi_lv` varchar(80) NOT NULL,
+  `lv_theo_ngay` int(24) NOT NULL,
+  `lv_theo_tuan` int(50) NOT NULL,
+  `nghi` int(24) NOT NULL,
+  `ghi_chu` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bin_order`
+--
+
+INSERT INTO `bin_order` (`created_at`, `mdh`, `ten_dh`, `ngay_xc`, `ngay_vn`, `hinh_thuc_tt`, `so_luong_tuyen`, `yeu_cau`, `luong_co_ban`, `luong_thuc_te`, `che_do_phu_cap`, `du_kien_tt`, `trang_thai`, `nghiep_doan`, `xi_nghiep`, `nganh_nghe`, `sl_nam`, `sl_nu`, `do_tuoi_nam`, `do_tuoi_nu`, `type_hv`, `ngay_tt`, `noi_lv`, `lv_theo_ngay`, `lv_theo_tuan`, `nghi`, `ghi_chu`) VALUES
+('2024-05-17 01:03:39', 'T124013', '2131231', '0000-00-00', '0000-00-00', 'online', 12, '', '21000000', '10000000', 'không có', '2024-05-18', 'Đang tuyển', 'hehe', 'doremon', 'abc', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-10', 'ở một nơi nào đó rất xa', 8, 48, 1, '');
 
 -- --------------------------------------------------------
 
@@ -98,19 +120,22 @@ CREATE TABLE `bin_order` (
 --
 
 CREATE TABLE `bin_student` (
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `mhv` varchar(9) NOT NULL,
   `ho_ten` varchar(50) DEFAULT NULL,
   `ngay_sinh` date DEFAULT NULL,
-  `gioi_tinh` varchar(5) DEFAULT NULL,
-  `file_anh` varchar(200) DEFAULT NULL,
+  `gioi_tinh` varchar(5) NOT NULL,
+  `file_anh` varchar(200) NOT NULL,
   `ho_chieu` varchar(8) DEFAULT NULL,
+  `ngay_cap_hc` date DEFAULT NULL,
+  `noi_cap_hc` text NOT NULL,
   `CCCD` varchar(12) DEFAULT NULL,
+  `ngay_cap_cccd` date DEFAULT NULL,
+  `noi_cap_cccd` int(50) NOT NULL,
   `ho_khau` varchar(100) DEFAULT NULL,
-  `que_quan` varchar(50) DEFAULT NULL,
-  `ng_bao_lanh` varchar(20) DEFAULT NULL,
+  `dia_chi` text NOT NULL,
   `sdt` varchar(10) DEFAULT NULL,
   `ngay_thi` date DEFAULT NULL,
-  `co_quan` varchar(50) DEFAULT NULL,
   `ngay_DKXC` date DEFAULT NULL,
   `ngayXC` date DEFAULT NULL,
   `dukien_venuoc` date DEFAULT NULL,
@@ -119,13 +144,51 @@ CREATE TABLE `bin_student` (
   `nghiep_doan` varchar(50) DEFAULT NULL,
   `noi_lam_viec` varchar(50) DEFAULT NULL,
   `note` varchar(200) DEFAULT NULL,
-  `type_hv` varchar(2) DEFAULT NULL,
-  `ngay_nhaphoc` date DEFAULT NULL,
-  `order_name` varchar(20) DEFAULT NULL,
-  `status` varchar(20) DEFAULT NULL,
-  `tinh` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `type_hv` varchar(2) NOT NULL,
+  `ngay_nhaphoc` date NOT NULL,
+  `mdh` varchar(20) NOT NULL,
+  `ten_dh` varchar(50) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `lich_su_xk` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bin_student`
+--
+
+INSERT INTO `bin_student` (`created_at`, `mhv`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `file_anh`, `ho_chieu`, `ngay_cap_hc`, `noi_cap_hc`, `CCCD`, `ngay_cap_cccd`, `noi_cap_cccd`, `ho_khau`, `dia_chi`, `sdt`, `ngay_thi`, `ngay_DKXC`, `ngayXC`, `dukien_venuoc`, `nganh_nghe`, `xi_nghiep`, `nghiep_doan`, `noi_lam_viec`, `note`, `type_hv`, `ngay_nhaphoc`, `mdh`, `ten_dh`, `status`, `lich_su_xk`) VALUES
+('2024-05-17 01:02:41', 'T12424006', 'abc', '2024-05-02', 'Nam', 'Screenshot 2024-04-16 112955.png', '', NULL, '', '213', '2024-05-20', 0, '123123', '', '123123', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', NULL, NULL, NULL, NULL, '', '1', '2024-05-17', 'DD24001', '', 'Đang đào tạo', ''),
+('2024-05-17 01:02:43', 'T32424003', '1adsá', '2024-05-09', 'Nam', 'Screenshot 2024-04-16 142623.png', '21312', '2024-05-31', '21312', '1321', '2024-05-24', 3123, '31312', '', '23123', '2024-05-23', '2024-05-17', '2024-05-15', '2024-05-03', NULL, NULL, NULL, NULL, '', '3', '2024-05-11', 'T124012', '', 'Đang đào tạo', 'Xí nghiệp asuna, từ  đến  / Xí nghiệp dd, từ  đến ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bin_xn`
+--
+
+CREATE TABLE `bin_xn` (
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `mdn` varchar(20) NOT NULL,
+  `xi_nghiep` varchar(20) NOT NULL,
+  `ten_giam_doc` varchar(50) NOT NULL,
+  `nganh_nghe_e` varchar(20) NOT NULL,
+  `nghiep_doan` varchar(20) NOT NULL,
+  `sdt_xn` varchar(11) NOT NULL,
+  `dia_chi_xn` varchar(255) NOT NULL,
+  `noi_lam_viec` varchar(255) DEFAULT NULL,
+  `so_luong_don_hang` int(11) DEFAULT NULL,
+  `so_luong_hv` int(11) DEFAULT NULL,
+  `ghi_chu` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bin_xn`
+--
+
+INSERT INTO `bin_xn` (`created_at`, `mdn`, `xi_nghiep`, `ten_giam_doc`, `nganh_nghe_e`, `nghiep_doan`, `sdt_xn`, `dia_chi_xn`, `noi_lam_viec`, `so_luong_don_hang`, `so_luong_hv`, `ghi_chu`) VALUES
+('2024-05-16 11:18:27', 'DOR001', 'doremon', '12', '13; cc; ccc', '123', '12', 'he', '(ưqeqư)', NULL, NULL, NULL),
+('2024-05-16 11:18:27', 'NOB002', 'nobita', '12', '13', '123', '12', 'he', '(ưqeqư)', NULL, NULL, NULL),
+('2024-05-16 11:18:27', 'EEE003', 'eee', '12', '13', '123', '12', 'he', '(ưqeqư)', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -137,25 +200,26 @@ CREATE TABLE `enterprise` (
   `mdn` varchar(20) NOT NULL,
   `xi_nghiep` varchar(20) NOT NULL,
   `ten_giam_doc` varchar(50) NOT NULL,
-  `nganh_nghe` varchar(20) NOT NULL,
+  `nganh_nghe_e` varchar(20) NOT NULL,
   `nghiep_doan` varchar(20) NOT NULL,
   `sdt_xn` varchar(11) NOT NULL,
   `dia_chi_xn` varchar(255) NOT NULL,
   `noi_lam_viec` varchar(255) DEFAULT NULL,
   `so_luong_don_hang` int(11) DEFAULT NULL,
   `so_luong_hv` int(11) DEFAULT NULL,
-  `ghi_chu` varchar(255) DEFAULT NULL
+  `ghi_chu_e` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-<<<<<<< HEAD
 
 --
 -- Dumping data for table `enterprise`
 --
 
-INSERT INTO `enterprise` (`mdn`, `xi_nghiep`, `ten_giam_doc`, `nganh_nghe`, `nghiep_doan`, `sdt_xn`, `dia_chi_xn`, `noi_lam_viec`, `so_luong_don_hang`, `so_luong_hv`, `ghi_chu`) VALUES
-('', 'ưeqe', '', '', '', '321312', '312312', NULL, NULL, NULL, NULL);
-=======
->>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
+INSERT INTO `enterprise` (`mdn`, `xi_nghiep`, `ten_giam_doc`, `nganh_nghe_e`, `nghiep_doan`, `sdt_xn`, `dia_chi_xn`, `noi_lam_viec`, `so_luong_don_hang`, `so_luong_hv`, `ghi_chu_e`) VALUES
+('DOR004', 'doremon', '12', 'abc; dcb; ccc', '123', '12', 'he', '(ưqeqư)', NULL, NULL, NULL),
+('DOR008', 'doremon', '12', 'cvcv; vvv; êcc ec; v', '123', '12', 'he', '(ưqeqư)', NULL, NULL, NULL),
+('NOB005', 'nobita', '12', 'cvcv; 111; 222', '123', '12', 'he', '(ưqeqư)', NULL, NULL, NULL),
+('NOB006', 'nobita', '12', 'cvcv', '123', '12', 'he', '(ưqeqư)(ád)(ad)', NULL, NULL, NULL),
+('NOB007', 'nobita', '12', 'cvcv; cccc; 123; ggg', '123', '12', 'he', '(ưqeqư)', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -168,47 +232,51 @@ CREATE TABLE `jporder` (
   `ten_dh` varchar(20) NOT NULL,
   `ngay_xc` date DEFAULT NULL,
   `ngay_vn` date NOT NULL,
-  `ngay_pv` date DEFAULT NULL,
   `hinh_thuc_tt` varchar(255) DEFAULT NULL,
   `so_luong_tuyen` int(100) NOT NULL,
   `yeu_cau` varchar(100) DEFAULT NULL,
-  `muc_luong` bigint(20) DEFAULT NULL,
+  `luong_co_ban` varchar(30) NOT NULL,
+  `luong_thuc_te` varchar(30) NOT NULL,
   `che_do_phu_cap` varchar(255) DEFAULT NULL,
-  `thoi_gian_lam_viec` varchar(255) DEFAULT NULL,
   `du_kien_tt` date DEFAULT NULL,
   `trang_thai` varchar(255) DEFAULT NULL,
   `nghiep_doan` varchar(50) NOT NULL,
   `xi_nghiep` varchar(20) NOT NULL,
   `nganh_nghe` varchar(20) NOT NULL,
-<<<<<<< HEAD
-  `gioi_tinh` varchar(11) NOT NULL,
-  `do_tuoi` varchar(9) NOT NULL,
+  `sl_nam` int(20) NOT NULL,
+  `sl_nu` int(20) NOT NULL,
+  `do_tuoi_nam` varchar(20) NOT NULL,
+  `do_tuoi_nu` varchar(20) NOT NULL,
   `type_hv` varchar(2) NOT NULL,
-  `ngay_tt` date DEFAULT NULL
-=======
-  `noi_lam_viec` varchar(255) DEFAULT NULL,
-  `mo_ta` varchar(1000) DEFAULT NULL
->>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
+  `ngay_tt` date DEFAULT NULL,
+  `noi_lv` varchar(80) NOT NULL,
+  `lv_theo_ngay` int(24) NOT NULL,
+  `lv_theo_tuan` int(50) NOT NULL,
+  `nghi` int(24) NOT NULL,
+  `ghi_chu` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `jporder`
 --
 
-<<<<<<< HEAD
-INSERT INTO `jporder` (`mdh`, `ten_dh`, `ngay_xc`, `ngay_vn`, `ngay_pv`, `hinh_thuc_tt`, `so_luong_tuyen`, `yeu_cau`, `muc_luong`, `che_do_phu_cap`, `thoi_gian_lam_viec`, `du_kien_tt`, `trang_thai`, `nghiep_doan`, `xi_nghiep`, `nganh_nghe`, `gioi_tinh`, `do_tuoi`, `type_hv`, `ngay_tt`) VALUES
-('DD24001', '123', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', '1231231', '13231', '', '', '', 'dd', '0000-00-00'),
-('T124001', '23123', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', '123123', '', '', '', '', '1', '0000-00-00'),
-('T124002', '123213', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', '21312', '', '', '', '', '1', '0000-00-00'),
-('T124003', '123', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', '1231231', '13231', '', '', '', '1', '0000-00-00'),
-('T124004', '123', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', '1231231', '13231', '', '', '', '1', '0000-00-00'),
-('T324001', 'e12312', '0000-00-00', '0000-00-00', '0000-00-00', '', 0, '', 0, '', '', '0000-00-00', '', 'ưqeqưe', 'ưqeqưe', '', '', '', '3', '0000-00-00');
-=======
-INSERT INTO `jporder` (`mdh`, `ten_dh`, `ngay_dktt`, `ngay_nhan`, `ngay_pv`, `hinh_thuc_tt`, `ngay_DKXC`, `ngay_dukien_VN`, `so_luong_hv`, `yeu_cau`, `noi lam viec`, `luong_du_kien`, `che_do_phu_cap`, `thoi_gian_lam_viec`, `trang_thai`, `ghi_chu`, `nghiep_doan`, `xi_nghiep`, `nganh_nghe`, `noi_lam_viec`, `mo_ta`) VALUES
-('984382', '', NULL, '0000-00-00', NULL, NULL, '0000-00-00', NULL, 5, 'Tiếng Nhật N4, Tốt nghiệp cấp 3', NULL, 60, NULL, NULL, NULL, NULL, 'Katsunaka', '', '', NULL, NULL),
-('MDH001', '', NULL, '2024-03-27', NULL, NULL, '2024-04-05', NULL, 100, 'Yêu cầu đơn hàng 1', NULL, 5000000, NULL, NULL, NULL, NULL, 'Nghề đoàn A', '', '', NULL, 'Mô tả đơn hàng 1'),
-('MDH002', '', NULL, '2024-03-28', NULL, NULL, '2024-04-10', NULL, 150, 'Yêu cầu đơn hàng 2', NULL, 7000000, NULL, NULL, NULL, NULL, 'Nghề đoàn B', '', '', NULL, 'Mô tả đơn hàng 2');
->>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
+INSERT INTO `jporder` (`mdh`, `ten_dh`, `ngay_xc`, `ngay_vn`, `hinh_thuc_tt`, `so_luong_tuyen`, `yeu_cau`, `luong_co_ban`, `luong_thuc_te`, `che_do_phu_cap`, `du_kien_tt`, `trang_thai`, `nghiep_doan`, `xi_nghiep`, `nganh_nghe`, `sl_nam`, `sl_nu`, `do_tuoi_nam`, `do_tuoi_nu`, `type_hv`, `ngay_tt`, `noi_lv`, `lv_theo_ngay`, `lv_theo_tuan`, `nghi`, `ghi_chu`) VALUES
+('DD24001', '2131231', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-09', 'Đang tuyển', 'hehe', 'doremon', 'abc', 12, 1, '1 đến 20', '1 đến 21', 'dd', '2024-05-10', 'ở một nơi nào đó rất xa', 8, 48, 1, 'hehe'),
+('T124004', '1 con vịt', '2024-05-11', '2024-05-04', 'hehe', 12, '', '21000000', '10000000', 'không có', '2024-05-17', 'Đang tuyển', 'hehe', 'doremon', 'ccc', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-11', 'ở một nơi nào đó rất xa', 8, 48, 1, 'ghi chu that dai'),
+('T124005', '1 con vịt', '0000-00-00', '0000-00-00', 'online', 12, '', '21000000', '10000000', 'không có', '2024-05-04', 'Đang tuyển', 'hehe', 'doremon', 'abc', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-10', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T124006', '1 con vịt', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-11', 'Đang tuyển', 'hehe', 'nobita', 'cvcv', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-10', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T124007', '1 con vịt', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-25', 'Đang tuyển', 'hehe', 'default', 'default', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-17', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T124008', '1 con vịt', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-17', 'Đang tuyển', 'hehe', 'default', 'default', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-17', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T124009', '1 con vịt', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-10', 'Đang tuyển', 'hehe', 'doremon', 'ccc', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-10', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T124010', '1 con vịt', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-11', 'Đang tuyển', 'hehe', 'doremon', 'abc', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-17', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T124011', '2131231', '2024-05-24', '2024-05-10', 'online', 12, '', '21000000', '10000000', 'không có', '2024-05-30', 'Đang tuyển', 'hehe', 'doremon', 'abc', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-10', 'ở một nơi nào đó rất xa', 8, 48, 1, 'hú hú khẹc khẹc'),
+('T124012', '2131231', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-06-07', 'Đang tuyển', 'hehe', 'doremon', 'abc', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-25', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T124014', '2131231', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-11', 'Đang tuyển', 'hehe', 'nobita', 'cvcv', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-18', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T124017', '1 con vịt', '2024-05-11', '2024-05-04', 'hehe', 12, '', '21000000', '10000000', 'không có', '2024-05-17', 'Đang tuyển', 'hehe', 'doremon', 'ccc', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-11', 'ở một nơi nào đó rất xa', 8, 48, 1, 'ghi chu that dai'),
+('T124018', '2131231', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-18', 'Đang tuyển', 'hehe', 'doremon', 'abc', 12, 1, '1 đến 20', '1 đến 21', '1', '2024-05-09', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T324007', '1 con vịt', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-18', 'Đang tuyển', '', 'nobita', 'cvcv', 12, 1, '1 đến 20', '1 đến 21', '3', '2024-05-10', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T324011', '1 con vịt', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-18', 'Đang tuyển', '', 'nobita', 'cvcv', 12, 1, '1 đến 20', '1 đến 21', '3', '2024-05-10', 'ở một nơi nào đó rất xa', 8, 48, 1, ''),
+('T324012', '2131231', '0000-00-00', '0000-00-00', 'offline', 12, '', '21000000', '10000000', 'không có', '2024-05-09', 'Đang tuyển', 'hehe', 'doremon', 'abc', 12, 1, '1 đến 20', '1 đến 21', '3', '2024-05-11', 'ở một nơi nào đó rất xa', 8, 48, 1, '');
 
 -- --------------------------------------------------------
 
@@ -246,7 +314,6 @@ CREATE TABLE `student` (
   `dia_chi` text NOT NULL,
   `sdt` varchar(10) DEFAULT NULL,
   `ngay_thi` date DEFAULT NULL,
-  `co_quan` varchar(50) DEFAULT NULL,
   `ngay_DKXC` date DEFAULT NULL,
   `ngayXC` date DEFAULT NULL,
   `dukien_venuoc` date DEFAULT NULL,
@@ -257,35 +324,25 @@ CREATE TABLE `student` (
   `note` varchar(200) DEFAULT NULL,
   `type_hv` varchar(2) NOT NULL,
   `ngay_nhaphoc` date NOT NULL,
-  `order_name` varchar(20) NOT NULL,
-<<<<<<< HEAD
+  `mdh` varchar(20) NOT NULL,
+  `ten_dh` varchar(50) NOT NULL,
   `status` varchar(20) NOT NULL,
-  `tinh` text NOT NULL
-=======
-  `status` varchar(20) NOT NULL
->>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
+  `lich_su_xk` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`mhv`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `file_anh`, `ho_chieu`, `ngay_cap_hc`, `noi_cap_hc`, `CCCD`, `ngay_cap_cccd`, `noi_cap_cccd`, `ho_khau`, `dia_chi`, `sdt`, `ngay_thi`, `co_quan`, `ngay_DKXC`, `ngayXC`, `dukien_venuoc`, `nganh_nghe`, `xi_nghiep`, `nghiep_doan`, `noi_lam_viec`, `note`, `type_hv`, `ngay_nhaphoc`, `order_name`, `status`, `tinh`) VALUES
-('T12424001', 'aaa', '2024-04-26', 'Nam', 'Screenshot 2024-04-16 111540.png', '312312', NULL, '', '3123123', NULL, 0, '123123', '', '313123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-25', '', 'Đang đào tạo', ''),
-('T12424002', '2213123', '2024-04-24', 'Nam', 'Screenshot 2024-04-16 112955.png', '312312', NULL, '', '3123123', NULL, 0, '123123', '', '1231231231', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-26', '', 'Đang đào tạo', ''),
-('T12424003', 'aaa', '2024-04-26', 'Nam', 'Screenshot 2024-04-16 142206.png', '312312', NULL, '', '3123123', NULL, 0, '123123', '', '313123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-05', '', 'Đang đào tạo', ''),
-('T12424004', 'aaa', '2024-04-26', 'Nam', 'Screenshot 2024-04-16 142206.png', '312312', NULL, '', '3123123', NULL, 0, '123123', '', '313123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-19', '', 'Đang đào tạo', ''),
-('T12424005', 'anh long', '2024-04-11', 'Nam', 'Screenshot 2024-04-16 111540.png', '', NULL, '', '23213123123', '2024-04-24', 0, '123123', '', '123123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-18', '#', 'Đang đào tạo', ''),
-('T12424006', 'anh long', '2024-04-26', 'Nam', 'Screenshot 2024-04-16 111540.png', '', NULL, '', '23213123123', '2024-04-05', 0, '123123', '', '123123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-19', 'DD24001', 'Đang đào tạo', ''),
-('T12424007', 'anh long g', '2024-04-16', 'Nam', 'Screenshot 2024-04-15 221058.png', '', NULL, '', '23213123123', '2024-04-05', 0, '123123', '', '123123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', 'ưeqe', '', '', '', '1', '2024-04-19', 'T124002', 'Đang đào tạo', ''),
-('T12424008', 'anh long ga', '2024-04-25', 'Nam', 'Screenshot 2024-04-15 221058.png', '', NULL, '', '23213123123', '2024-04-13', 0, '123123', '', '123123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', 'ưeqe', '', '', '', '1', '2024-04-17', 'DD24001', 'Đang đào tạo', ''),
-('T12424019', 'đại ca', '2024-04-18', 'Nam', 'Screenshot 2024-04-16 142930.png', '13123', NULL, '', '13123123', NULL, 0, NULL, '', 'bbb', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-11', '', 'Đang đào tạo', ''),
-('T12424020', '213123', '2024-04-26', 'Nam', 'Screenshot 2024-04-15 213001.png', '312312', NULL, '', '3123123', NULL, 0, '123123', '', '313123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-19', '', 'Đang làm việc', ''),
-('T12424021', 'aaa', '2024-04-11', 'Nam', 'Screenshot 2024-04-16 111540.png', '312312', NULL, '', '3123123', NULL, 0, '123123', '', '313123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-27', '', 'Đang đào tạo', ''),
-('T12424022', 'aaa', '2024-04-25', 'Nam', 'Screenshot 2024-04-16 142206.png', '312312', NULL, '', '3123123', NULL, 0, '123123', '', '313123', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '1', '2024-04-11', '', 'Đang đào tạo', ''),
-('T12470000', '123123', '0000-00-00', '', '', NULL, NULL, '', NULL, NULL, 0, '', '', '', '0000-00-00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '0000-00-00', '', 'option1', ''),
-('T32424000', '123123', '2024-04-11', '', '', NULL, NULL, '', NULL, NULL, 0, '', '', 'áđá', '0000-00-00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '0000-00-00', '', 'option1', ''),
-('T32424001', '2213123', '2024-04-25', 'Nam', 'Screenshot 2024-04-16 111540.png', '312312', NULL, '', '3123123', '2024-04-04', 0, '123123', '', '1231231231', '0000-00-00', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '3', '2024-04-12', '', 'Đang làm việc', '');
+INSERT INTO `student` (`mhv`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `file_anh`, `ho_chieu`, `ngay_cap_hc`, `noi_cap_hc`, `CCCD`, `ngay_cap_cccd`, `noi_cap_cccd`, `ho_khau`, `dia_chi`, `sdt`, `ngay_thi`, `ngay_DKXC`, `ngayXC`, `dukien_venuoc`, `nganh_nghe`, `xi_nghiep`, `nghiep_doan`, `noi_lam_viec`, `note`, `type_hv`, `ngay_nhaphoc`, `mdh`, `ten_dh`, `status`, `lich_su_xk`) VALUES
+('DD2424001', '1adsá', '2024-05-10', 'Nam', 'Screenshot 2024-04-16 142238.png', '21312', '2024-05-09', '21312', '1321', '2024-05-23', 3123, '31312', 'hehe', '23123', '2024-05-04', '2024-05-18', '2024-05-30', '2024-05-04', NULL, NULL, NULL, NULL, 'không có ghi chú', 'dd', '2024-05-03', '', '', 'Đang đào tạo', 'Xí nghiệp asuna, từ 2024-05-10 đến 2024-05-16 / Xí nghiệp dd, từ 2024-05-23 đến 2024-05-29'),
+('DD2424002', '1adsá', '2024-05-03', 'Nam', 'Screenshot 2024-04-16 112955.png', '21312', '2024-05-24', '21312', '1321', '2024-05-24', 3123, '31312', '', '23123', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', NULL, NULL, NULL, NULL, '', 'dd', '2024-05-18', '', '', 'Đang đào tạo', 'Xí nghiệp asuna, từ  đến  / Xí nghiệp dd, từ  đến '),
+('T12424001', 'anh long ga', '2024-05-16', 'Nam', 'Screenshot 2024-04-15 130157.png', '', NULL, '', '23213123123', '2024-05-16', 0, '123123', '', '123123', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '', 'ưeqe', '', '', '', '1', '2024-05-10', 'DD24001', '', 'Đang đào tạo', ''),
+('T12424002', 'anh long ga', '2024-05-16', 'Nam', 'Screenshot 2024-04-15 130157.png', '', NULL, '', '23213123123', '2024-05-16', 0, '123123', '', '123123', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '', 'ưeqe', '', '', '', '1', '2024-05-17', 'DD24001', '', 'Đang đào tạo', ''),
+('T12424003', 'anh long ga', '2024-04-25', 'Nam', 'Screenshot 2024-04-16 111540.png', '', NULL, '', '23213123123', '2024-04-26', 0, '123123', '', '123123', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '', 'ưeqe', '', '', '', '1', '2024-04-25', 'DD24001', '', 'Đang đào tạo', ''),
+('T12424005', 'abc', '2024-05-11', 'Nam', 'Screenshot 2024-04-16 142238.png', '', NULL, '', '213', '2024-05-17', 0, '123123', '', '123123', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '', '32131231', '', '', '', '1', '2024-05-17', 'DD24001', '', 'Đang đào tạo', ''),
+('T32424001', '2213123', '2024-04-25', 'Nam', 'Screenshot 2024-04-16 111540.png', '312312', NULL, '', '3123123', '2024-04-04', 0, '123123', '', '1231231231', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', '', '', '3', '2024-04-12', '', '', 'Đang làm việc', ''),
+('T32424002', '1adsá', '2024-05-24', 'Nam', 'Screenshot 2024-04-16 112955.png', '21312', NULL, '', '1321', '2024-05-23', 0, '31312', 'đâu đó trên trái đất này', '23123', '2024-05-10', '2024-05-22', '2024-05-14', '2024-05-13', NULL, NULL, NULL, NULL, 'cccc', '3', '2024-05-23', '', '', 'Đang làm việc', 'Xí nghiệp asuna, từ 2024-05-16 đến 2024-05-21 / Xí nghiệp dd, từ 2024-05-24 đến 2024-05-21');
 
 -- --------------------------------------------------------
 
@@ -314,17 +371,16 @@ INSERT INTO `user` (`id`, `name`, `email`, `user`, `pass`, `role`) VALUES
 --
 
 --
-<<<<<<< HEAD
+-- Indexes for table `enterprise`
+--
+ALTER TABLE `enterprise`
+  ADD PRIMARY KEY (`mdn`);
+
+--
 -- Indexes for table `jporder`
 --
 ALTER TABLE `jporder`
   ADD PRIMARY KEY (`mdh`);
-=======
--- Indexes for table `baolanh`
---
-ALTER TABLE `baolanh`
-  ADD PRIMARY KEY (`mhv`);
->>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
 
 --
 -- Indexes for table `student`
@@ -337,17 +393,20 @@ ALTER TABLE `student`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
-<<<<<<< HEAD
 
 DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `delete_old_bin_data` ON SCHEDULE EVERY 1 DAY STARTS '2024-04-17 03:36:26' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Delete records from bin_student after 30 days' DO DELETE FROM bin_student WHERE created_at <= DATE_SUB(NOW(), INTERVAL 30 DAY)$$
+CREATE DEFINER=`root`@`localhost` EVENT `delete_old_records_student` ON SCHEDULE EVERY 1 DAY STARTS '2024-05-14 01:17:17' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    DELETE FROM bin_student WHERE created_at < (NOW() - INTERVAL 30 DAY);
+END$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `delete_old_records_order` ON SCHEDULE EVERY 1 DAY STARTS '2024-05-14 01:17:17' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    DELETE FROM bin_order WHERE created_at < (NOW() - INTERVAL 30 DAY);
+END$$
 
 DELIMITER ;
-=======
->>>>>>> 782cf829cc807f441b4c82b6711f86c407cabc67
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

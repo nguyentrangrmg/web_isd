@@ -90,14 +90,12 @@ $pages = ceil($rs / $per_page);
                             <th><input type="checkbox" onclick="select_all()" id="select-all-checkbox" /></th>
                             <th style="white-space: nowrap;">MDH</th>
                             <th style="white-space: nowrap;">Tên đơn hàng</th>
-                            <th style="white-space: nowrap;">Xí nghiệp</th>
                             <th style="white-space: nowrap;">Ngành nghề</th>
-                            <th style="white-space: nowrap;">Giới tính</th>
-                            <th style="white-space: nowrap;">Số lượng tuyển</th>
-                            <th style="white-space: nowrap;">Độ tuổi</th>
+                            <th style="white-space: nowrap;">Xí nghiệp</th>
                             <th style="white-space: nowrap;">Ngày thi tuyển</th>
+                            <th style="white-space: nowrap;">Số lượng tuyển</th>
                             <th style="white-space: nowrap;">Trạng thái</th>
-                            <th style="white-space: nowrap;">Hình thức</th>
+                            <th style="white-space: nowrap;">Ghi chú</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -105,17 +103,18 @@ $pages = ceil($rs / $per_page);
                     while ($row = mysqli_fetch_assoc($res)) {
                     ?>
                         <tr id="box<?php echo $row['mdh'] ?>">
-                            <td><input type="checkbox" id="<?php echo $row['mdh'] ?>" name="checkbox[]" value="<?php echo $row['mdh'] ?>" /></td>
-                            <td style="white-space: nowrap;"><?php echo $row['mdh'] ?></td>
+                        <td><input type="checkbox" id="<?php echo $row['mdh'] ?>" name="checkbox[]" value="<?php echo $row['mdh'] ?>" /></td>
+                        <td style="white-space: nowrap;">
+                                <a href="index.php?action=view&mdh=<?php echo $row['mdh']; ?>" 
+                                style="text-decoration: none; color: black;"><?php echo $row['mdh'] ?></a>
+                            </td>
                             <td style="white-space: nowrap;"><?php echo $row['ten_dh'] ?></td>
-                            <td style="white-space: nowrap;"><?php echo $row['xi_nghiep'] ?></td>
                             <td style="white-space: nowrap;"><?php echo $row['nganh_nghe'] ?></td>
-                            <td style="white-space: nowrap;"><?php echo $row['gioi_tinh'] ?></td>
-                            <td style="white-space: nowrap;"><?php echo $row['so_luong_tuyen'] ?></td>
-                            <td style="white-space: nowrap;"><?php echo $row['do_tuoi'] ?></td>
+                            <td style="white-space: nowrap;"><?php echo $row['xi_nghiep'] ?></td>
                             <td><?php echo date('d/m/Y', strtotime($row['ngay_tt'])) ?></td>
+                            <td style="white-space: nowrap;"><?php echo $row['so_luong_tuyen'] ?></td>
                             <td><?php echo $row['trang_thai'] ?></td>
-                            <td><?php echo $row['hinh_thuc_tt'] ?></td>
+                            <td><?php echo strlen($row['ghi_chu']) > 10 ? substr($row['ghi_chu'], 0, 10) . '...' : $row['ghi_chu']; ?></td>
                             <td>
                                 <div style="display:flex" class="action-buttons">
                                     <form action="#" method="#">
@@ -148,65 +147,70 @@ $pages = ceil($rs / $per_page);
                     Không có dữ liệu</div>";
                 } ?>
             </form>
-            <!-- pagination -->
-<?php
-        $typedh = isset($_GET['typedh']) ? $_GET['typedh'] : 'dd';
-        $current_page = isset($_GET['pageo']) ? (int)$_GET['pageo'] : 1;
-        if ($pages > 0) {?>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination d-flex justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="?pageo=<?php echo max(1, $current_page - 1); ?>&typedh=<?php echo $typedh; ?>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <?php 
-                $start_page = max(1, $current_page - 1);
-                $end_page = min($pages, $current_page + 1);
-
-                if ($start_page > 1) {
-                    ?>
-                    <li class="page-item"><a class="page-link" href="?pageo=1&typedh=<?php echo $typedh; ?>">1</a></li>
-                    <?php
-                    if ($start_page > 2) {
-                        echo '<li class="page-item"><span class="page-link">...</span></li>';
-                    }
-                }
-
-                for ($i = $start_page; $i <= $end_page; $i++) {  
-                    if ($i != $current_page) {
-                        ?>
-                        <li class="page-item"><a class="page-link" href="?pageo=<?php echo $i; ?>&typedh=<?php echo $typedh; ?>"><?php echo $i; ?></a></li>
-                        <?php
-                    } else { ?>
-                        <li class="current-page page-item"><a style="color:white;background:#374375;" class="page-link" href="?pageo=<?php echo $i; ?>&typedh=<?php echo $typedh; ?>"><?php echo $i; ?></a></li>
-                    <?php 
-                    }
-                }
-
-                if ($end_page < $pages - 1) {
-                    echo '<li class="page-item"><span class="page-link">...</span></li>';
-                }
-                if ($end_page < $pages) {
-                    ?>
-                    <li class="page-item"><a class="page-link" href="?pageo=<?php echo $pages; ?>&typedh=<?php echo $typedh; ?>"><?php echo $pages; ?></a></li>
-                    <?php
-                }
-                ?>
-                <li class="page-item">
-                    <a class="page-link" href="?pageo=<?php echo min($pages, $current_page + 1); ?>&typedh=<?php echo $typedh; ?>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <?php
-        }
-        ?>
+            
         </div>
         
     </div>
-
+    <div class="pagination-container">
+    <div class="pagination">
+        <!-- pagination -->
+        <?php
+                $typedh = isset($_GET['typedh']) ? $_GET['typedh'] : 'dd';
+                $current_page = isset($_GET['pageo']) ? (int)$_GET['pageo'] : 1;
+                if ($pages > 0) { ?>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination d-flex justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="?pageo=<?php echo max(1, $current_page - 1); ?>&typedh=<?php echo $typedh; ?>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <?php 
+                        $start_page = max(1, $current_page - 1);
+                        $end_page = min($pages, $current_page + 1);
+        
+                        if ($start_page > 1) {
+                            ?>
+                            <li class="page-item"><a class="page-link" href="?pageo=1&typedh=<?php echo $typedh; ?>">1</a></li>
+                            <?php
+                            if ($start_page > 2) {
+                                echo '<li class="page-item"><span class="page-link">...</span></li>';
+                            }
+                        }
+        
+                        for ($i = $start_page; $i <= $end_page; $i++) {  
+                            if ($i != $current_page) {
+                                ?>
+                                <li class="page-item"><a class="page-link" href="?pageo=<?php echo $i; ?>&typedh=<?php echo $typedh; ?>"><?php echo $i; ?></a></li>
+                                <?php
+                            } else { ?>
+                                <li class="current-page page-item"><a style="color:white;background:#374375;" class="page-link" href="?pageo=<?php echo $i; ?>&typedh=<?php echo $typedh; ?>"><?php echo $i; ?></a></li>
+                            <?php 
+                            }
+                        }
+        
+                        if ($end_page < $pages - 1) {
+                            echo '<li class="page-item"><span class="page-link">...</span></li>';
+                        }
+                        if ($end_page < $pages) {
+                            ?>
+                            <li class="page-item"><a class="page-link" href="?pageo=<?php echo $pages; ?>&typedh=<?php echo $typedh; ?>"><?php echo $pages; ?></a></li>
+                            <?php
+                        }
+                        ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?pageo=<?php echo min($pages, $current_page + 1); ?>&typedh=<?php echo $typedh; ?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </nav>
+                <?php
+                        }
+                        ?>
+    </div>
+</div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         function select_all() {

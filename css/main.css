@@ -150,6 +150,11 @@ button.search-button {
   background: #374375;
   position: relative;
 }
+.pagination-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
 
 .bt i {
   position: absolute;

@@ -9,15 +9,15 @@
 <body>
 <?php 
     require 'config.php';
-    if(isset($_GET['mdh'])){
-        $mdh = $_GET['mdh'];
-        $res = mysqli_query($mysqli,"SELECT type_hv FROM jporder WHERE mdh='$mdh'");
+    if(isset($_GET['mdn'])){
+        $mdn = $_GET['mdn'];
+        $res = mysqli_query($mysqli,"SELECT * FROM enterprise WHERE mdn='$mdn'");
         if ($res === false) {
             echo "Error: " . mysqli_error($mysqli);
         } else {
             // Fetch the result from the query
             $row = mysqli_fetch_assoc($res);
-            $type_hv = $row['type_hv'];
+            $xi_nghiep = $row['xi_nghiep'];
 ?>
 
 <div class="loai_hv">
@@ -40,9 +40,9 @@
 ?>
 
 <div class="function" style="overflow: hidden;">
-    <a href="?typedh=1" style="float: left;"><button class="nut-back"><i class="fas fa-long-arrow-alt-left"></i></button></a>
+    <a href="?chucnang=xinghiep" style="float: left;"><button class="nut-back"><i class="fas fa-long-arrow-alt-left"></i></button></a>
     <div style="float: right;">
-        <a href="?function=themdh" ><button class="nut-them">Tạo mới</button></a>
+        <a href="?function=themxn" ><button class="nut-them">Tạo mới</button></a>
         <a href="#"><button class="nut-xoa">Xóa</button></a>
         <a href="#" onclick="xuatfile()"><button class="nut-xuat">Xuất Excel</button></a>  
         <input type="text" class="search-input" placeholder="Search..." style="vertical-align: middle;">
@@ -54,8 +54,8 @@
 <?php
                     require 'config.php';
 
-                    if(isset($_GET['mdh'])) {
-                      $mdh = $_GET['mdh'];
+                    if(isset($_GET['mdn'])) {
+                      $mdn = $_GET['mdn'];
                       $query = "SELECT student.*, jporder.*, enterprise.*
                                 FROM jporder
                                 LEFT JOIN student ON jporder.mdh = student.mdh
@@ -128,15 +128,15 @@
                 </div>
                 <div class="info-item">
                   <div class="field-name">Ngày xuất cảnh</div>
-                  <div class="information"><?php echo date('d/m/Y', strtotime($row['ngay_xc'])) ?></div>
+                  <div class="information"><?php echo $row['hinh_thuc_tt'] ?></div>
                 </div>
                 <div class="info-item">
                   <div class="field-name">Ngày về nước</div>
-                  <div class="information"><?php echo date('d/m/Y', strtotime($row['ngay_vn'])) ?></div>
+                  <div class="information"><?php echo $row['hinh_thuc_tt'] ?></div>
                 </div>
                 <div class="info-item">
                   <div class="field-name">Số lượng tuyển</div>
-                  <div class="information"><?php echo $row['so_luong_tuyen'] ?></div>
+                  <div class="information"><?php echo $row['hinh_thuc_tt'] ?></div>
                 </div>
                 <div class="info-item" style="padding: top 0px;">
                     <div class="row">

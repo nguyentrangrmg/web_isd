@@ -222,6 +222,10 @@
                                             break;
                                         }
                                 }
+                                //search xí nghiệp
+                                if (isset($_GET['search_xn'])){
+                                    include 'modules/xi_nghiep/xinghiep.php';
+                                }
                                 // thùng rác
                                 if(isset($_GET['typebin'])) {
                                 $type = $_GET['typebin'];
@@ -250,6 +254,8 @@
                                             case 'themdh':
                                                 include 'modules/donhang/add/themdh.php';
                                                 break;    
+                                            case 'themxn':
+                                                include 'modules/xi_nghiep/add/themxn.php';
                                         }
                                     }
                                     // sửa học viên
@@ -269,14 +275,19 @@
                                     && isset($_GET['mdh'])) {
                                       include 'modules/donhang/viewod.php';
                                     }
+                                    if(isset($_GET['action']) && $_GET['action'] === 'view' 
+                                    && isset($_GET['mxn'])) {
+                                      include 'modules/xi_nghiep/view_xn.php';
+                                    }
                                     // mặc định hiển thị menu.php
                                     if(!(isset($_GET['chucnang']) || isset($_GET['type']) || 
                                         isset($_GET['typedh']) || isset($_GET['typebin']) || 
                                         isset($_GET['function']) || isset($_GET['edit']) || 
                                     (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mhv'])) || 
                                     (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mdh'])) || 
+                                    (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mxn'])) || 
                                     isset($_GET['error_message']) && isset($_SESSION['login']) || isset($_GET['edit_dh']) ||
-                                    isset($_GET['search_dh']) )) {
+                                    isset($_GET['search_dh']) || isset($_GET['search_xn'])|| isset($_GET['search_hv']) )) {
                                         include 'modules/menu.php';
                                     }
                                 ?>

@@ -6,6 +6,14 @@
   <title>Thêm học viên</title>
   <!-- Link CSS Bootstrap -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="vendors/feather/feather.css">
+   <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
+   <link rel="stylesheet" href="vendors/select2/select2.min.css">
+   <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+   <link rel="stylesheet" href="css/newstyle.css">
+   <link rel="stylesheet" href="vendors/base/base.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+   <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
   <!-- Menu -->
@@ -27,6 +35,7 @@
     <div style="float: right;">
         <a href="?function=them" ><button class="nut-them">Tạo mới</button></a>
         <a href="javascript:void(0)" onclick="delete_all()"><button class="nut-xoa">Xóa</button></a>
+        <a href="javascript:void(0)" onclick="xuatfile()"><button class="nut-xuat">Bộ lọc</button></a>  
         <a href="javascript:void(0)" onclick="xuatfile()"><button class="nut-xuat">Xuất Excel</button></a>  
         <input type="text" class="search-input" placeholder="Search..." style="vertical-align: middle;">
         <i class="fas fa-search search-icon" style="vertical-align: middle;"></i>
@@ -81,6 +90,8 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
+                        <div class="row">
                         <div class="col-md-4">
                             <div class="form-group row">
                                 <label for="ngay_sinh" class="col-sm-9">Ngày
@@ -147,7 +158,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group row">
-                                <label for="noi_cap_cccd" class="col-sm-9" for="phone_number">Nơi cấp</label>
+                                <label for="noi_cap_cccd" class="col-sm-9" for="noi_cap_cccd">Nơi cấp</label>
                                 <div class="col-sm-12">
                                 <input type="text" class="form-control" id="noi_cap_cccd" name="noi_cap_cccd" maxlength="50">
                                 </div>
@@ -281,7 +292,7 @@
         } else {
         ?>
         <br>
-                            <!-- Chỗ chọn đơn hàng cần sửa lại 1 chút, chỉ hiển thị đơn hàng vẫn đang hoạt động -->
+                            <!-- Chỗ chọn đơn hàng cần sửa lại 1 chút, chỉ hiển thị đơn hàng theo type_hv -->
                             <div class="col-14 grid-margin">
                                 <div class="card">
                                     <div class="card-body">
@@ -292,11 +303,11 @@
                                                         <label class="col-sm-9">Chọn đơn hàng hiện
                                                             có<code>*</code></label>
                                                         <div class="col-sm-12">
-                                                        <select class="form-select" id="order_name" name="order_name" >
+                                                        <select class="form-select" id="ten_dh" name="ten_dh" >
                                                             <?php 
                                                             while ($row = mysqli_fetch_assoc($res)) {
                                                             ?>
-                                                                <option value="<?php echo $row['mdh']?>"><?php echo $row['mdh']?></option>
+                                                                <option value="<?php echo $row['ten_dh']?>"><?php echo $row['mdh']?>: <?php echo $row['ten_dh']?></option>
                                                             <?php } ?>
                                                             </select>
                                                         </div>
@@ -353,67 +364,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group row"><label class="col-sm-9">Ngành
-                                                            nghề</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="nganh_nghe" name="nganh_nghe"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group row">
-                                                        <!-- Cái này chắc đợi xong xí nghiệp thì cho select -->
-                                                        <label class="col-sm-9">Xí
-                                                            nghiệp<code>*</code></label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="xi_nghiep" name="xi_nghiep" required/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9">Địa chỉ <code>*</code></label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="dia_chi_xn" name="dia_chi_xn" required />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9" for="phone_number">Số điện
-                                                            thoại <code>*</code></label>
-                                                        <div class="col-sm-12">
-                                                            <input type="tel" id="phone_number" class="form-control"
-                                                                pattern="[0-9]+" id="sdt_xn" name="sdt_xn" required />
-                                                            <!-- require number -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9">Nghiệp đoàn</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9">Nơi làm việc</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -425,9 +375,9 @@
                                             <div class="row">
                                                 <div class="col-md-8 col-form-label">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-9">Nơi làm việc</label>
+                                                        <label class="col-sm-9">Xí nghiệp 1</label>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
+                                                            <input type="text" class="form-control" id="xn1" name="xn1"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -437,14 +387,14 @@
                                                     <div class="form-group row"><label class="col-sm-9">Thời gian lao
                                                             động từ</label>
                                                         <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
+                                                            <input type="date" class="form-control" id="thoi_gian_ld1" name="thoi_gian_ld1"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group row"><label class="col-sm-9">Đến</label>
                                                         <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
+                                                            <input type="date" class="form-control" id="thoi_gian_ld2" name="thoi_gian_ld2"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -452,9 +402,9 @@
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-9">Nơi làm việc</label>
+                                                        <label class="col-sm-9">Xí nghiệp 2</label>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
+                                                            <input type="text" class="form-control" id="xn2" name="xn2"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -464,27 +414,27 @@
                                                     <div class="form-group row"><label class="col-sm-9">Thời gian lao
                                                             động từ</label>
                                                         <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
+                                                            <input type="date" class="form-control" id="thoi_gian_ld3" name="thoi_gian_ld3"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group row"><label class="col-sm-9">Đến</label>
                                                         <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
+                                                            <input type="date" class="form-control" id="thoi_gian_ld4" name="thoi_gian_ld4"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="Textarea">Ghi chú</label>
-                                                <textarea class="form-control" id="Textarea" rows="5" maxlength="200"></textarea>
+                                                <textarea class="form-control" id="note" name="note" rows="5" maxlength="200"></textarea>
                                             </div>
                                     </div>
                                 </div>
                             </div>
                     <div style="text-align: right; margin-top: 10px;">
-                        <a href="#" class="btn btn-light" type="button" style="font-size: 15px; margin-right:5px">Huỷ</a>
+                        <a href="?chucnang=hocvien" class="btn btn-light" type="button" style="font-size: 15px; margin-right:5px">Huỷ</a>
                         <button type="submit" class="btn btn-primary" style="font-size: 15px;">Tạo mới</button>
                     </div>
                     <br>

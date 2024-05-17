@@ -6,14 +6,12 @@ if(isset($_POST['checkbox'][0])){
         $id = mysqli_real_escape_string($mysqli, $list);
 
         // Chuyển dữ liệu của học viên từ bảng student sang bảng bin_student
-        $insert_query = "INSERT INTO bin_student (mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, CCCD, ngay_cap_cccd, 
-    ho_khau, dia_chi, ngay_thi, co_quan, ngay_DKXC, ngayXC, dukien_venuoc, 
-    nganh_nghe, xi_nghiep, nghiep_doan, noi_lam_viec, note, type_hv, 
-    ngay_nhaphoc, order_name, status, file_anh)
-                    SELECT mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, CCCD, ngay_cap_cccd, 
-            ho_khau, dia_chi, ngay_thi, co_quan, ngay_DKXC, ngayXC, dukien_venuoc, 
-            nganh_nghe, xi_nghiep, nghiep_doan, noi_lam_viec, note, type_hv, 
-            ngay_nhaphoc, order_name, status, file_anh
+        $insert_query = "INSERT INTO bin_student (mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, ngay_cap_hc, noi_cap_hc, CCCD, ngay_cap_cccd, 
+        ho_khau, dia_chi, ngay_thi, ngay_DKXC, ngayXC, dukien_venuoc, noi_cap_cccd,
+        note, type_hv, ngay_nhaphoc, mdh, status, file_anh, lich_su_xk, ten_dh)
+                    SELECT mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, ngay_cap_hc, noi_cap_hc, CCCD, ngay_cap_cccd, 
+            ho_khau, dia_chi, ngay_thi, ngay_DKXC, ngayXC, dukien_venuoc, noi_cap_cccd,
+            note, type_hv, ngay_nhaphoc, mdh, status, file_anh, lich_su_xk, ten_dh
                     FROM student
                         WHERE mhv = '$id'";
         $insert_result = mysqli_query($mysqli, $insert_query);
@@ -30,14 +28,12 @@ if(isset($_POST['checkbox'][0])){
 if (isset($_POST['delete'])) {
     $mhv = $_POST['delete'];
     // Chuyển dữ liệu của học viên bị xóa từ bảng student sang bảng bin_student trước khi xóa
-    $insert_query = "INSERT INTO bin_student (mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, CCCD, ngay_cap_cccd, 
-    ho_khau, dia_chi, ngay_thi, co_quan, ngay_DKXC, ngayXC, dukien_venuoc, 
-    nganh_nghe, xi_nghiep, nghiep_doan, noi_lam_viec, note, type_hv, 
-    ngay_nhaphoc, order_name, status, file_anh)
-                    SELECT mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, CCCD, ngay_cap_cccd, 
-            ho_khau, dia_chi, ngay_thi, co_quan, ngay_DKXC, ngayXC, dukien_venuoc, 
-            nganh_nghe, xi_nghiep, nghiep_doan, noi_lam_viec, note, type_hv, 
-            ngay_nhaphoc, order_name, status, file_anh
+    $insert_query = "INSERT INTO bin_student (mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, ngay_cap_hc, noi_cap_hc, CCCD, ngay_cap_cccd, 
+    ho_khau, dia_chi, ngay_thi, ngay_DKXC, ngayXC, dukien_venuoc, noi_cap_cccd,
+    note, type_hv, ngay_nhaphoc, mdh, status, file_anh, lich_su_xk, ten_dh)
+                    SELECT mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, ngay_cap_hc, noi_cap_hc, CCCD, ngay_cap_cccd, 
+            ho_khau, dia_chi, ngay_thi, ngay_DKXC, ngayXC, dukien_venuoc, noi_cap_cccd,
+            note, type_hv, ngay_nhaphoc, mdh, status, file_anh, lich_su_xk, ten_dh
                     FROM student
                     WHERE mhv = ?";
     $insert_stmt = mysqli_prepare($mysqli, $insert_query);

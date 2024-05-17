@@ -8,30 +8,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gioi_tinh = $_POST['gioi_tinh'];
 
     $ho_chieu = isset($_POST['ho_chieu']) ? $_POST['ho_chieu'] : null;
+    $ngay_cap_hc = isset($_POST['ngay_cap_hc']) ? $_POST['ngay_cap_hc'] : null;
+    $noi_cap_hc = isset($_POST['noi_cap_hc']) ? $_POST['noi_cap_hc'] : null;
     $cccd = isset($_POST['cccd']) ? $_POST['cccd'] : null;
     $ngay_cap_cccd = isset($_POST['ngay_cap_cccd']) ? $_POST['ngay_cap_cccd'] : null;
+    $noi_cap_cccd = isset($_POST['noi_cap_cccd']) ? $_POST['noi_cap_cccd'] : null;
     $ho_khau = isset($_POST['ho_khau']) ? $_POST['ho_khau'] : null;
     $dia_chi = isset($_POST['dia_chi']) ? $_POST['dia_chi'] : null;
     
     $ngay_thi = isset($_POST['ngay_thi']) ? $_POST['ngay_thi'] : null;
-    $co_quan = isset($_POST['co_quan']) ? $_POST['co_quan'] : null;
     $ngay_DKXC = isset($_POST['ngay_DKXC']) ? $_POST['ngay_DKXC'] : null;
     $ngayXC = isset($_POST['ngayXC']) ? $_POST['ngayXC'] : null;
     $dukien_venuoc = isset($_POST['dukien_venuoc']) ? $_POST['dukien_venuoc'] : null;
-    $nganh_nghe = isset($_POST['nganh_nghe']) ? $_POST['nganh_nghe'] : null;
     
-    $nghiep_doan = isset($_POST['nghiep_doan']) ? $_POST['nghiep_doan'] : null;
-    $noi_lam_viec = isset($_POST['noi_lam_viec']) ? $_POST['noi_lam_viec'] : null;
+    $xn1 = $_POST['xn1'];
+    $thoi_gian_ld1 = $_POST['thoi_gian_ld1'];
+    $thoi_gian_ld2 = $_POST['thoi_gian_ld2'];
+    $xn2 = $_POST['xn2'];
+    $thoi_gian_ld3 = $_POST['thoi_gian_ld3'];
+    $thoi_gian_ld4 = $_POST['thoi_gian_ld4'];
+
+    $ls_lan1 = "Xí nghiệp $xn1, từ $thoi_gian_ld1 đến $thoi_gian_ld2";
+    $ls_lan2 = "Xí nghiệp $xn2, từ $thoi_gian_ld3 đến $thoi_gian_ld4";
+    $lich_su_xk = $ls_lan1 . " / " . $ls_lan2;
+
     $note = isset($_POST['note']) ? $_POST['note'] : null;
     $type_hv = $_POST['type_hv'];
     $ngay_nhaphoc = $_POST['ngay_nhaphoc'];
     $status = $_POST['status'];
     //don hang
-    $order_name = $_POST['order_name'];
-    //xi nghiep
-    $xi_nghiep = isset($_POST['xi_nghiep']) ? $_POST['xi_nghiep'] : null;
-    $sdt_xn = $_POST['sdt_xn'];
-    $dia_chi_xn = $_POST['dia_chi_xn'];
+    $mdh = $_POST['mdh'];
+    $ten_dh = $_POST['ten_dh'];
     //bao lanh
     $ten = $_POST['ten'];
     $dob = $_POST['dob'];
@@ -73,49 +80,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
     }
     
-    // $order_index = "001"; // Bắt đầu với số cuối cùng là 001
-    
-    // // Kiểm tra xem đã tồn tại mhv với 3 số cuối cùng là 001 hay chưa
-    // $query_check_exists = "SELECT COUNT(*) AS count FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two' AND SUBSTRING(mhv, -3) = '$order_index'";
-    // $result_check_exists = mysqli_query($mysqli, $query_check_exists);
-    
-    // if ($result_check_exists) {
-    //     $row_check_exists = mysqli_fetch_assoc($result_check_exists);
-    //     $count = intval($row_check_exists['count']);
-        
-    //     // Nếu đã tồn tại mhv có 3 số cuối của order-index, tăng giá trị cho đến khi không còn tồn tại
-    //     while ($count > 0) {
-    //         $order_index = sprintf('%03d', intval($order_index) + 1);
-    //         $query_check_exists = "SELECT COUNT(*) AS count FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two' AND SUBSTRING(mhv, -3) = '$order_index'";
-    //         $result_check_exists = mysqli_query($mysqli, $query_check_exists);
-    //         if ($result_check_exists) {
-    //             $row_check_exists = mysqli_fetch_assoc($result_check_exists);
-    //             $count = intval($row_check_exists['count']);
-    //         } else {
-    //             echo "Error: " . mysqli_error($mysqli);
-    //             break;
-    //         }
-    //     }
-    // }
     function getMaxLastThreeDigits($mysqli, $mhv_prefix, $year_last_two)
     {
         $max_last_three_digits = 0;
 
-        // Lấy 3 số cuối lớn nhất từ bảng student
         $query_student = "SELECT MAX(CAST(SUBSTRING(mhv, -3) AS UNSIGNED)) AS max_digits FROM student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two'";
         $result_student = mysqli_query($mysqli, $query_student);
         $row_student = mysqli_fetch_assoc($result_student);
         $max_last_three_digits_student = intval($row_student['max_digits']);
 
-        // Lấy 3 số cuối lớn nhất từ bảng bin_student
         $query_bin_student = "SELECT MAX(CAST(SUBSTRING(mhv, -3) AS UNSIGNED)) AS max_digits FROM bin_student WHERE SUBSTRING(mhv, 1, 2) = '$mhv_prefix' AND SUBSTRING(mhv, 3, 2) = '$year_last_two'";
         $result_bin_student = mysqli_query($mysqli, $query_bin_student);
         $row_bin_student = mysqli_fetch_assoc($result_bin_student);
         $max_last_three_digits_bin_student = intval($row_bin_student['max_digits']);
 
-        // So sánh và lấy số lớn hơn
         $max_last_three_digits = max($max_last_three_digits_student, $max_last_three_digits_bin_student);
-
         return $max_last_three_digits;
     }
     $order_index = getMaxLastThreeDigits($mysqli, $mhv_prefix, $year_last_two) + 1;
@@ -125,7 +104,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $order_index = 1;
     }
     $order_index = sprintf('%03d', $order_index);
-    // Tạo mã mhv hoàn chỉnh
     $mhv = $mhv_prefix . $year_last_two . $dob_last_two . $order_index;
 }    
 // Kiểm tra xem học viên đã tồn tại trong cơ sở dữ liệu chưa
@@ -136,25 +114,20 @@ if(mysqli_num_rows($result) > 0) {
     exit;
 }
 
-$themsql = "INSERT INTO student (mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, CCCD, ngay_cap_cccd, 
-            ho_khau, dia_chi, ngay_thi, co_quan, ngay_DKXC, ngayXC, dukien_venuoc, 
-            nganh_nghe, xi_nghiep, nghiep_doan, noi_lam_viec, note, type_hv, 
-            ngay_nhaphoc, order_name, status, file_anh)
-            VALUES ('$mhv', '$ho_ten', '$ngay_sinh', '$gioi_tinh', '$sdt', '$ho_chieu', '$cccd', '$ngay_cap_cccd',
-            '$ho_khau', '$dia_chi', '$ngay_thi', '$co_quan', '$ngay_DKXC', '$ngayXC', '$dukien_venuoc',
-            '$nganh_nghe', '$xi_nghiep', '$nghiep_doan','$noi_lam_viec', '$note', '$type_hv', 
-            '$ngay_nhaphoc', '$order_name', '$status','$anh_path')";
+$themsql = "INSERT INTO student (mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, ngay_cap_hc, noi_cap_hc, CCCD, ngay_cap_cccd, 
+            ho_khau, dia_chi, ngay_thi, ngay_DKXC, ngayXC, dukien_venuoc, noi_cap_cccd,
+            note, type_hv, ngay_nhaphoc, mdh, status, file_anh, lich_su_xk, ten_dh)
+            VALUES ('$mhv', '$ho_ten', '$ngay_sinh', '$gioi_tinh', '$sdt', '$ho_chieu','$ngay_cap_hc','$noi_cap_hc', '$cccd', '$ngay_cap_cccd',
+            '$ho_khau', '$dia_chi', '$ngay_thi', '$ngay_DKXC', '$ngayXC', '$dukien_venuoc', '$noi_cap_cccd',
+            '$note', '$type_hv', '$ngay_nhaphoc', '$mdh', '$status','$anh_path','$lich_su_xk','$ten_dh')";
 
 $thembl = "INSERT INTO baolanh (mhv, ten, dob, sdt_bl, ho_khau_bl, dia_chi_bl, quan_he)
         VALUES ('$mhv','$ten', '$dob', '$sdt_bl','$ho_khau_bl', '$dia_chi_bl', '$quan_he') ";
 
-$themxn = "INSERT INTO enterprise (mdn, xi_nghiep, nganh_nghe, sdt_xn, dia_chi_xn)
-        VALUES ('$mdn','$xi_nghiep', '$nganh_nghe', '$sdt_xn','$dia_chi_xn') ";
 $result = mysqli_query($mysqli, "SELECT * FROM student");
 $re = mysqli_query($mysqli, "SELECT * FROM baolanh");
-$res = mysqli_query($mysqli, "SELECT * FROM enterprise");
 
-if((mysqli_query($mysqli, $themsql)) && mysqli_query($mysqli,$thembl) && mysqli_query($mysqli,$themxn) ){
+if((mysqli_query($mysqli, $themsql)) && mysqli_query($mysqli,$thembl)){
     // Chuyển hướng đến trang hiển thị thông tin học viên sau khi tạo thành công
     header("Location: ../../../index.php?action=view&mhv=$mhv");
     exit;
