@@ -66,7 +66,6 @@
                   
                       if($result && mysqli_num_rows($result) > 0) {
                           while($row = mysqli_fetch_assoc($result)) {
-                            $nganh_nghe
         ?>
         <div class="in4-below-img" style="margin-top: 50px;">
             <div class="ho-va-ten"></div>
@@ -147,8 +146,8 @@
                   <div class="information" style="text-align: right; margin:0;padding:0">
                     <div class="row" style="text-align:right;">
                     <div class="sub-field" style="margin-top:10px; height:26.78px"></div>
-                    <div class="sub-field" style="margin-top:10px; height:26.78px">SL: <?php echo $row['sl_nam'] ?>; từ <?php echo $row['do_tuoi_nam'] ?></div>
-                    <div class="sub-field" style="margin-top:10px; height:26.78px">SL: <?php echo $row['sl_nu'] ?>; từ <?php echo $row['do_tuoi_nu'] ?></div>
+                    <div class="sub-field" style="margin-top:10px; height:26.78px">SL: <?php echo $row['sl_nam'] ?>; từ <?php echo $row['do_tuoi_nam'] ?> tuổi</div>
+                    <div class="sub-field" style="margin-top:10px; height:26.78px">SL: <?php echo $row['sl_nu'] ?>; từ <?php echo $row['do_tuoi_nu'] ?> tuổi</div>
                   </div>
                 </div>
                 </div>

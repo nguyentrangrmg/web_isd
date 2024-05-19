@@ -12,7 +12,7 @@ include 'config.php';
         $key = $_GET['key_search'];
         $query = "SELECT bin_student.*, jporder.* 
                   FROM bin_bin_student 
-                  JOIN `jporder` ON bin_student.mdh = jporder.mdh
+                  LEFT JOIN `jporder` ON bin_student.mdh = jporder.mdh
                   WHERE (bin_student.mhv LIKE '%".$key."%' 
                   OR bin_student.ho_ten LIKE '%".$key."%' 
                   OR bin_student.ngay_sinh LIKE '%".$key."%' 
@@ -53,7 +53,7 @@ include 'config.php';
 
     $count_query = "SELECT COUNT(*) AS total 
                     FROM bin_student 
-                    JOIN `jporder` ON bin_student.mdh = jporder.mdh";
+                    LEFT JOIN `jporder` ON bin_student.mdh = jporder.mdh";
     $count_result = executeQuery($mysqli, $count_query);
     $count_row = mysqli_fetch_assoc($count_result);
     $rs = $count_row['total'];
@@ -78,7 +78,6 @@ include 'config.php';
     </div>
     <div class="function" style="text-align: right;">
     <div style="display: inline-block;">
-    <a href="#" ><button class="nut-them">Tạo mới</button></a>
         <a href="javascript:void(0)" onclick="delete_all()"><button class="nut-xoa">Xóa</button></a>
         <a href="javascript:void(0)" onclick="restore_all()"><button class="nut-re">Khôi phục</button></a>
     </div>
@@ -147,6 +146,12 @@ include 'config.php';
                     }
                     ?>
                 </table>
+                <?php 
+                if (mysqli_num_rows($res) == 0) {
+                    echo "<div style='text-align: center; 
+                    margin-top: 20px; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;'>
+                    Không có gì ở đây cả!</div>";
+                } ?>
             </form>
             <!-- pagination -->
             <div class="pagination-container">

@@ -84,52 +84,88 @@
                                                 ?>
 
                                         <div class="row">
-                                            <div class="col-md-4 col-form-label">
-                                                <div class="form-group row ">
-                                                    <label class="col-sm-9">Xí nghiệp<code>*</code></label>
-                                                    <div class="col-sm-12">
-                                                        <select class="form-select" id="xi_nghiep" name="xi_nghiep" onchange="getValue()" required>
-                                                            <option value="">Chọn xí nghiệp</option>
-                                                            <?php while ($row = mysqli_fetch_assoc($res)) { ?>
-                                                                <option value="<?php echo $row['xi_nghiep']?>"><?php echo $row['xi_nghiep']?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 col-form-label">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-9">Ngành nghề<code>*</code></label>
-                                                    <div class="col-sm-12">
-                                                        <select class="form-select" id="nganh_nghe" name="nganh_nghe" required>
-                                                            <option value="default">Vui lòng chọn xí nghiệp trước</option>
-                                                            <script>
-                                                                // Hàm getValue để gửi giá trị đã chọn đến máy chủ bằng AJAX
-                                                                function getValue() {
-                                                                    var selectedValue = document.getElementById("xi_nghiep").value;
+    <div class="col-md-4 col-form-label">
+        <div class="form-group row ">
+            <label class="col-sm-9">Xí nghiệp<code>*</code></label>
+            <div class="col-sm-12">
+                <select class="form-select" id="xi_nghiep" name="xi_nghiep" onchange="getValue()" required>
+                    <option value="">Chọn xí nghiệp</option>
+                    <?php while ($row = mysqli_fetch_assoc($res)) { ?>
+                        <option value="<?php echo $row['xi_nghiep']?>"><?php echo $row['xi_nghiep']?></option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                                                    $.ajax({
-                                                                        url: 'modules/donhang/add/process.php',
-                                                                        type: 'POST',
-                                                                        data: { xi_nghiep: selectedValue },
-                                                                        success: function(response) {
-                                                                            // Hiển thị kết quả từ process.php
-                                                                            var select = document.getElementById("nganh_nghe");
-                                                                            select.innerHTML = response;
-                                                                        },
-                                                                        error: function(xhr, status, error) {
-                                                                            console.error(xhr.responseText);
-                                                                        }
-                                                                    });
-                                                                }
-                                                            </script>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+<div class="row">
+    <div class="col-md-4 col-form-label">
+        <div class="form-group row">
+            <label class="col-sm-9">Ngành nghề<code>*</code></label>
+            <div class="col-sm-12">
+                <select class="form-select" id="nganh_nghe" name="nganh_nghe" required>
+                    <option value="default">Vui lòng chọn xí nghiệp trước</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-form-label">
+        <div class="form-group row">
+            <label class="col-sm-9">Nơi làm việc<code>*</code></label>
+            <div class="col-sm-12">
+                <select class="form-select" id="noi_lv" name="noi_lv" required>
+                    <option value="default">Vui lòng chọn xí nghiệp trước</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getValue() {
+                        var selectedValue = document.getElementById("xi_nghiep").value;
+                        getNganhNghe(selectedValue);
+                        getNoiLamViec(selectedValue);
+                    }
+    function getNganhNghe() {
+        var selectedValue = document.getElementById("xi_nghiep").value;
+
+        $.ajax({
+            url: 'modules/donhang/add/process.php',
+            type: 'POST',
+            data: { xi_nghiep: selectedValue },
+            success: function(response) {
+                var select = document.getElementById("nganh_nghe");
+                select.innerHTML = response;
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function getNoiLamViec() {
+        var selectedValue = document.getElementById("xi_nghiep").value;
+
+        $.ajax({
+            url: 'modules/donhang/add/pro_noi_lv.php',
+            type: 'POST',
+            data: { xi_nghiep: selectedValue },
+            success: function(response) {
+                var select = document.getElementById("noi_lv");
+                select.innerHTML = response;
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>
+
                                         
                                             
                                            <div class="row">
@@ -219,8 +255,8 @@
                                                        <div class="form-group row">
                                                            <label class="col-sm-4" style="white-space: nowrap;">Ghi chú yêu cầu</label>
                                                            <div class="col-sm-7">
-                                                               <input type="text" class="form-control" id="sl_nam" name="sl_nam"
-                                                                   placeholder="Nam" />
+                                                               <input type="number" class="form-control" id="sl_nam" name="sl_nam"
+                                                               required min="0" step="1" placeholder="Số lượng Nam" />
                                                            </div>
                                                        </div>
                                                    </div>
@@ -251,8 +287,9 @@
                                                    <div class="form-group row">
                                                        <label class="col-sm-3"></label>
                                                        <div class="col-md-9">
-                                                           <input type="text" class="form-control" id="sl_nu" name="sl_nu" required
-                                                               placeholder="Nữ" />
+                                                       <input type="number" class="form-control" id="sl_nu" 
+                                                       name="sl_nu" required min="0" step="1" placeholder="Số lượng Nữ" />
+
                                                        </div>
                                                    </div>
                                                </div>
@@ -271,16 +308,6 @@
                                                                    <input type="text" class="form-control" id="tuoi_nu2" name="tuoi_nu2" required />
                                                                </div>
                                                            </div>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                           <div class="row">
-                                               <div class="col-md-8">
-                                                   <div class="form-group row">
-                                                       <label class="col-sm-9">Nơi làm việc</label>
-                                                       <div class="col-sm-12">
-                                                           <input type="text" class="form-control" id="noi_lv" name="noi_lv"/>
                                                        </div>
                                                    </div>
                                                </div>

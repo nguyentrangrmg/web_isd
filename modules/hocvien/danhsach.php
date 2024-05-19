@@ -10,6 +10,9 @@ include 'config.php';
     
     if (isset($_GET['search_hv'])) {
         $key = $_GET['key_search'];
+        $per_page = 10;
+        $current_page = !empty($_GET['pageo']) ? $_GET['pageo'] : 1;
+        $offset = ($current_page - 1) * $per_page;
         $query = "SELECT student.*, jporder.* 
                   FROM student 
                   JOIN `jporder` ON student.mdh = jporder.mdh
@@ -155,6 +158,12 @@ include 'config.php';
                     }
                     ?>
                 </table>
+                <?php 
+                if (mysqli_num_rows($res) == 0) {
+                    echo "<div style='text-align: center; 
+                    margin-top: 20px; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;'>
+                    Không có dữ liệu</div>";
+                } ?>
             </form>
             <!-- pagination -->
 <div class="pagination-container">

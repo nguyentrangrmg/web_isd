@@ -37,7 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ngay_nhaphoc = $_POST['ngay_nhaphoc'];
     $status = $_POST['status'];
     //don hang
-    $mdh = $_POST['mdh'];
+    $ma_va_ten = $_POST['mdh'];
+    list($mdh, $ten_dh) = explode('; ', $ma_va_ten);
     $ten_dh = $_POST['ten_dh'];
     //bao lanh
     $ten = $_POST['ten'];

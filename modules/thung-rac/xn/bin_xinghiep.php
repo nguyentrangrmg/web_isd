@@ -124,14 +124,15 @@ $pages = ceil($rs / $per_page);
                     }
                     ?>
                 </table>
-                <div class="pagination-container">
-    <div class="pagination">
                 <?php 
                 if (mysqli_num_rows($res) == 0) {
                     echo "<div style='text-align: center; 
                     margin-top: 20px; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;'>
                     Không có gì ở đây cả!</div>";
                 } ?>
+                <div class="pagination-container">
+    <div class="pagination">
+                
             </form>
             <?php
         $current_page = isset($_GET['pageo']) ? (int)$_GET['pageo'] : 1;

@@ -9,34 +9,38 @@ include 'config.php';
     }
     
     if (isset($_GET['search_hv'])) {
-        
         $key = $_GET['key_search'];
         $per_page = 10;
         $current_page = !empty($_GET['pageo']) ? $_GET['pageo'] : 1;
         $offset = ($current_page - 1) * $per_page;
-        $query = "SELECT * FROM student  
-                  WHERE type_hv='dd' AND (mhv LIKE '%".$key."%' 
-                  OR ho_ten LIKE '%".$key."%') 
-                  OR ngay_sinh LIKE '%".$key."%' 
-                  OR sdt LIKE '%".$key."%' 
-                  OR ngay_thi LIKE '%".$key."%' 
-                  OR ngay_nhaphoc LIKE '%".$key."%' 
-                  OR mdh LIKE '%".$key."%' 
-                  OR status LIKE '%".$key."%' 
-                  ORDER BY CONCAT(SUBSTRING(mhv, 3, 2), SUBSTRING(mhv, -3)) ASC 
+        $query = "SELECT student.*, jporder.* 
+                  FROM student 
+                  JOIN `jporder` ON student.mdh = jporder.mdh
+                  WHERE student.type_hv='dd' 
+                  AND (student.mhv LIKE '%".$key."%' 
+                  OR student.ho_ten LIKE '%".$key."%' 
+                  OR student.ngay_sinh LIKE '%".$key."%' 
+                  OR student.sdt LIKE '%".$key."%' 
+                  OR student.ngay_thi LIKE '%".$key."%' 
+                  OR student.ngay_nhaphoc LIKE '%".$key."%' 
+                  OR student.mdh LIKE '%".$key."%' 
+                  OR student.status LIKE '%".$key."%') 
+                  ORDER BY CONCAT(SUBSTRING(student.mhv, 3, 2), SUBSTRING(student.mhv, -3)) ASC 
                   LIMIT ".$per_page." OFFSET ".$offset;
         $res = executeQuery($mysqli, $query);
     
-        $count_query = "SELECT COUNT(*) AS total FROM student  
-        WHERE type_hv='dd' AND (mhv LIKE '%".$key."%' 
-        OR ho_ten LIKE '%".$key."%') 
-        OR ngay_sinh LIKE '%".$key."%' 
-        OR sdt LIKE '%".$key."%' 
-        OR ngay_thi LIKE '%".$key."%' 
-        OR ngay_nhaphoc LIKE '%".$key."%' 
-        OR mdh LIKE '%".$key."%' 
-        OR status LIKE '%".$key."%' 
-        ORDER BY CONCAT(SUBSTRING(mhv, 3, 2), SUBSTRING(mhv, -3)) ASC";
+        $count_query = "SELECT COUNT(*) AS total 
+                    FROM student 
+                    JOIN `jporder` ON student.mdh = jporder.mdh
+                    WHERE student.type_hv='dd' 
+                    AND (student.mhv LIKE '%".$key."%' 
+                    OR student.ho_ten LIKE '%".$key."%' 
+                    OR student.ngay_sinh LIKE '%".$key."%' 
+                    OR student.sdt LIKE '%".$key."%' 
+                    OR student.ngay_thi LIKE '%".$key."%' 
+                    OR student.ngay_nhaphoc LIKE '%".$key."%' 
+                    OR student.mdh LIKE '%".$key."%' 
+                    OR student.status LIKE '%".$key."%')";
         $count_result = executeQuery($mysqli, $count_query);
         $count_row = mysqli_fetch_assoc($count_result);
         $rs = $count_row['total'];
@@ -45,24 +49,21 @@ include 'config.php';
         $per_page = 10;
         $current_page = !empty($_GET['pageo']) ? $_GET['pageo'] : 1;
         $offset = ($current_page - 1) * $per_page;
-        $query = "SELECT * FROM student  
-        WHERE type_hv='dd' AND (mhv LIKE '%".$key."%' 
-        OR ho_ten LIKE '%".$key."%' 
-        OR ngay_sinh LIKE '%".$key."%' 
-        OR sdt LIKE '%".$key."%' 
-        OR ngay_thi LIKE '%".$key."%' 
-        OR ngay_nhaphoc LIKE '%".$key."%' 
-        OR mdh LIKE '%".$key."%' 
-        OR status LIKE '%".$key."%') 
-        ORDER BY CONCAT(SUBSTRING(mhv, 3, 2), SUBSTRING(mhv, -3)) ASC 
-        LIMIT ".$per_page." OFFSET ".$offset;
+        $query = "SELECT student.*, jporder.* 
+              FROM student 
+              JOIN `jporder` ON student.mdh = jporder.mdh
+              WHERE student.type_hv='dd'
+              ORDER BY CONCAT(SUBSTRING(student.mhv, 3, 2), SUBSTRING(student.mhv, -3)) ASC 
+              LIMIT ".$per_page." OFFSET ".$offset;
+    $res = executeQuery($mysqli, $query);
 
-        $res = executeQuery($mysqli, $query);
-    
-        $count_query = "SELECT COUNT(*) AS total FROM student WHERE type_hv='dd' ORDER BY CONCAT(SUBSTRING(mhv, 3, 2), SUBSTRING(mhv, -3)) ASC;";
-        $count_result = executeQuery($mysqli, $count_query);
-        $count_row = mysqli_fetch_assoc($count_result);
-        $rs = $count_row['total'];
+    $count_query = "SELECT COUNT(*) AS total 
+                    FROM student 
+                    JOIN `jporder` ON student.mdh = jporder.mdh
+                    WHERE student.type_hv='dd'";
+    $count_result = executeQuery($mysqli, $count_query);
+    $count_row = mysqli_fetch_assoc($count_result);
+    $rs = $count_row['total'];
     }
     
     $pages = ceil($rs / $per_page);
@@ -91,7 +92,7 @@ include 'config.php';
         </div>
         <form action="" method="GET" style="display: inline-block;">
             <input type="text" class="search-input" placeholder="Search..." name="key_search" value="<?php echo isset($key) ? $key : ''; ?>">
-            <input type="hidden" name="type" value='dd'>
+            <input type="hidden" name="type" value="dd">
             <button type="submit" name="search_hv" class="search-button"><i class="fas fa-search search-icon"></i></button>
         </form>
     </div>
@@ -108,7 +109,7 @@ include 'config.php';
                         <th style="white-space: nowrap;">Số điện thoại</th>
                         <th style="white-space: nowrap;">Ngày thi tuyển</th>
                         <th style="white-space: nowrap;">Ngày nhập học</th>
-                        <th style="white-space: nowrap;">Mã đơn hàng</th>
+                        <th style="white-space: nowrap;">Tên đơn hàng</th>
                         <th style="white-space: nowrap;">Trạng thái</th>
                         <th style="white-space: nowrap;">Ghi chú</th>
                         <th></th>
@@ -127,7 +128,10 @@ include 'config.php';
                             <td style="white-space: nowrap;"><?php echo $row['sdt'] ?></td>
                             <td style="white-space: nowrap;"><?php echo date('d/m/Y', strtotime($row['ngay_thi'])) ?></td>
                             <td style="white-space: nowrap;"><?php echo date('d/m/Y', strtotime($row['ngay_nhaphoc'])) ?></td>
-                            <td style="white-space: nowrap;"><?php echo $row['mdh'] ?></td>
+                            <td style="white-space: nowrap;">
+                            <?php echo $row['ten_dh'] ?>
+                            <input type="hidden" name="mdh" value="<?php echo $row['mdh'] ?>">
+                            </td>
                             <td style="white-space: nowrap;"><?php echo $row['status'] ?></td>
                             <td style="white-space: normal"><?php echo $row['note'] ?></td>
                             <td>
@@ -154,6 +158,12 @@ include 'config.php';
                     }
                     ?>
                 </table>
+                <?php 
+                if (mysqli_num_rows($res) == 0) {
+                    echo "<div style='text-align: center; 
+                    margin-top: 20px; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;'>
+                    Không có dữ liệu</div>";
+                } ?>
             </form>
             <!-- pagination -->
 <div class="pagination-container">

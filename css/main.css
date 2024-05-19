@@ -77,6 +77,13 @@ button.search-button {
   border-radius: 2rem;
   padding: 0.5rem 1rem;
 }
+.function .loc {
+  color: #9f9f9f;
+  background: inherit;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}
 .function .nut-re {
   color: #9f9f9f;
   background: inherit;
@@ -99,6 +106,10 @@ button.search-button {
   padding: 0.5rem 1rem;
 }
 .function .nut-them:hover {
+  background: #9f9f9f;
+  color: #0b2c4d;
+}
+.function .loc:hover {
   background: #9f9f9f;
   color: #0b2c4d;
 }

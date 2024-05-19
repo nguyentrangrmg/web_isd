@@ -53,17 +53,23 @@
 <div>
 <?php
         require 'config.php';
-        if(isset($_GET['mhv'])) {
-            $mhv = $_GET['mhv'];
-            $query = "SELECT * FROM student WHERE mhv='$mhv'";
-            $query2 = "SELECT * FROM baolanh WHERE mhv='$mhv'";
-            $result = mysqli_query($mysqli, $query); 
-            $re = mysqli_query($mysqli, $query2);} 
-            if((mysqli_num_rows($result) > 0)&&(mysqli_num_rows($re))) {
-                while(($row = mysqli_fetch_assoc($result))&&($row2 = mysqli_fetch_assoc($re))) {
-                    $anh_path = $row['file_anh'];           
-                    $target_dir = "modules/hocvien/anhhv/";
-                    $target_file = $target_dir.$anh_path;
+        if (isset($_GET['mhv'])) {
+          $mhv = mysqli_real_escape_string($mysqli, $_GET['mhv']);
+      
+          // Basic join query
+          $query = "SELECT student.*, jporder.*, baolanh.* 
+                    FROM student 
+                    JOIN jporder ON student.mdh = jporder.mdh 
+                    JOIN baolanh ON student.mhv = baolanh.mhv 
+                    WHERE student.mhv = '$mhv'";
+          
+          $result = mysqli_query($mysqli, $query);
+      
+          if (mysqli_num_rows($result) > 0) {
+              while ($row = mysqli_fetch_assoc($result)) {
+                $anh_path = $row['file_anh'];           
+            $target_dir = "modules/hocvien/anhhv/";
+            $target_file = $target_dir . $anh_path;
         ?>
         <div class="student-image">
             <img src="<?php echo $target_file; ?>" width="100px"><br>
@@ -111,7 +117,7 @@
                     <div class="row" style="text-align:right;">
                     <div class="sub-field" style="margin-top:10px; height:26.78px"><?php echo $row['ho_chieu'] ?></div>
                     <div class="sub-field" style="margin-top:10px; height:26.78px"><?php echo $row['noi_cap_hc'] ?></div>
-                    <div class="sub-field" style="margin-top:10px; height:26.78px"><?php echo $row['ngay_cap_hc'] ?></div>
+                    <div class="sub-field" style="margin-top:10px; height:26.78px"><?php echo date('d/m/Y', strtotime($row['ngay_cap_hc'])) ?></div>
                   </div>
                 </div>
                 </div>
@@ -125,7 +131,7 @@
                     <div class="row" style="text-align:right;">
                     <div class="sub-field" style="margin-top:10px; height:26.78px"><?php echo $row['CCCD'] ?></div>
                     <div class="sub-field" style="margin-top:10px; height:26.78px"><?php echo $row['noi_cap_cccd'] ?></div>
-                    <div class="sub-field" style="margin-top:10px; height:26.78px"><?php echo $row['ngay_cap_cccd'] ?></div>
+                    <div class="sub-field" style="margin-top:10px; height:26.78px"><?php echo date('d/m/Y', strtotime($row['ngay_cap_cccd'])) ?></div>
                   </div>
                 </div>
                 </div>
@@ -153,27 +159,27 @@
               <div class="info-content">
                 <div class="info-item">
                   <div class="field-name">Họ và tên người bảo lãnh</div>
-                  <div class="information"><?php echo $row2['ten'] ?></div>
+                  <div class="information"><?php echo $row['ten'] ?></div>
                 </div>
                 <div class="info-item">
                   <div class="field-name">Ngày sinh</div>
-                  <div class="information"><?php echo date('d/m/Y', strtotime($row2['dob'])) ?></div>
+                  <div class="information"><?php echo date('d/m/Y', strtotime($row['dob'])) ?></div>
                 </div>
                 <div class="info-item">
                   <div class="field-name">Quan hệ với học viên</div>
-                  <div class="information"><?php echo $row2['quan_he'] ?></div>
+                  <div class="information"><?php echo $row['quan_he'] ?></div>
                 </div>
                 <div class="info-item">
                   <div class="field-name">Số điện thoại</div>
-                  <div class="information"><?php echo $row2['sdt_bl'] ?></div>
+                  <div class="information"><?php echo $row['sdt_bl'] ?></div>
                 </div>
                 <div class="info-item">
                   <div class="field-name">Hộ khẩu</div>
-                  <div class="information"><?php echo $row2['ho_khau_bl'] ?></div>
+                  <div class="information"><?php echo $row['ho_khau_bl'] ?></div>
                 </div>
                 <div class="info-item">
                   <div class="field-name">Địa chỉ thường trú</div>
-                  <div class="information"><?php echo $row2['dia_chi_bl'] ?></div>
+                  <div class="information"><?php echo $row['dia_chi_bl'] ?></div>
                 </div>
               </div>
             </div>
@@ -217,16 +223,16 @@
                   <div class="field-name">Xí nghiệp</div>
                   <div class="information">
                     <div class="sub-field"></div>
-                    <div class="sub-field">Số điện thoại: 0123456789</div>
+                    <div class="sub-field"><?php echo $row['xi_nghiep'] ?></div>
                   </div>
                 </div>
                 <div class="info-item">
                   <div class="field-name">Nghiệp đoàn</div>
-                  <div class="information">Asunaro</div>
+                  <div class="information"><?php echo $row['nghiep_doan'] ?></div>
                 </div>
                 <div class="info-item">
                   <div class="field-name">Nơi làm việc</div>
-                  <div class="information">Text</div>
+                  <div class="information"><?php echo $row['noi_lv'] ?></div>
                 </div>
               </div>
             </div>
@@ -251,7 +257,6 @@
         </div>
       </div>
     </div>
-    <?php } ?>
 </body>
 <script>
     function toggleContent(containerId) {
@@ -261,4 +266,8 @@
   </script>
   
 </html>
-<?php } ?>
+<?php
+        break;}
+    }
+}
+?>

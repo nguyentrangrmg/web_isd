@@ -1,11 +1,9 @@
 <?php 
 include ('../../../config.php');
 
-if(isset($_POST['checkbox']) &&  isset($_POST['mhv'])) {
-    // Lặp qua mảng checkbox để lấy các giá trị tương ứng
-    foreach($_POST['checkbox'] as $key) {
-        // Lấy giá trị mhv và created_at tương ứng với $key
-        $mhv = mysqli_real_escape_string($mysqli, $_POST['mhv'][$key]);
+if(isset($_POST['checkbox'][0])){
+    foreach($_POST['checkbox'] as $list){
+        $mhv = mysqli_real_escape_string($mysqli, $list);
         
         $insert_query = "INSERT INTO student (mhv, ho_ten, ngay_sinh, gioi_tinh, sdt, ho_chieu, ngay_cap_hc, noi_cap_hc, CCCD, ngay_cap_cccd, 
         ho_khau, dia_chi, ngay_thi, ngay_DKXC, ngayXC, dukien_venuoc, noi_cap_cccd,

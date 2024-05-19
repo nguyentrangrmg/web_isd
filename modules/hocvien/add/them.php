@@ -303,11 +303,11 @@
                                                         <label class="col-sm-9">Chọn đơn hàng hiện
                                                             có<code>*</code></label>
                                                         <div class="col-sm-12">
-                                                        <select class="form-select" id="ten_dh" name="ten_dh" >
+                                                        <select class="form-select" id="mdh" name="mdh" >
                                                             <?php 
                                                             while ($row = mysqli_fetch_assoc($res)) {
                                                             ?>
-                                                                <option value="<?php echo $row['ten_dh']?>"><?php echo $row['mdh']?>: <?php echo $row['ten_dh']?></option>
+                                                                <option value="<?php echo $row['mdh']?>; <?php echo $row['ten_dh']?>"><?php echo $row['mdh']?>: <?php echo $row['ten_dh']?></option>
                                                             <?php } ?>
                                                             </select>
                                                         </div>

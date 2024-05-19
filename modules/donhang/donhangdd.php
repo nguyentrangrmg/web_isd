@@ -16,9 +16,9 @@ if (isset($_GET['search_dh'])) {
     $offset = ($current_page - 1) * $per_page;
     $query = "SELECT * FROM jporder 
               WHERE type_hv='dd' AND (mdh LIKE '%".$key."%' 
-              OR gioi_tinh LIKE '%".$key."%' OR ten_dh LIKE '%".$key."%' 
+              OR ten_dh LIKE '%".$key."%' 
               OR xi_nghiep LIKE '%".$key."%' OR nganh_nghe LIKE '%".$key."%' 
-              OR so_luong_tuyen LIKE '%".$key."%' OR do_tuoi LIKE '%".$key."%' 
+              OR so_luong_tuyen LIKE '%".$key."%' 
               OR ngay_tt LIKE '%".$key."%' OR trang_thai LIKE '%".$key."%' 
               OR hinh_thuc_tt LIKE '%".$key."%') 
               ORDER BY mdh ASC 
@@ -27,9 +27,9 @@ if (isset($_GET['search_dh'])) {
 
     $count_query = "SELECT COUNT(*) AS total FROM jporder 
                     WHERE type_hv='dd' AND (mdh LIKE '%".$key."%' 
-                    OR gioi_tinh LIKE '%".$key."%' OR ten_dh LIKE '%".$key."%' 
+                    OR ten_dh LIKE '%".$key."%' 
                     OR xi_nghiep LIKE '%".$key."%' OR nganh_nghe LIKE '%".$key."%' 
-                    OR so_luong_tuyen LIKE '%".$key."%' OR do_tuoi LIKE '%".$key."%' 
+                    OR so_luong_tuyen LIKE '%".$key."%' 
                     OR ngay_tt LIKE '%".$key."%' OR trang_thai LIKE '%".$key."%' 
                     OR hinh_thuc_tt LIKE '%".$key."%')";
     $count_result = executeQuery($mysqli, $count_query);
@@ -82,7 +82,7 @@ $pages = ceil($rs / $per_page);
     </div>
 
     <div class="content">
-        <div class="table-container" style="max-height: 500px; overflow: auto;">
+        <div class="table-container" style="max-height: 500px;">
             <form method="post" id="frm">
                 <table class="table table-hover table-stripe">
                     <thead class="color-head">
@@ -103,8 +103,8 @@ $pages = ceil($rs / $per_page);
                     while ($row = mysqli_fetch_assoc($res)) {
                     ?>
                         <tr id="box<?php echo $row['mdh'] ?>">
-                        <td><input type="checkbox" id="<?php echo $row['mdh'] ?>" name="checkbox[]" value="<?php echo $row['mdh'] ?>" /></td>
-                        <td style="white-space: nowrap;">
+                            <td><input type="checkbox" id="<?php echo $row['mdh'] ?>" name="checkbox[]" value="<?php echo $row['mdh'] ?>" /></td>
+                            <td style="white-space: nowrap;">
                                 <a href="index.php?action=view&mdh=<?php echo $row['mdh']; ?>" 
                                 style="text-decoration: none; color: black;"><?php echo $row['mdh'] ?></a>
                             </td>
@@ -151,13 +151,15 @@ $pages = ceil($rs / $per_page);
         </div>
         
     </div>
-    <div class="pagination-container">
+<!-- pagination -->
+<div class="pagination-container">
     <div class="pagination">
-        <!-- pagination -->
         <?php
                 $typedh = isset($_GET['typedh']) ? $_GET['typedh'] : 'dd';
                 $current_page = isset($_GET['pageo']) ? (int)$_GET['pageo'] : 1;
+                
                 if ($pages > 0) { ?>
+                
                 <nav aria-label="Page navigation example">
                     <ul class="pagination d-flex justify-content-center">
                         <li class="page-item">

@@ -73,7 +73,6 @@ $pages = ceil($rs / $per_page);
             <a href="?function=themdh"><button class="nut-them">Tạo mới</button></a>
             <a href="javascript:void(0)" onclick="delete_all()"><button class="nut-xoa">Xóa</button></a>
             <a href="javascript:void(0)" onclick="xuatfile()"><button class="nut-xuat">Xuất Excel</button></a>
-            <a href="javascript:void(0)" onclick="xuatfile()"><button class="loc">Bộ lọc</button></a>
         </div>
         <form action="" method="GET" style="display: inline-block;">
             <input type="text" class="search-input" placeholder="Search..." name="key_search" value="<?php echo isset($key) ? $key : ''; ?>">

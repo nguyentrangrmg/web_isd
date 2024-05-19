@@ -20,13 +20,24 @@
                     case 'thung-rac':
                         $pageTitle = 'Thùng rác';
                         break;
+                    case 'doi-mat-khau':
+                        $pageTitle = 'Đổi mật khẩu';
+                        break;
                 }
             }
             else if(isset($_GET['action'])) {
                 $action = $_GET['action'];
                 switch($action) {
                     case 'view':
-                        $pageTitle = 'Quản lý học viên';
+                        if(isset($_GET['mhv'])) {
+                            $pageTitle = 'Xem thông tin học viên';
+                        } else if(isset($_GET['mdh'])) {
+                            $pageTitle = 'Xem thông tin đơn hàng';
+                        } else if(isset($_GET['mxn'])) {
+                            $pageTitle = 'Xem thông tin xí nghiệp';
+                        } else {
+                            $pageTitle = 'Quản lý học viên';
+                        }
                         break;
                 }
             }
@@ -130,9 +141,14 @@
                                         Cài đặt
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                                        <a class="dropdown-item preview-item" href="#">
+                                    <form  method="get" action="#">
+                                        <input name="chucnang" value="doi-mat-khau" style="display:none">
+                                        <button type="submit" class="dropdown-item preview-item" href="">
+                                            <input type="hidden" name="user" value="<?php echo $user ?>">
                                             <i class="icon-head mr-2"></i> Đổi mật khẩu
-                                        </a>
+                                        </button>
+                                    </form>    
+                                    
                                         <a class="dropdown-item preview-item" href="index.php?dangxuat=1">
                                             <i class="icon-outbox mr-2"></i> Đăng Xuất
                                         </a>
@@ -163,11 +179,23 @@
                                         case 'thung-rac':
                                             include 'modules/thung-rac/hv/bin_hocvien.php';
                                             break;
+                                            case 'doi-mat-khau':
+                                                include 'changepassword_form.php';
+                                                break;
                                         default:
                                         include 'modules/menu.php';
                                         break;
                                         }
                                 } 
+                                //filter
+                                if(isset($_GET['filter'])){
+                                    $filter = $_GET['filter'];
+                                    switch($filter) {
+                                        case 'hocvien':
+                                            include 'modules/hocvien/filter-hv.php';
+                                            break;
+                                        }
+                                }
                                 // loại học viên
                                 if(isset($_GET['type'])) {
                                 $type = $_GET['type'];
@@ -287,7 +315,8 @@
                                     (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mdh'])) || 
                                     (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mxn'])) || 
                                     isset($_GET['error_message']) && isset($_SESSION['login']) || isset($_GET['edit_dh']) ||
-                                    isset($_GET['search_dh']) || isset($_GET['search_xn'])|| isset($_GET['search_hv']) )) {
+                                    isset($_GET['search_dh']) || isset($_GET['search_xn'])|| isset($_GET['search_hv'])||
+                                    isset($_GET['filter']) )) {
                                         include 'modules/menu.php';
                                     }
                                 ?>
