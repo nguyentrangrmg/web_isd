@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2024 at 12:09 PM
+-- Generation Time: May 20, 2024 at 09:09 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,16 @@ CREATE TABLE `baolanh` (
   `sdt_bl` varchar(12) NOT NULL,
   `ho_khau_bl` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `baolanh`
+--
+
+INSERT INTO `baolanh` (`mhv`, `ten`, `quan_he`, `dob`, `dia_chi_bl`, `sdt_bl`, `ho_khau_bl`) VALUES
+('T12424001', 'dasdas', 'cha con', '2024-05-15', 'đâu đó trên trái đất này', '123123', 'gò vấp'),
+('T32424001', 'dasdas', 'cha con', '2024-05-30', 'đâu đó trên trái đất này', '123123', 'gò vấp'),
+('T12424002', 'dasdas', 'cha con', '2024-05-02', 'đâu đó trên trái đất này', '123123', 'gò vấp'),
+('T12424003', 'dasdas', 'cha con', '2024-05-29', 'đâu đó trên trái đất này', '123123', 'gò vấp');
 
 -- --------------------------------------------------------
 
@@ -158,7 +168,8 @@ CREATE TABLE `enterprise` (
 --
 
 INSERT INTO `enterprise` (`mdn`, `xi_nghiep`, `ten_giam_doc`, `nganh_nghe_e`, `nghiep_doan`, `sdt_xn`, `dia_chi_xn`, `noi_lam_viec`, `so_luong_don_hang`, `so_luong_hv`, `ghi_chu_e`) VALUES
-('HEH002', 'HEHE', 'hả', 'may mặc; ngủ', 'bumbum', '0123456778', 'trên núi', '(hà nội)(vĩnh phúc, an giang)', NULL, NULL, NULL);
+('HEH002', 'HEHE', 'hả', 'may mặc; ngủ', 'bumbum', '0123456778', 'trên núi', '(hà nội)(vĩnh phúc, an giang)', NULL, NULL, NULL),
+('HU003', 'huhu', 'ge', 'may mặc; hốc', 'bumbum', '0123456778', 'trên núi', '(hà nội)', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -255,6 +266,16 @@ CREATE TABLE `student` (
   `lich_su_xk` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`mhv`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `file_anh`, `ho_chieu`, `ngay_cap_hc`, `noi_cap_hc`, `CCCD`, `ngay_cap_cccd`, `noi_cap_cccd`, `ho_khau`, `dia_chi`, `sdt`, `ngay_thi`, `ngay_DKXC`, `ngayXC`, `dukien_venuoc`, `nganh_nghe`, `xi_nghiep`, `nghiep_doan`, `noi_lam_viec`, `note`, `type_hv`, `ngay_nhaphoc`, `mdh`, `ten_dh`, `status`, `lich_su_xk`) VALUES
+('T12424001', '123123', '2024-05-16', 'Nam', 'Screenshot 2024-04-16 142238.png', 'qưeqưe', '0000-00-00', '3123123', '123123', '2024-05-23', 123213, '123123', '12312', '13132', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', NULL, NULL, NULL, NULL, '', '1', '2024-05-03', 'T124001', '', 'Đang đào tạo', 'Xí nghiệp asuna, từ  đến  / Xí nghiệp dd, từ  đến '),
+('T12424002', '123123', '2024-05-31', 'Nam', 'Screenshot 2024-04-16 142623.png', 'qưeqưe', '0000-00-00', '3123123', '123123', '2024-05-22', 123213, '123123', '12312', '13132', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', NULL, NULL, NULL, NULL, '', '1', '2024-02-14', 'T124001', '', 'Đang đào tạo', 'Xí nghiệp asuna, từ  đến  / Xí nghiệp dd, từ  đến '),
+('T12424003', '123123', '2024-05-10', 'Nam', 'Screenshot 2024-04-16 142623.png', 'qưeqưe', '0000-00-00', '3123123', '123123', '2024-05-23', 123213, '123123', '12312', '13132', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', NULL, NULL, NULL, NULL, '', '1', '2024-07-27', 'T124001', '', 'Đang đào tạo', 'Xí nghiệp asuna, từ  đến  / Xí nghiệp dd, từ  đến '),
+('T32424001', '123123', '2024-05-18', 'Nam', 'Screenshot 2024-04-16 142206.png', 'qưeqưe', '0000-00-00', '3123123', '123123', '2024-05-23', 123213, '123123', '12312', '13132', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', NULL, NULL, NULL, NULL, '', '3', '2024-05-24', 'T124001', '', 'Đang làm việc', 'Xí nghiệp asuna, từ  đến  / Xí nghiệp dd, từ  đến ');
+
 -- --------------------------------------------------------
 
 --
@@ -267,6 +288,7 @@ CREATE TABLE `user` (
   `email` varchar(50) NOT NULL,
   `user` varchar(20) NOT NULL,
   `pass` varchar(64) NOT NULL,
+  `forgotToken` varchar(200) NOT NULL,
   `role` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -274,8 +296,8 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `user`, `pass`, `role`) VALUES
-(1, 'Admin', 'admin@gmail.com', 'admin', '$2y$10$6lc4vE9dArCSA76FrJqSUuTCn3oVDcm7kNhFK1Zmy2BC75.WTR0Pe', 1);
+INSERT INTO `user` (`id`, `name`, `email`, `user`, `pass`, `forgotToken`, `role`) VALUES
+(1, 'Admin', 'nguyentrangrmg@gmail.com', 'admin', '$2y$10$cU7aNuL9U83X0cmdwHND2OXMSXsgdPMAtZGdaDxGuSz9bJcbx0a1u', '602069e010514d180ddccf2670e47e7f', 1);
 
 --
 -- Indexes for dumped tables

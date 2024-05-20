@@ -1,5 +1,7 @@
-<?php
-include 'config.php';
+
+<body>
+    <?php
+    include 'config.php';
     function executeQuery($mysqli, $query) {
         $result = mysqli_query($mysqli, $query);
         if (!$result) {
@@ -7,6 +9,21 @@ include 'config.php';
         }
         return $result;
     }
+    // Lấy danh sách đơn hàng
+$donHangQuery = "SELECT ten_dh FROM jporder";
+$donHangResult = executeQuery($mysqli, $donHangQuery);
+$donHangOptions = [];
+while ($row = mysqli_fetch_assoc($donHangResult)) {
+    $donHangOptions[] = $row['ten_dh'];
+}
+
+// Lấy danh sách xí nghiệp
+$xiNghiepQuery = "SELECT xi_nghiep FROM enterprise";
+$xiNghiepResult = executeQuery($mysqli, $xiNghiepQuery);
+$xiNghiepOptions = [];
+while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
+    $xiNghiepOptions[] = $row['xi_nghiep'];
+}
     
     if (isset($_GET['search_hv'])) {
         $key = $_GET['key_search'];
@@ -68,15 +85,13 @@ include 'config.php';
     
     $pages = ceil($rs / $per_page);
     ?>
-    
-    <!-- Menu -->
-    <div class="loai_hv">
+  <div class="loai_hv">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="?type=1" style="text-decoration: none;color:black" >Thực tập sinh số 1</a>
+                <a class="nav-link active" href="?type=1" style="text-decoration: none;color:black" >Thực tập sinh số 1</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="?type=3" style="text-decoration: none;color:black" >Thực tập sinh số 3</a>
+                <a class="nav-link" href="?type=3" style="text-decoration: none;color:black" >Thực tập sinh số 3</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?type=dd" style="text-decoration: none;color:black" >Kỹ năng đặc định</a>
@@ -87,15 +102,216 @@ include 'config.php';
         <div style="display: inline-block;">
             <a href="?function=them"><button class="nut-them">Tạo mới</button></a>
             <a href="javascript:void(0)" onclick="delete_all()"><button class="nut-xoa">Xóa</button></a>
-            <a href="javascript:void(0)" onclick="xuatfile()"><button class="nut-xuat">Xuất Excel</button></a>
-            <a href="javascript:void(0)" onclick="xuatfile()"><button class="loc">Bộ lọc</button></a>
+            <a href="modules/hocvien/export.php"><button class="nut-xuat">Xuất Excel</button></a>
+            <button class="ec-ec"  id="filterButton">Bộ lọc</button>
         </div>
+        
         <form action="" method="GET" style="display: inline-block;">
             <input type="text" class="search-input" placeholder="Search..." name="key_search" value="<?php echo isset($key) ? $key : ''; ?>">
             <input type="hidden" name="type" value="3">
             <button type="submit" name="search_hv" class="search-button"><i class="fas fa-search search-icon"></i></button>
         </form>
     </div>
+    <!-- Pop-up 1 -->
+    <div id="popup1" class="popup">
+      <div class="popup-content">
+        <span class="close" id="closePopup1">&times;</span>
+        <h2>Bộ lọc</h2>
+        <button class="ec-ec" id="showColumns">Chọn các cột muốn hiển thị</button>
+        <div>
+          <input type="checkbox" id="checkNgayNhapHoc" />
+          <label for="checkNgayNhapHoc">Ngày nhập học</label>
+          <div class="date-selector" id="dateSelectorNhapHoc">
+            <label for="tuNgayNhapHoc">Từ ngày:</label>
+            <input value="nhap_hoc1" type="date" id="tuNgayNhapHoc" />
+            <label for="denNgayNhapHoc">
+              &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; Đến ngày:</label
+            >
+            <input value="nhap_hoc2" type="date" id="denNgayNhapHoc" />
+          </div>
+        </div>
+        <div>
+          <input type="checkbox" id="checkNgayThiTuyen" />
+          <label for="checkNgayThiTuyen">Ngày thi tuyển</label>
+          <div class="date-selector" id="dateSelectorThiTuyen">
+            <label for="tuNgayThiTuyen">Từ ngày:</label>
+            <input value="tt1" type="date" id="tuNgayThiTuyen" />
+            <label for="denNgayThiTuyen">
+              &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; Đến ngày:</label
+            >
+            <input value="tt2" type="date" id="denNgayThiTuyen" />
+          </div>
+        </div>
+        <div>
+          <input type="checkbox" id="checkNgaySinh" />
+          <label for="checkNgaySinh">Ngày sinh</label>
+          <div class="date-selector" id="dateSelectorSinh">
+            <label for="tuNgaySinh">Từ ngày:</label>
+            <input value="ngay_sinh1" type="date" id="tuNgaySinh" />
+            <label for="denNgaySinh">
+              &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; Đến ngày:</label
+            >
+            <input value="ngay_sinh2" type="date" id="denNgaySinh" />
+          </div>
+        </div>
+        <div>
+          <input type="checkbox" id="checkNgayXuatCanh" />
+          <label for="checkNgayXuatCanh">Ngày xuất cảnh</label>
+          <div class="date-selector" id="dateSelectorXuatCanh">
+            <label for="tuNgayXuatCanh">Từ ngày:</label>
+            <input value="xc1" type="date" id="tuNgayXuatCanh" />
+            <label for="denNgayXuatCanh">
+              &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; Đến ngày:</label
+            >
+            <input value="xc2" type="date" id="denNgayXuatCanh" />
+          </div>
+        </div>
+        <div>
+          <input type="checkbox" id="checkDonHang" />
+          <label for="checkDonHang">Đơn hàng</label>
+          <select id="dropdownDonHang">
+          <?php foreach ($donHangOptions as $option): ?>
+                        <option value="<?= htmlspecialchars($option) ?>"><?= htmlspecialchars($option) ?></option>
+                    <?php endforeach; ?>
+          </select>
+        </div>
+        <div>
+          <input type="checkbox" id="checkXiNghiep" />
+          <label for="checkXiNghiep">Xí nghiệp</label>
+          <select id="dropdownXiNghiep">
+          <?php foreach ($xiNghiepOptions as $option): ?>
+                        <option value="<?= htmlspecialchars($option) ?>"><?= htmlspecialchars($option) ?></option>
+                    <?php endforeach; ?>
+          </select>
+        </div>
+        <button class="ec-ec"  id="applyPopup1" class="applyPopup1">Áp dụng</button>
+      </div>
+    </div>
+
+    <!-- Pop-up 2 -->
+    <div id="popup2" class="popup">
+      <div class="popup-content">
+        <span class="close" id="closePopup2">&times;</span>
+        <h2>Chọn các cột muốn hiển thị, tối đa 8 cột</h2>
+        <div class="collapse-e">
+          <button class="collapse-button">Thông tin cơ bản</button>
+          <div class="collapse-content">
+            <div class="checkbox-item">
+              <input value="ho_ten" type="checkbox" id="ho_ten" />
+              <label for="ho_ten">Họ và tên</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="ngay_sinh" type="checkbox" id="ngaySinh" />
+              <label for="ngaySinh">Ngày sinh</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="gioi_tinh" type="checkbox" id="gioiTinh" />
+              <label for="gioiTinh">Giới tính</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="sdt" type="checkbox" id="soDienThoai" />
+              <label for="soDienThoai">Số điện thoại</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="ho_chieu" type="checkbox" id="hoChieu" />
+              <label for="hoChieu">Hộ chiếu</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="CCCD" type="checkbox" id="canCuocCongDan" />
+              <label for="canCuocCongDan">Căn cước công dân</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="ho_khau" type="checkbox" id="hoKhau" />
+              <label for="hoKhau">Hộ khẩu</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="dia_chi" type="checkbox" id="diaChiThuongTru" />
+              <label for="diaChiThuongTru">Địa chỉ thường trú</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="status" type="checkbox" id="trangThai" />
+              <label for="trangThai">Trạng thái</label>
+            </div>
+          </div>
+        </div>
+        <div class="collapse-e">
+          <button class="collapse-button">Người bảo lãnh</button>
+          <div class="collapse-content">
+            <div class="checkbox-item">
+              <input value="ten" type="checkbox" id="hoTenBaoLanh" />
+              <label for="hoTenBaoLanh">Họ và tên người bảo lãnh</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="dob" type="checkbox" id="ngaySinhBaoLanh" />
+              <label for="ngaySinhBaoLanh">Ngày sinh</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="quan_he" type="checkbox" id="quanHeHocVien" />
+              <label for="quanHeHocVien">Quan hệ với học viên</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="sdt_bl" type="checkbox" id="soDienThoaiBaoLanh" />
+              <label for="soDienThoaiBaoLanh">Số điện thoại</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="ho_khau_bl" type="checkbox" id="hoKhauBaoLanh" />
+              <label for="hoKhauBaoLanh">Hộ khẩu</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="dia_chi_bl" type="checkbox" id="diaChiThuongTruBaoLanh" />
+              <label for="diaChiThuongTruBaoLanh">Địa chỉ thường trú</label>
+            </div>
+          </div>
+        </div>
+        <div class="collapse-e">
+          <button class="collapse-button">Đơn hàng</button>
+          <div class="collapse-content">
+            <div class="checkbox-item">
+              <input value="ngay_tt" type="checkbox" id="ngayThiTuyen" />
+              <label for="ngayThiTuyen">Ngày thi tuyển</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="ngay_vn" type="checkbox" id="ngayDuKienVeNuoc" />
+              <label for="ngayDuKienVeNuoc">Ngày dự kiến về nước</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="ngay_xc" type="checkbox" id="ngayDuKienXuatCanh" />
+              <label for="ngayDuKienXuatCanh">Ngày dự kiến xuất cảnh</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="nganh_nghe" type="checkbox" id="nganhNghe" />
+              <label for="nganhNghe">Ngành nghề</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="xi_nghiep" type="checkbox" id="xiNghiep" />
+              <label for="xiNghiep">Xí nghiệp</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="nghiep_doan" type="checkbox" id="nghiepDoan" />
+              <label for="nghiepDoan">Nghiệp đoàn</label>
+            </div>
+            <div class="checkbox-item">
+              <input value="noi_lv" type="checkbox" id="noiLamViec" />
+              <label for="noiLamViec">Nơi làm việc</label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="checkbox-item" id="lichSuXuatKhauLaoDong">
+            <input value="lich_su_xk" type="checkbox" id="lichSuXuatKhauLaoDong" />
+            <label for="lichSuXuatKhauLaoDong"
+              >Lịch sử xuất khẩu lao động</label
+            >
+          </div>
+          <div class="checkbox-item">
+            <input value="note" type="checkbox" id="ghiChu" />
+            <label for="ghiChu">Ghi chú</label>
+          </div>
+        </div>
+        <button class="ec-ec" id="applyPopup2">Áp dụng</button>
+      </div>
+    </div>
+
     <div class="content">
     <div class="table-container" style="max-height: 500px; overflow: auto;">
             <form method="post" id="frm">
@@ -151,7 +367,6 @@ include 'config.php';
                                     <button type="submit" class="xoa" style="border: none; background: none; color: inherit;"><i class="fas fa-trash trash"></i></button>
                                 </form>
                             </div>
-
                             </td>
                         </tr>
                         <?php 
@@ -164,10 +379,9 @@ include 'config.php';
                     margin-top: 20px; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;'>
                     Không có dữ liệu</div>";
                 } ?>
-            </form>
-            <!-- pagination -->
-<div class="pagination-container">
-    <div class="pagination">
+                </form>
+                <div class="pagination-container">
+            <div class="pagination">
         <?php
                 $type = isset($_GET['type']) ? $_GET['type'] : '3';
                 $current_page = isset($_GET['pageo']) ? (int)$_GET['pageo'] : 1;
@@ -224,11 +438,12 @@ include 'config.php';
                 </nav>
         </div>
         </div>
+        
         </div>
     </div>
-
+    <script src="js/filter2.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-       <script>
+    <script>
         //checkbox
         function select_all(){
             var isChecked = jQuery('#select-all-checkbox').prop("checked");
@@ -287,8 +502,98 @@ include 'config.php';
             });
         }
     });
-    </script>
     
-    <?php
+    </script>  
+    <script>
+    var selectedValuesPopup2 = {};
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("applyPopup2").addEventListener("click", function() {
+            var checkedCountPopup2 = 0;
+            var checkboxesPopup2 = document.querySelectorAll("#popup2 input[type='checkbox']");
+            checkboxesPopup2.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    checkedCountPopup2++;
+                }
+            });
+
+            if (checkedCountPopup2 > 8) {
+                alert("Chỉ được chọn tối đa 8 cột!");
+                return;
+            }
+
+            checkboxesPopup2.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    selectedValuesPopup2[checkbox.id] = true;
+                }
+            });
+
+            document.getElementById("popup2").style.display = "none";
+        });
+
+        // popup 1
+        document.getElementById("applyPopup1").addEventListener("click", function() {
+            var selectedValuesPopup1 = {};
+
+if (document.getElementById("checkNgayNhapHoc").checked) {
+    var tuNgayNhapHoc = document.getElementById("tuNgayNhapHoc").value;
+    var denNgayNhapHoc = document.getElementById("denNgayNhapHoc").value;
+    var ngayNhapHocValue = tuNgayNhapHoc + " đến " + denNgayNhapHoc;
+    selectedValuesPopup1["ngayNhapHoc"] = ngayNhapHocValue;
 }
-?>
+
+if (document.getElementById("checkNgayThiTuyen").checked) {
+    var tuNgayThiTuyen = document.getElementById("tuNgayThiTuyen").value;
+    var denNgayThiTuyen = document.getElementById("denNgayThiTuyen").value;
+    var ngayThiTuyenValue = tuNgayThiTuyen + " đến " + denNgayThiTuyen;
+    selectedValuesPopup1["ngayThiTuyen"] = ngayThiTuyenValue;
+}
+
+if (document.getElementById("checkNgaySinh").checked) {
+    var tuNgaySinh = document.getElementById("tuNgaySinh").value;
+    var denNgaySinh = document.getElementById("denNgaySinh").value;
+    var ngaySinhValue = tuNgaySinh + " đến " + denNgaySinh;
+    selectedValuesPopup1["ngaySinh"] = ngaySinhValue;
+}
+
+if (document.getElementById("checkNgayXuatCanh").checked) {
+    var tuNgayXuatCanh = document.getElementById("tuNgayXuatCanh").value;
+    var denNgayXuatCanh = document.getElementById("denNgayXuatCanh").value;
+    var ngayXuatCanhValue = tuNgayXuatCanh + " đến " + denNgayXuatCanh;
+    selectedValuesPopup1["ngayXuatCanh"] = ngayXuatCanhValue;
+}
+
+if (document.getElementById("checkDonHang").checked) {
+    var dropdownDonHangValue = document.getElementById("dropdownDonHang").value;
+    selectedValuesPopup1["donHang"] = dropdownDonHangValue;
+}
+
+if (document.getElementById("checkXiNghiep").checked) {
+    var dropdownXiNghiepValue = document.getElementById("dropdownXiNghiep").value;
+    selectedValuesPopup1["xiNghiep"] = dropdownXiNghiepValue;
+}
+
+            var formData = new FormData();
+            formData.append("popup1_data", JSON.stringify(selectedValuesPopup1));
+            formData.append("popup2_data", JSON.stringify(selectedValuesPopup2));
+
+            $.ajax({
+                url: "modules/hocvien/process.php",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(status, error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
+<?php } ?>

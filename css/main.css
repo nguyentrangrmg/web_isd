@@ -237,6 +237,7 @@ button.search-button {
   height: 50px;
   overflow: hidden;
   align-content: center;
+  color: #515151;
 }
 .trash-button:hover {
   color: #e10000;

@@ -69,7 +69,71 @@ include 'config.php';
     $count_result = executeQuery($mysqli, $count_query);
     $count_row = mysqli_fetch_assoc($count_result);
     $rs = $count_row['total'];
-    }}
+    }
+}
+    if (isset($_GET['status'])){
+        $status=($_GET['status']);
+        if (isset($_GET['search_hv'])) {
+        $key = $_GET['key_search'];
+        $per_page = 10;
+        $current_page = !empty($_GET['pageo']) ? $_GET['pageo'] : 1;
+        $offset = ($current_page - 1) * $per_page;
+        $query = "SELECT student.*, jporder.* 
+        FROM student
+        LEFT JOIN jporder ON student.mdh = jporder.mdh
+        LEFT JOIN enterprise ON jporder.xi_nghiep = enterprise.xi_nghiep
+        WHERE student.status = '$status' 
+                  AND (student.mhv LIKE '%".$key."%' 
+                  OR student.ho_ten LIKE '%".$key."%' 
+                  OR student.ngay_sinh LIKE '%".$key."%' 
+                  OR student.sdt LIKE '%".$key."%' 
+                  OR student.ngay_thi LIKE '%".$key."%' 
+                  OR student.ngay_nhaphoc LIKE '%".$key."%' 
+                  OR student.mdh LIKE '%".$key."%' 
+                  OR student.status LIKE '%".$key."%') 
+                  ORDER BY CONCAT(SUBSTRING(student.mhv, 3, 2), SUBSTRING(student.mhv, -3)) ASC 
+                  LIMIT ".$per_page." OFFSET ".$offset;
+        $res = executeQuery($mysqli, $query);
+    
+        $count_query = "SELECT COUNT(*) AS total 
+                    FROM student
+        LEFT JOIN jporder ON student.mdh = jporder.mdh
+        LEFT JOIN enterprise ON jporder.xi_nghiep = enterprise.xi_nghiep
+        WHERE student.status = '$status'  
+                    AND (student.mhv LIKE '%".$key."%' 
+                    OR student.ho_ten LIKE '%".$key."%' 
+                    OR student.ngay_sinh LIKE '%".$key."%' 
+                    OR student.sdt LIKE '%".$key."%' 
+                    OR student.ngay_thi LIKE '%".$key."%' 
+                    OR student.ngay_nhaphoc LIKE '%".$key."%' 
+                    OR student.mdh LIKE '%".$key."%' 
+                    OR student.status LIKE '%".$key."%')";
+        $count_result = executeQuery($mysqli, $count_query);
+        $count_row = mysqli_fetch_assoc($count_result);
+        $rs = $count_row['total'];
+    }
+    else{
+        $key = '';
+        $per_page = 10;
+        $current_page = !empty($_GET['pageo']) ? $_GET['pageo'] : 1;
+        $offset = ($current_page - 1) * $per_page;
+
+        $status = $_GET['status'];
+        $query = "SELECT student.*, jporder.* 
+        FROM student
+        LEFT JOIN jporder ON student.mdh = jporder.mdh
+        LEFT JOIN enterprise ON jporder.xi_nghiep = enterprise.xi_nghiep
+        WHERE student.status = '$status'
+        ORDER BY CONCAT(SUBSTRING(student.mhv, 3, 2), SUBSTRING(student.mhv, -3)) ASC";
+        $res = executeQuery($mysqli, $query);
+        $count_query = "SELECT COUNT(*) AS total 
+                    FROM student 
+                    JOIN `jporder` ON student.mdh = jporder.mdh";
+    $count_result = executeQuery($mysqli, $count_query);
+    $count_row = mysqli_fetch_assoc($count_result);
+    $rs = $count_row['total'];
+    }
+}
     
     $pages = ceil($rs / $per_page);
     ?>
@@ -78,7 +142,7 @@ include 'config.php';
     <div class="loai_hv">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="?type=1" style="text-decoration: none;color:black" >Thực tập sinh số 1</a>
+                <a class="nav-link" href="?type=1" style="text-decoration: none;color:black" >Thực tập sinh số 1</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?type=3" style="text-decoration: none;color:black" >Thực tập sinh số 3</a>
@@ -98,7 +162,8 @@ include 'config.php';
         <form action="" method="GET" style="display: inline-block;">
             <input type="text" class="search-input" placeholder="Search..." name="key_search" value="<?php echo isset($key) ? $key : ''; ?>">
             <input type="hidden" name="filter" value="hocvien">
-            <input type="hidden" name="mdn" value="<?php echo $_GET['mdn']; ?>">
+            <input type="hidden" name="mdn" value="<?php if(isset($_GET['mdn'])){echo $_GET['mdn'];}  ?>">
+            <input type="hidden" name="status" value="<?php if(isset($_GET['status'])){echo $_GET['status'];}  ?>">
             <button type="submit" name="search_hv" class="search-button"><i class="fas fa-search search-icon"></i></button>
         </form>
     </div>

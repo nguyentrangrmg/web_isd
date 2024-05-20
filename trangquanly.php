@@ -15,7 +15,7 @@
                         $pageTitle = 'Quản lý xí nghiệp';
                         break;
                     case 'dashboard':
-                        $pageTitle = 'Bảng điều khiển';
+                        $pageTitle = 'Trang báo cáo';
                         break;
                     case 'thung-rac':
                         $pageTitle = 'Thùng rác';
@@ -59,6 +59,16 @@
             else if(isset($_GET['edit'])) {
                 $edit = $_GET['edit'];
                         $pageTitle = 'Quản lý học viên';
+                
+            }
+            else if(isset($_GET['edit_dh'])) {
+                $edit = $_GET['edit_dh'];
+                        $pageTitle = 'Quản lý đơn hàng';
+                
+            }
+            else if(isset($_GET['edit_xn'])) {
+                $edit = $_GET['edit_xn'];
+                        $pageTitle = 'Quản lý xí nghiệp';
                 
             }
             else {
@@ -192,7 +202,11 @@
                                     $filter = $_GET['filter'];
                                     switch($filter) {
                                         case 'hocvien':
-                                            include 'modules/hocvien/filter-hv.php';
+                                            if(isset($_GET['mdn'])) {
+                                                include 'modules/hocvien/filter-hv.php';
+                                            } else if(isset($_GET['status'])) {
+                                                include 'modules/hocvien/filter-hv.php';
+                                            } 
                                             break;
                                         }
                                 }
@@ -284,6 +298,8 @@
                                                 break;    
                                             case 'themxn':
                                                 include 'modules/xi_nghiep/add/themxn.php';
+                                            case 'export':
+                                                include 'modules/hocvien/export.php';
                                         }
                                     }
                                     // sửa học viên
@@ -293,6 +309,10 @@
                                     // sửa đơn hàng
                                     if(isset($_GET['edit_dh'])) {
                                     include 'modules/donhang/edit/form-editdh.php';
+                                    } 
+                                    // sửa xí nghiệp
+                                    if(isset($_GET['edit_xn'])) {
+                                    include 'modules/xi_nghiep/edit/form-editxn.php';
                                     } 
                                     // xem pv học viên
                                     if(isset($_GET['action']) && $_GET['action'] === 'view' 
@@ -310,7 +330,7 @@
                                     // mặc định hiển thị menu.php
                                     if(!(isset($_GET['chucnang']) || isset($_GET['type']) || 
                                         isset($_GET['typedh']) || isset($_GET['typebin']) || 
-                                        isset($_GET['function']) || isset($_GET['edit']) || 
+                                        isset($_GET['function']) || isset($_GET['edit']) || isset($_GET['edit_xn']) ||
                                     (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mhv'])) || 
                                     (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mdh'])) || 
                                     (isset($_GET['action']) && $_GET['action'] === 'view' && isset($_GET['mxn'])) || 

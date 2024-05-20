@@ -41,22 +41,31 @@ require '../../../config.php';
     }
     $order_index = sprintf('%03d', $order_index);
     $mdn = $first_three_chars . $order_index;
-       
-          // Chuẩn bị truy vấn để chèn dữ liệu vào bảng enterprise
-            $insert_query = "INSERT INTO enterprise (mdn, xi_nghiep, ten_giam_doc, nganh_nghe_e, nghiep_doan, 
-            sdt_xn, dia_chi_xn, noi_lam_viec) 
-            VALUES ('$mdn', '$xi_nghiep', '$ten_giam_doc', '$nganh_nghe_values', '$nghiep_doan', '$sdt', 
-            '$dia_chi_xn', '$noi_lam_viec_values')";
 
-        // Thực thi truy vấn
+    $select_query = "SELECT * FROM enterprise WHERE xi_nghiep = '$xi_nghiep'";
+
+    // Thực thi câu truy vấn SELECT
+    $result = mysqli_query($mysqli, $select_query);
+    if (mysqli_num_rows($result) > 0) {
+        // Nếu có, xi_nghiep đã tồn tại trong bảng enterprise
+        $message = "Xí nghiệp đã tồn tại.";
+        header("Location: ../../../index.php?chucnang=xinghiep");
+    }else {
+    // Nếu không, tiến hành thực hiện câu truy vấn INSERT
+        $insert_query = "INSERT INTO enterprise (mdn, xi_nghiep, ten_giam_doc, nganh_nghe_e, nghiep_doan, 
+        sdt_xn, dia_chi_xn, noi_lam_viec) 
+        VALUES ('$mdn', '$xi_nghiep', '$ten_giam_doc', '$nganh_nghe_values', '$nghiep_doan', '$sdt', 
+        '$dia_chi_xn', '$noi_lam_viec_values')";
+
+        // Thực thi truy vấn INSERT
         if (mysqli_query($mysqli, $insert_query)) {
-        echo "Dữ liệu đã được chèn vào bảng enterprise thành công.";
-        header("Location: ../../../index.php?chucnang=xinghiep");
+            $message = "Thêm xí nghiệp thành công.";
+            header("Location: ../../../index.php?chucnang=xinghiep&success_message=" . urlencode($success_message));
         } else {
-        echo "Lỗi: " . $insert_query . "<br>" . mysqli_error($mysqli);
-        header("Location: ../../../index.php?chucnang=xinghiep");
+            $error_message = "Lỗi: " . $insert_query . "<br>" . mysqli_error($mysqli);
+            header("Location: ../../../index.php?chucnang=xinghiep");
         }
-
+    }
         // Đóng kết nối với cơ sở dữ liệu
         mysqli_close($mysqli);
     }
