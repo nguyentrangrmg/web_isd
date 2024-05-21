@@ -88,10 +88,10 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
   <div class="loai_hv">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="?type=1" style="text-decoration: none;color:black" >Thực tập sinh số 1</a>
+                <a class="nav-link" href="?type=1" style="text-decoration: none;color:black" >Thực tập sinh số 1</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?type=3" style="text-decoration: none;color:black" >Thực tập sinh số 3</a>
+                <a class="nav-link active" href="?type=3" style="text-decoration: none;color:black" >Thực tập sinh số 3</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?type=dd" style="text-decoration: none;color:black" >Kỹ năng đặc định</a>

@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="function" style="overflow: hidden;">
-    <a href="?typedh=1" style="float: left;"><button class="nut-back"><i class="fas fa-long-arrow-alt-left"></i></button></a>
+    <a href="?chucnang=xinghiep" style="float: left;"><button class="nut-back"><i class="fas fa-long-arrow-alt-left"></i></button></a>
     <div style="float: right;">
         <a href="?function=themxn" ><button class="nut-them" >Tạo mới</button></a>
         <a href="#"><button class="nut-xoa">Xóa</button></a>

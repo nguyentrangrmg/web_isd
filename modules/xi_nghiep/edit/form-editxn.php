@@ -194,6 +194,7 @@
       </div>
     </form>
   </div>
+  <?php break; ?>
 </div>
 </div>
 </div>
@@ -308,6 +309,7 @@
 <?php
        }
     }
+    
 }
 ?>
 </html>

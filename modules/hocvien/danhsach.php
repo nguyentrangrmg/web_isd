@@ -103,7 +103,7 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
             <a href="?function=them"><button class="nut-them">Tạo mới</button></a>
             <a href="javascript:void(0)" onclick="delete_all()"><button class="nut-xoa">Xóa</button></a>
             <a href="modules/hocvien/export.php"><button class="nut-xuat">Xuất Excel</button></a>
-            <button class="ec-ec"  id="filterButton">Bộ lọc</button>
+            <!-- <button class="ec-ec"  id="filterButton">Bộ lọc</button> -->
         </div>
         
         <form action="" method="GET" style="display: inline-block;">
@@ -113,7 +113,7 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
         </form>
     </div>
     <!-- Pop-up 1 -->
-    <div id="popup1" class="popup">
+    <!-- <div id="popup1" class="popup">
       <div class="popup-content">
         <span class="close" id="closePopup1">&times;</span>
         <h2>Bộ lọc</h2>
@@ -186,10 +186,10 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
         </div>
         <button class="ec-ec"  id="applyPopup1" class="applyPopup1">Áp dụng</button>
       </div>
-    </div>
+    </div> -->
 
     <!-- Pop-up 2 -->
-    <div id="popup2" class="popup">
+    <!-- <div id="popup2" class="popup">
       <div class="popup-content">
         <span class="close" id="closePopup2">&times;</span>
         <h2>Chọn các cột muốn hiển thị, tối đa 8 cột</h2>
@@ -310,7 +310,7 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
         </div>
         <button class="ec-ec" id="applyPopup2">Áp dụng</button>
       </div>
-    </div>
+    </div> -->
 
     <div class="content">
     <div class="table-container" style="max-height: 500px; overflow: auto;">
@@ -504,7 +504,7 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
     });
     
     </script>  
-    <script>
+    <!-- <script>
     var selectedValuesPopup2 = {};
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -531,7 +531,6 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
             document.getElementById("popup2").style.display = "none";
         });
 
-        // popup 1
         document.getElementById("applyPopup1").addEventListener("click", function() {
             var selectedValuesPopup1 = {};
 
@@ -592,7 +591,7 @@ if (document.getElementById("checkXiNghiep").checked) {
             });
         });
     });
-</script>
+</script> -->
 
 </body>
 </html>

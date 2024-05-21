@@ -298,8 +298,10 @@
                                                 break;    
                                             case 'themxn':
                                                 include 'modules/xi_nghiep/add/themxn.php';
+                                                break; 
                                             case 'export':
                                                 include 'modules/hocvien/export.php';
+                                                break; 
                                         }
                                     }
                                     // sửa học viên
