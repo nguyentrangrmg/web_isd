@@ -1,7 +1,8 @@
 <?php
 include 'config.php';
 
-function executeQuery($mysqli, $query) {
+function executeQuery($mysqli, $query)
+{
     $result = mysqli_query($mysqli, $query);
     if (!$result) {
         die("Query failed: " . mysqli_error($mysqli));
@@ -15,23 +16,23 @@ if (isset($_GET['search_dh'])) {
     $current_page = !empty($_GET['pageo']) ? $_GET['pageo'] : 1;
     $offset = ($current_page - 1) * $per_page;
     $query = "SELECT * FROM jporder 
-              WHERE type_hv='3' AND (mdh LIKE '%".$key."%' 
-              OR ten_dh LIKE '%".$key."%' 
-              OR xi_nghiep LIKE '%".$key."%' OR nganh_nghe LIKE '%".$key."%' 
-              OR so_luong_tuyen LIKE '%".$key."%' 
-              OR ngay_tt LIKE '%".$key."%' OR trang_thai LIKE '%".$key."%' 
-              OR hinh_thuc_tt LIKE '%".$key."%') 
+              WHERE type_hv='3' AND (mdh LIKE '%" . $key . "%' 
+              OR ten_dh LIKE '%" . $key . "%' 
+              OR xi_nghiep LIKE '%" . $key . "%' OR nganh_nghe LIKE '%" . $key . "%' 
+              OR so_luong_tuyen LIKE '%" . $key . "%' 
+              OR ngay_tt LIKE '%" . $key . "%' OR trang_thai LIKE '%" . $key . "%' 
+              OR hinh_thuc_tt LIKE '%" . $key . "%') 
               ORDER BY mdh ASC 
-              LIMIT ".$per_page." OFFSET ".$offset;
+              LIMIT " . $per_page . " OFFSET " . $offset;
     $res = executeQuery($mysqli, $query);
 
     $count_query = "SELECT COUNT(*) AS total FROM jporder 
-                    WHERE type_hv='3' AND (mdh LIKE '%".$key."%' 
-                    OR ten_dh LIKE '%".$key."%' 
-                    OR xi_nghiep LIKE '%".$key."%' OR nganh_nghe LIKE '%".$key."%' 
-                    OR so_luong_tuyen LIKE '%".$key."%' 
-                    OR ngay_tt LIKE '%".$key."%' OR trang_thai LIKE '%".$key."%' 
-                    OR hinh_thuc_tt LIKE '%".$key."%')";
+                    WHERE type_hv='3' AND (mdh LIKE '%" . $key . "%' 
+                    OR ten_dh LIKE '%" . $key . "%' 
+                    OR xi_nghiep LIKE '%" . $key . "%' OR nganh_nghe LIKE '%" . $key . "%' 
+                    OR so_luong_tuyen LIKE '%" . $key . "%' 
+                    OR ngay_tt LIKE '%" . $key . "%' OR trang_thai LIKE '%" . $key . "%' 
+                    OR hinh_thuc_tt LIKE '%" . $key . "%')";
     $count_result = executeQuery($mysqli, $count_query);
     $count_row = mysqli_fetch_assoc($count_result);
     $rs = $count_row['total'];
@@ -42,7 +43,7 @@ if (isset($_GET['search_dh'])) {
     $query = "SELECT * FROM jporder 
               WHERE type_hv='3' 
               ORDER BY CONCAT(SUBSTRING(mdh, 3, 2), SUBSTRING(mdh, -3)) ASC 
-              LIMIT ".$per_page." OFFSET ".$offset;
+              LIMIT " . $per_page . " OFFSET " . $offset;
     $res = executeQuery($mysqli, $query);
 
     $count_query = "SELECT COUNT(*) AS total FROM jporder WHERE type_hv='3'";
@@ -73,6 +74,8 @@ $pages = ceil($rs / $per_page);
             <a href="?function=themdh"><button class="nut-them">Tạo mới</button></a>
             <a href="javascript:void(0)" onclick="delete_all()"><button class="nut-xoa">Xóa</button></a>
             <a href="javascript:void(0)" onclick="xuatfile()"><button class="nut-xuat">Xuất Excel</button></a>
+            <a href="javascript:void(0)" onclick="xuatfile()"><button class="nut-xuat">Bộ lọc</button></a>
+
         </div>
         <form action="" method="GET" style="display: inline-block;">
             <input type="text" class="search-input" placeholder="Search..." name="key_search" value="<?php echo isset($key) ? $key : ''; ?>">
@@ -99,14 +102,13 @@ $pages = ceil($rs / $per_page);
                             <th></th>
                         </tr>
                     </thead>
-                    <?php 
+                    <?php
                     while ($row = mysqli_fetch_assoc($res)) {
                     ?>
                         <tr id="box<?php echo $row['mdh'] ?>">
                             <td><input type="checkbox" id="<?php echo $row['mdh'] ?>" name="checkbox[]" value="<?php echo $row['mdh'] ?>" /></td>
                             <td style="white-space: nowrap;">
-                                <a href="index.php?action=view&mdh=<?php echo $row['mdh']; ?>" 
-                                style="text-decoration: none; color: black;"><?php echo $row['mdh'] ?></a>
+                                <a href="index.php?action=view&mdh=<?php echo $row['mdh']; ?>" style="text-decoration: none; color: black;"><?php echo $row['mdh'] ?></a>
                             </td>
                             <td style="white-space: nowrap;"><?php echo $row['ten_dh'] ?></td>
                             <td style="white-space: nowrap;"><?php echo $row['nganh_nghe'] ?></td>
@@ -114,7 +116,8 @@ $pages = ceil($rs / $per_page);
                             <td><?php echo date('d/m/Y', strtotime($row['ngay_tt'])) ?></td>
                             <td style="white-space: nowrap;"><?php echo $row['so_luong_tuyen'] ?></td>
                             <td><?php echo $row['trang_thai'] ?></td>
-                            <td><?php echo strlen($row['ghi_chu']) > 10 ? substr($row['ghi_chu'], 0, 10) . '...' : $row['ghi_chu']; ?></td>
+                            <td><?php echo strlen($row['ghi_chu']) > 10 ? substr($row['ghi_chu'], 0, 10) . '...' : $row['ghi_chu']; ?>
+                            </td>
                             <td>
                                 <div style="display:flex" class="action-buttons">
                                     <form action="#" method="#">
@@ -136,30 +139,30 @@ $pages = ceil($rs / $per_page);
                                 </div>
                             </td>
                         </tr>
-                    <?php 
+                    <?php
                     }
                     ?>
                 </table>
-                <?php 
+                <?php
                 if (mysqli_num_rows($res) == 0) {
                     echo "<div style='text-align: center; 
                     margin-top: 20px; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;'>
                     Không có dữ liệu</div>";
                 } ?>
             </form>
-            
+
         </div>
-        
+
     </div>
-<!-- pagination -->
-<div class="pagination-container">
-    <div class="pagination">
-        <?php
-                $typedh = isset($_GET['typedh']) ? $_GET['typedh'] : '3';
-                $current_page = isset($_GET['pageo']) ? (int)$_GET['pageo'] : 1;
-                
-                if ($pages > 0) { ?>
-                
+    <!-- pagination -->
+    <div class="pagination-container">
+        <div class="pagination">
+            <?php
+            $typedh = isset($_GET['typedh']) ? $_GET['typedh'] : '3';
+            $current_page = isset($_GET['pageo']) ? (int)$_GET['pageo'] : 1;
+
+            if ($pages > 0) { ?>
+
                 <nav aria-label="Page navigation example">
                     <ul class="pagination d-flex justify-content-center">
                         <li class="page-item">
@@ -167,37 +170,38 @@ $pages = ceil($rs / $per_page);
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <?php 
+                        <?php
                         $start_page = max(1, $current_page - 1);
                         $end_page = min($pages, $current_page + 1);
-        
+
                         if ($start_page > 1) {
-                            ?>
+                        ?>
                             <li class="page-item"><a class="page-link" href="?pageo=1&typedh=<?php echo $typedh; ?>">1</a></li>
                             <?php
                             if ($start_page > 2) {
                                 echo '<li class="page-item"><span class="page-link">...</span></li>';
                             }
                         }
-        
-                        for ($i = $start_page; $i <= $end_page; $i++) {  
+
+                        for ($i = $start_page; $i <= $end_page; $i++) {
                             if ($i != $current_page) {
-                                ?>
+                            ?>
                                 <li class="page-item"><a class="page-link" href="?pageo=<?php echo $i; ?>&typedh=<?php echo $typedh; ?>"><?php echo $i; ?></a></li>
-                                <?php
+                            <?php
                             } else { ?>
                                 <li class="current-page page-item"><a style="color:white;background:#374375;" class="page-link" href="?pageo=<?php echo $i; ?>&typedh=<?php echo $typedh; ?>"><?php echo $i; ?></a></li>
-                            <?php 
+                            <?php
                             }
                         }
-        
+
                         if ($end_page < $pages - 1) {
                             echo '<li class="page-item"><span class="page-link">...</span></li>';
                         }
                         if ($end_page < $pages) {
                             ?>
-                            <li class="page-item"><a class="page-link" href="?pageo=<?php echo $pages; ?>&typedh=<?php echo $typedh; ?>"><?php echo $pages; ?></a></li>
-                            <?php
+                            <li class="page-item"><a class="page-link" href="?pageo=<?php echo $pages; ?>&typedh=<?php echo $typedh; ?>"><?php echo $pages; ?></a>
+                            </li>
+                        <?php
                         }
                         ?>
                         <li class="page-item">
@@ -205,14 +209,14 @@ $pages = ceil($rs / $per_page);
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </nav>
-                <?php
-                        }
-                        ?>
+            <?php
+            }
+            ?>
+        </div>
     </div>
-</div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         function select_all() {
@@ -233,7 +237,8 @@ $pages = ceil($rs / $per_page);
 
         function delete_all() {
             if (jQuery('input[type=checkbox]:checked').length > 0) {
-                var check = confirm("Bạn chắc chắn muốn xóa đơn hàng này?(Đơn hàng sẽ được lưu trữ trong thùng rác 30 ngày)");
+                var check = confirm(
+                    "Bạn chắc chắn muốn xóa đơn hàng này?(Đơn hàng sẽ được lưu trữ trong thùng rác 30 ngày)");
                 if (check == true) {
                     jQuery.ajax({
                         url: 'modules/donhang/deletedh.php',
@@ -255,7 +260,8 @@ $pages = ceil($rs / $per_page);
 
         jQuery('.xoa').click(function(e) {
             e.preventDefault();
-            var confirmation = confirm("Bạn chắc chắn muốn xóa đơn hàng này?(Đơn hàng sẽ được lưu trữ trong thùng rác 30 ngày)");
+            var confirmation = confirm(
+                "Bạn chắc chắn muốn xóa đơn hàng này?(Đơn hàng sẽ được lưu trữ trong thùng rác 30 ngày)");
             if (confirmation) {
                 var form = jQuery(this).closest('form');
                 jQuery.ajax({
