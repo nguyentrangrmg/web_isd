@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="row">
           <div class="col-md-4">
             <div class="form-group row">
-              <label class="col-sm-9">Mật khẩu hiện tại <?php echo $row['pass'] ?><code>*</code></label>
+              <label class="col-sm-9">Mật khẩu hiện tại<code>*</code></label>
               <div class="col-sm-12">
                 <div class="input-group rounded">
                   <input type="password" class="form-control rounded" name="currentPassword" id="currentPassword" maxlength="20"/>

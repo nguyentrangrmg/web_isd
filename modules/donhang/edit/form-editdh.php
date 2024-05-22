@@ -21,7 +21,6 @@
         if (isset($_GET['edit_dh'])) {
           $mdh = $_GET['edit_dh'];
           
-          // Truy vấn với JOIN bảng jporder và enterprise dựa trên cột xi_nghiep
           $query = "
               SELECT jporder.*, enterprise.*
               FROM jporder
@@ -389,7 +388,7 @@
                                         </div>
                                  
                                     <div style="text-align: right; margin-top: 10px;">
-                                <a href="#" class="btn btn-light" type="button" style="font-size: 15px; margin-right:5px">Huỷ</a>
+                                <a href="?chucnang=donhang" class="btn btn-light" type="button" style="font-size: 15px; margin-right:5px">Huỷ</a>
                                 <button type="submit" class="btn btn-primary" style="font-size: 15px;">Cập nhật</button>
                             </div>
                         </div>

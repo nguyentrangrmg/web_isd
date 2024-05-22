@@ -127,7 +127,7 @@
         </div>
       </div>
       <div style="text-align: right; margin-top: 10px;">
-        <a href="#" class="btn btn-light" type="button" style="font-size: 15px; margin-right:5px" >Huỷ</a>
+        <a href="?chucnang=xinghiep" class="btn btn-light" type="button" style="font-size: 15px; margin-right:5px" >Huỷ</a>
         <button type="submit" class="btn btn-primary" style="font-size: 15px;">Tạo mới</button>
       </div>
     </form>

@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sửa xí nghiệp</title>
-  <!-- Link CSS Bootstrap -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="vendors/feather/feather.css">
-  <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
-  <link rel="stylesheet" href="vendors/select2/select2.min.css">
-  <link rel="stylesheet" href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
-  <link rel="stylesheet" href="css/newstyle.css">
-  <link rel="stylesheet" href="vendors/base/base.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-</head>
+
 <body>
 <?php
                     require 'config.php';
@@ -31,7 +15,8 @@
                       $result = mysqli_query($mysqli, $query);
                   
                       if($result && mysqli_num_rows($result) > 0) {
-                          while($row = mysqli_fetch_assoc($result)) {
+                          
+                            $row = mysqli_fetch_assoc($result);
                             $mdh = $row['mdh'];
                             $nganh_nghe_e = $row['nganh_nghe_e'];
                             $nganh_nghe_list = explode('; ', $nganh_nghe_e);
@@ -45,7 +30,6 @@
     <div style="float: right;">
         <a href="?function=themxn" ><button class="nut-them" >Tạo mới</button></a>
         <a href="#"><button class="nut-xoa">Xóa</button></a>
-        <!-- <a href="#" onclick="xuatfile()"><button class="nut-xuat">Xuất Excel</button></a>   -->
         <input type="text" class="search-input" placeholder="Search..." style="vertical-align: middle;">
         <i class="fas fa-search search-icon" style="vertical-align: middle;"></i>
     </div>
@@ -194,7 +178,6 @@
       </div>
     </form>
   </div>
-  <?php break; ?>
 </div>
 </div>
 </div>
@@ -309,8 +292,7 @@
 <?php
        }
     }
-    
-}
+
 ?>
 </html>
 

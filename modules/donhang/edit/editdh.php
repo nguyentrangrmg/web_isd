@@ -2,8 +2,7 @@
 require '../../../config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Lấy thông tin từ form themdh.php
-    $mdh = $_POST['mdh']; // Add this line to get the order ID
+    $mdh = $_POST['mdh'];
     
     $ten_dh = $_POST['ten_dh'];
     $nghiep_doan = $_POST['nghiep_doan'];
@@ -36,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $do_tuoi_nam = $tuoi_nam1 . ' đến ' . $tuoi_nam2;
     $do_tuoi_nu = $tuoi_nu1 . ' đến ' . $tuoi_nu2;
-    // Query to update the order information in the database
+    
     $update_query = "UPDATE jporder SET 
     ten_dh = '$ten_dh',
     nghiep_doan = '$nghiep_doan',
@@ -62,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ghi_chu = '$ghi_chu'
     WHERE mdh = '$mdh'";
     
-    // Execute the update query
     if (mysqli_query($mysqli, $update_query)) {
         header("Location: ../../../index.php?typedh=".$type_hv."");
         exit;

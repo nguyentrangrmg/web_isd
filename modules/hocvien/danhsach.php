@@ -103,7 +103,6 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
             <a href="?function=them"><button class="nut-them">Tạo mới</button></a>
             <a href="javascript:void(0)" onclick="delete_all()"><button class="nut-xoa">Xóa</button></a>
             <a href="modules/hocvien/export.php"><button class="nut-xuat">Xuất Excel</button></a>
-            <!-- <button class="ec-ec"  id="filterButton">Bộ lọc</button> -->
         </div>
         
         <form action="" method="GET" style="display: inline-block;">
@@ -113,7 +112,7 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
         </form>
     </div>
     <!-- Pop-up 1 -->
-    <!-- <div id="popup1" class="popup">
+    <div id="popup1" class="popup">
       <div class="popup-content">
         <span class="close" id="closePopup1">&times;</span>
         <h2>Bộ lọc</h2>
@@ -186,10 +185,10 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
         </div>
         <button class="ec-ec"  id="applyPopup1" class="applyPopup1">Áp dụng</button>
       </div>
-    </div> -->
+    </div>
 
     <!-- Pop-up 2 -->
-    <!-- <div id="popup2" class="popup">
+    <div id="popup2" class="popup">
       <div class="popup-content">
         <span class="close" id="closePopup2">&times;</span>
         <h2>Chọn các cột muốn hiển thị, tối đa 8 cột</h2>
@@ -310,7 +309,7 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
         </div>
         <button class="ec-ec" id="applyPopup2">Áp dụng</button>
       </div>
-    </div> -->
+    </div>
 
     <div class="content">
     <div class="table-container" style="max-height: 500px; overflow: auto;">
@@ -504,95 +503,7 @@ while ($row = mysqli_fetch_assoc($xiNghiepResult)) {
     });
     
     </script>  
-    <!-- <script>
-    var selectedValuesPopup2 = {};
-
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("applyPopup2").addEventListener("click", function() {
-            var checkedCountPopup2 = 0;
-            var checkboxesPopup2 = document.querySelectorAll("#popup2 input[type='checkbox']");
-            checkboxesPopup2.forEach(function(checkbox) {
-                if (checkbox.checked) {
-                    checkedCountPopup2++;
-                }
-            });
-
-            if (checkedCountPopup2 > 8) {
-                alert("Chỉ được chọn tối đa 8 cột!");
-                return;
-            }
-
-            checkboxesPopup2.forEach(function(checkbox) {
-                if (checkbox.checked) {
-                    selectedValuesPopup2[checkbox.id] = true;
-                }
-            });
-
-            document.getElementById("popup2").style.display = "none";
-        });
-
-        document.getElementById("applyPopup1").addEventListener("click", function() {
-            var selectedValuesPopup1 = {};
-
-if (document.getElementById("checkNgayNhapHoc").checked) {
-    var tuNgayNhapHoc = document.getElementById("tuNgayNhapHoc").value;
-    var denNgayNhapHoc = document.getElementById("denNgayNhapHoc").value;
-    var ngayNhapHocValue = tuNgayNhapHoc + " đến " + denNgayNhapHoc;
-    selectedValuesPopup1["ngayNhapHoc"] = ngayNhapHocValue;
-}
-
-if (document.getElementById("checkNgayThiTuyen").checked) {
-    var tuNgayThiTuyen = document.getElementById("tuNgayThiTuyen").value;
-    var denNgayThiTuyen = document.getElementById("denNgayThiTuyen").value;
-    var ngayThiTuyenValue = tuNgayThiTuyen + " đến " + denNgayThiTuyen;
-    selectedValuesPopup1["ngayThiTuyen"] = ngayThiTuyenValue;
-}
-
-if (document.getElementById("checkNgaySinh").checked) {
-    var tuNgaySinh = document.getElementById("tuNgaySinh").value;
-    var denNgaySinh = document.getElementById("denNgaySinh").value;
-    var ngaySinhValue = tuNgaySinh + " đến " + denNgaySinh;
-    selectedValuesPopup1["ngaySinh"] = ngaySinhValue;
-}
-
-if (document.getElementById("checkNgayXuatCanh").checked) {
-    var tuNgayXuatCanh = document.getElementById("tuNgayXuatCanh").value;
-    var denNgayXuatCanh = document.getElementById("denNgayXuatCanh").value;
-    var ngayXuatCanhValue = tuNgayXuatCanh + " đến " + denNgayXuatCanh;
-    selectedValuesPopup1["ngayXuatCanh"] = ngayXuatCanhValue;
-}
-
-if (document.getElementById("checkDonHang").checked) {
-    var dropdownDonHangValue = document.getElementById("dropdownDonHang").value;
-    selectedValuesPopup1["donHang"] = dropdownDonHangValue;
-}
-
-if (document.getElementById("checkXiNghiep").checked) {
-    var dropdownXiNghiepValue = document.getElementById("dropdownXiNghiep").value;
-    selectedValuesPopup1["xiNghiep"] = dropdownXiNghiepValue;
-}
-
-            var formData = new FormData();
-            formData.append("popup1_data", JSON.stringify(selectedValuesPopup1));
-            formData.append("popup2_data", JSON.stringify(selectedValuesPopup2));
-
-            $.ajax({
-                url: "modules/hocvien/process.php",
-                type: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    console.error(status, error);
-                }
-            });
-        });
-    });
-</script> -->
-
+    
 </body>
 </html>
 <?php } ?>

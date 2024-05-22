@@ -319,7 +319,7 @@
                                                     <div class="form-group row"><label for="ngay_thi" class="col-sm-9">Ngày
                                                             thi tuyển</label>
                                                         <div class="col-sm-12">
-                                                        <input type="date" class="form-control" id="ngay_thi" name="ngay_thi" required>
+                                                        <input type="date" class="form-control" id="ngay_thi" name="ngay_thi">
                                                         </div>
                                                     </div>
                                                 </div>

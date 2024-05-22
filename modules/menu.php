@@ -103,10 +103,10 @@ $total_enterprise = $row_enterprise['total_enterprise'];
       </div>
     </div>
     
-    <div id="chart-wrapper">
-    <div id="chart-container" style="text-align: center;">
+    <div id="chart-wrapper" style="height: 400px;">
+    <div id="chart-container" style="text-align: center; height: 400px;">
       <h5>Số lượng tuyển học viên theo tháng</h5>
-      <div id="myfirstchart" style="height: 250px;"></div>
+      <div id="myfirstchart" style="height: 85%;"></div>
   </div>
   </div>
   
@@ -123,36 +123,6 @@ $total_enterprise = $row_enterprise['total_enterprise'];
         ykeys: ['value'],
         labels: ['Số lượng học viên'],
         parseTime: false // Không cần phân tích ngày tháng
-    });
-</script>
-  <script>
-    const ctx = document.getElementById('enrollmentChart').getContext('2d');
-    const enrollmentChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['06/2023', '07/2023', '08/2023', '09/2023', '10/2023', '11/2023', '12/2023', '01/2024', '02/2024', '03/2024', '04/2024', '05/2024'],
-            datasets: [{
-                label: 'Số lượng tuyển thực tập sinh theo tháng',
-                data: [30, 45, 35, 50, 65, 60, 70, 80, 75, 90, 100, 95],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
-                fill: true, // This makes it an area chart
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Số lượng tuyển'
-                    },
-                    ticks: {
-                        stepSize: 10
-                    }
-                }
-            }
-        }
     });
 </script>
 

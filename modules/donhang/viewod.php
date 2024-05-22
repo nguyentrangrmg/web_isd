@@ -44,7 +44,6 @@
     <div style="float: right;">
         <a href="?function=themdh" ><button class="nut-them">Tạo mới</button></a>
         <a href="#"><button class="nut-xoa">Xóa</button></a>
-        <a href="#" onclick="xuatfile()"><button class="nut-xuat">Xuất Excel</button></a>  
         <input type="text" class="search-input" placeholder="Search..." style="vertical-align: middle;">
         <i class="fas fa-search search-icon" style="vertical-align: middle;"></i>
     </div>
