@@ -1,0 +1,515 @@
+/* Header */
+
+.lock {
+  position: fixed;
+  margin-top: -150px;
+  background-color: white;
+  height: 150px;
+  z-index: 10;
+}
+
+.header {
+  height: 50px;
+  width: 100%;
+  background-color: #fff;
+  color: #374375;
+  text-align: center;
+  line-height: 40px;
+  box-shadow: 2px 2px 2px #d5d5d5;
+  z-index: 2;
+}
+
+.header a {
+  color: #374375;
+  text-decoration: none;
+  margin-right: 750px;
+  font-size: 20px;
+  font-weight: bolder;
+  z-index: 2;
+}
+
+.student-type {
+  margin-top: 10px;
+  margin-left: 270px;
+  padding-right: 30px;
+  z-index: 2;
+}
+
+.student-type a {
+  display: inline-block;
+  color: #9f9f9f;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 10px 10px 10px;
+  margin-left: 30px;
+  z-index: 2;
+}
+
+.student-type a.active1 {
+  color: #0b2c4d;
+  z-index: 2;
+}
+
+.student-type :hover {
+  background-color: #e5e5e5;
+  padding: 10px 10px 10px 10px;
+  z-index: 2;
+}
+
+.straight-line {
+  width: 1165px;
+  margin-left: 300px;
+  margin-top: 0px;
+  z-index: 2;
+}
+
+/* Style for the search container */
+.search-container {
+  width: 200px;
+  margin-right: 50px;
+  padding-left: 50px;
+  z-index: 2;
+}
+
+/* Style for the search input */
+.search-input {
+  width: 100%;
+  padding: 5px 30px 5px 5px;
+  /* Add padding for the search icon */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  /* Add border radius for curved border */
+  outline: none;
+  z-index: 2;
+}
+
+/* Style for the search icon */
+.search-icon {
+  position: absolute;
+  top: 125px;
+  right: 80px;
+  transform: translateY(-50%);
+  color: #666;
+  z-index: 2;
+}
+
+.sub-header {
+  display: flex;
+  height: 25px;
+  margin-left: 950px;
+  z-index: 2;
+}
+
+.sub-header a {
+  padding-top: 6px;
+  padding-right: 30px;
+  color: #9f9f9f;
+  font-weight: bold;
+  font-size: 15px;
+  z-index: 2;
+}
+
+.sub-header a:hover {
+  color: #0b2c4d;
+  z-index: 2;
+}
+
+.sub-header .xoa:hover {
+  color: #e30606;
+  z-index: 2;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* Sidebar */
+.top-right-icon i {
+  display: inline-block;
+  position: absolute;
+  font-size: 25px;
+  margin-left: 1250px;
+  margin-top: 10px;
+  color: #0b2c4d;
+}
+
+.top-right-icon i#search-header {
+  padding-right: 100px;
+}
+
+.top-right-icon i#notification {
+  font-size: 25px;
+  margin-left: 1320px;
+}
+
+.top-right-icon i#user-icon {
+  font-size: 25px;
+  margin-left: 1385px;
+}
+
+.sidebar img {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin-left: 60px;
+}
+
+#icon-baocao {
+  position: absolute;
+  color: #fff;
+  margin-top: 17px;
+  margin-left: 32px;
+  font-size: 28px;
+}
+
+#icon-hocvien {
+  position: absolute;
+  color: #fff;
+  margin-top: 17px;
+  margin-left: 32px;
+  font-size: 28px;
+}
+
+#icon-donhang {
+  position: absolute;
+  color: #fff;
+  margin-top: 17px;
+  margin-left: 32px;
+  font-size: 28px;
+}
+
+#icon-xinghiep {
+  position: absolute;
+  color: #fff;
+  margin-top: 17px;
+  margin-left: 32px;
+  font-size: 28px;
+}
+
+.sidebar {
+  height: 100%;
+  width: 250px;
+  /* Adjust the width as needed */
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #374375;
+  padding-top: 20px;
+}
+
+/* Style for the links in the side bar */
+.sidebar a {
+  padding: 20px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  text-align: center;
+}
+
+/* Change the color of links on hover */
+.sidebar a:hover {
+  background-color: #393a62;
+}
+
+.sidebar a.active-hocvien {
+  color: #dfaea1;
+}
+
+.sidebar #icon-hocvien {
+  color: #dfaea1;
+}
+
+/*basic information */
+
+.in4-below-img {
+  margin-left: 1150px;
+  margin-top: 50px;
+  position: fixed;
+  color: #0b2c4d;
+  font-size: 15px;
+}
+
+.in4-below-img div.ma-dh-title {
+  font-weight: bolder;
+  padding-bottom: 10px;
+}
+
+.in4-below-img div.ten-dh {
+  padding-bottom: 10px;
+}
+
+.in4-below-img div.ma-dh {
+  padding-left: 50px;
+  display: flex;
+  position: fixed;
+  margin-left: 100px;
+}
+
+.in4-below-img div.trang-thai-title {
+  font-weight: bolder;
+  padding-bottom: 10px;
+}
+
+/* Order's information display */
+.boxes {
+  margin-top: 150px;
+}
+
+.background-container {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 800px;
+  margin-left: 300px;
+  margin-bottom: 30px;
+}
+
+.info-container {
+  max-width: 800px;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+/* Hide content when not expanded */
+.info-container:not(.expanded) .info-content {
+  max-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Title styling */
+.info-title {
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #0b2c4d;
+}
+
+/* Down arrow styling */
+.down-arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+  margin-left: 5px;
+  transition: transform 0.3s ease-out;
+  /* Smooth transition animation */
+}
+
+/* Rotate down arrow when content is expanded */
+.expanded .down-arrow {
+  transform: rotate(180deg);
+}
+
+/* Individual item styling */
+.info-item {
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding: 8px 0;
+}
+/* Individual item styling */
+.info-item-xn {
+  display: block;
+  align-items: left;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding: 8px 0;
+}
+/* Individual item styling */
+.info-item-yc {
+  display: block;
+  align-items: left;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding: 8px 0;
+}
+/* Individual item styling */
+.info-item-muc-luong {
+  display: block;
+  align-items: left;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding: 8px 0;
+}
+/* Individual item styling */
+.info-item-tg-lamvc {
+  display: block;
+  align-items: left;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding: 8px 0;
+}
+
+/* Field name styling */
+.field-name {
+  flex: 1;
+  color: #0b2c4d;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+/* Information styling */
+.information {
+  flex: 2;
+  padding: 8px;
+  display: flex;
+  justify-content: left;
+}
+.information-xn {
+  padding: 8px;
+  display: flex;
+  margin-left: 260px;
+  margin-top: 5px;
+}
+
+/* Field name styling */
+.field-name-sub {
+  flex: 1;
+  color: #0b2c4d;
+  display: inline;
+  margin-left: 10px;
+  padding-bottom: 10px;
+}
+
+/* Information styling */
+.information-sub {
+  flex: 2;
+  padding-left: 50px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-ten-xn {
+  flex: 2;
+  padding-left: 128px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-gd {
+  flex: 2;
+  padding-left: 149px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-sdt {
+  flex: 2;
+  padding-left: 130px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-dc {
+  flex: 2;
+  padding-left: 165px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-nam {
+  flex: 2;
+  padding-left: 175px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-nu {
+  flex: 2;
+  padding-left: 184px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-luongcb {
+  flex: 2;
+  padding-left: 175px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-luongtt {
+  flex: 2;
+  padding-left: 184px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-lamvc-ngay {
+  flex: 2;
+  padding-left: 143px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-lamvc-tuan {
+  flex: 2;
+  padding-left: 145px;
+  display: inline;
+  justify-content: left;
+}
+/* Information styling */
+.information-sub-lamvc-nghi {
+  flex: 2;
+  padding-left: 55px;
+  display: inline;
+  justify-content: left;
+}
+
+.sub-info {
+  display: block; /* Adjust as needed */
+  padding-bottom: 20px;
+}
+
+.sub-field {
+  display: block;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+.info-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-content-wrapper {
+  border: 1px solid #9f9f9f;
+  border-radius: 5px;
+  background-color: white;
+}
+
+/* table */
+table {
+  padding-top: 10px;
+}
+.table th,
+td {
+  padding: 10px;
+  padding-right: 53px;
+  text-align: left;
+}
+
+table thead.head-table {
+  background-color: #f1f3f9;
+  text-align: left;
+  padding: 20px;
+}
+
+/* Apply background color to even rows */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Apply background color to odd rows (optional) */
+tr:nth-child(odd) {
+  background-color: #ffffff; /* You can set it to transparent if you want */
+}

@@ -4,30 +4,48 @@
     // Kiểm tra nếu có yêu cầu post từ form chỉnh sửa
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['mhv'])) {
         // Lấy thông tin từ form
-        $mhv = $_GET['mhv'];
+        $mhv=$_GET['mhv'];
         $ho_ten = $_POST['ho_ten'];
         $ngay_sinh = $_POST['ngay_sinh'];
         $sdt = $_POST['sdt'];
+        $gioi_tinh = $_POST['gioi_tinh'];
+
         $ho_chieu = isset($_POST['ho_chieu']) ? $_POST['ho_chieu'] : null;
-        $CCCD = isset($_POST['CCCD']) ? $_POST['CCCD'] : null;
-        $gioi_tinh = isset($_POST['gioi_tinh']) ? $_POST['gioi_tinh'] : null;
+        $ngay_cap_hc = isset($_POST['ngay_cap_hc']) ? $_POST['ngay_cap_hc'] : null;
+        $noi_cap_hc = isset($_POST['noi_cap_hc']) ? $_POST['noi_cap_hc'] : null;
+        $cccd = isset($_POST['cccd']) ? $_POST['cccd'] : null;
+        $ngay_cap_cccd = isset($_POST['ngay_cap_cccd']) ? $_POST['ngay_cap_cccd'] : null;
+        $noi_cap_cccd = isset($_POST['noi_cap_cccd']) ? $_POST['noi_cap_cccd'] : null;
         $ho_khau = isset($_POST['ho_khau']) ? $_POST['ho_khau'] : null;
-        $que_quan = isset($_POST['que_quan']) ? $_POST['que_quan'] : null;
+        $dia_chi = isset($_POST['dia_chi']) ? $_POST['dia_chi'] : null;
+
         $ngay_thi = isset($_POST['ngay_thi']) ? $_POST['ngay_thi'] : null;
-        $co_quan = isset($_POST['co_quan']) ? $_POST['co_quan'] : null;
         $ngay_DKXC = isset($_POST['ngay_DKXC']) ? $_POST['ngay_DKXC'] : null;
         $ngayXC = isset($_POST['ngayXC']) ? $_POST['ngayXC'] : null;
-        $ng_bao_lanh = isset($_POST['ng_bao_lanh']) ? $_POST['ng_bao_lanh'] : null;
         $dukien_venuoc = isset($_POST['dukien_venuoc']) ? $_POST['dukien_venuoc'] : null;
-        $nganh_nghe = isset($_POST['nganh_nghe']) ? $_POST['nganh_nghe'] : null;
-        $xi_nghiep = isset($_POST['xi_nghiep']) ? $_POST['xi_nghiep'] : null;
-        $nghiep_doan = isset($_POST['nghiep_doan']) ? $_POST['nghiep_doan'] : null;
-        $noi_lam_viec = isset($_POST['noi_lam_viec']) ? $_POST['noi_lam_viec'] : null;
+
+        $xn1 = $_POST['xn1'];
+        $thoi_gian_ld1 = $_POST['thoi_gian_ld1'];
+        $thoi_gian_ld2 = $_POST['thoi_gian_ld2'];
+        $xn2 = $_POST['xn2'];
+        $thoi_gian_ld3 = $_POST['thoi_gian_ld3'];
+        $thoi_gian_ld4 = $_POST['thoi_gian_ld4'];
+
+        $ls_lan1 = "Xí nghiệp $xn1, từ $thoi_gian_ld1 đến $thoi_gian_ld2";
+        $ls_lan2 = "Xí nghiệp $xn2, từ $thoi_gian_ld3 đến $thoi_gian_ld4";
+        $lich_su_xk = $ls_lan1 . " / " . $ls_lan2;
+
         $note = isset($_POST['note']) ? $_POST['note'] : null;
-        $type_hv = isset($_POST['type_hv']) ? $_POST['type_hv'] : null;
-        $ngay_nhaphoc = isset($_POST['ngay_nhaphoc']) ? $_POST['ngay_nhaphoc'] : null;
-        $order_name = isset($_POST['order_name']) ? $_POST['order_name'] : null;
+        $ngay_nhaphoc = $_POST['ngay_nhaphoc'];
         $status = $_POST['status'];
+
+        //bao lanh
+        $ten = $_POST['ten'];
+        $dob = $_POST['dob'];
+        $sdt_bl = $_POST['sdt_bl'];
+        $ho_khau_bl = $_POST['ho_khau_bl'];
+        $dia_chi_bl = $_POST['dia_chi_bl'];
+        $quan_he = $_POST['quan_he'];
 
         $sql_select_old_image = "SELECT file_anh FROM student WHERE mhv='$mhv'";
         $result_old_image = mysqli_query($mysqli, $sql_select_old_image);
@@ -65,34 +83,42 @@
             }
         }
         // Cập nhật thông tin học viên trong CSDL
+        
         $sql = "UPDATE student SET 
-            ng_bao_lanh='$ng_bao_lanh',
-            gioi_tinh='$gioi_tinh',
-            ho_khau='$ho_khau',
-            ho_ten='$ho_ten',
-            ngay_sinh='$ngay_sinh',
-            sdt='$sdt',
-            ho_chieu='$ho_chieu',
-            CCCD='$CCCD',
-            que_quan='$que_quan',
-            ngay_thi='$ngay_thi',
-            co_quan='$co_quan',
-            ngay_DKXC='$ngay_DKXC',
-            ngayXC='$ngayXC',
-            dukien_venuoc='$dukien_venuoc',
-            nganh_nghe='$nganh_nghe',
-            xi_nghiep='$xi_nghiep',
-            nghiep_doan='$nghiep_doan',
-            noi_lam_viec='$noi_lam_viec',
-            note='$note',
-            type_hv='$type_hv',
-            ngay_nhaphoc='$ngay_nhaphoc',
-            order_name='$order_name',
-            status='$status',
-            file_anh='$anh_path'
-            WHERE mhv='$mhv'";
+        ho_ten = '$ho_ten', 
+        ngay_sinh = '$ngay_sinh', 
+        gioi_tinh = '$gioi_tinh', 
+        sdt = '$sdt', 
+        ho_chieu = '$ho_chieu', 
+        ngay_cap_hc = '$ngay_cap_hc', 
+        noi_cap_hc = '$noi_cap_hc', 
+        CCCD = '$cccd', 
+        ngay_cap_cccd = '$ngay_cap_cccd', 
+        ho_khau = '$ho_khau', 
+        dia_chi = '$dia_chi', 
+        ngay_thi = '$ngay_thi', 
+        ngay_DKXC = '$ngay_DKXC', 
+        ngayXC = '$ngayXC', 
+        dukien_venuoc = '$dukien_venuoc', 
+        noi_cap_cccd = '$noi_cap_cccd', 
+        note = '$note', 
+        ngay_nhaphoc = '$ngay_nhaphoc', 
+        status = '$status', 
+        file_anh = '$anh_path', 
+        lich_su_xk = '$lich_su_xk' 
+        WHERE mhv = '$mhv'";
+    
 
-        if (mysqli_query($mysqli, $sql)) {
+        $sql1="UPDATE baolanh SET 
+        ten='$ten',
+        dob='$dob',
+        sdt_bl='$sdt_bl',
+        ho_khau_bl='$ho_khau_bl',
+        dia_chi_bl='$dia_chi_bl',
+        quan_he='$quan_he'
+        WHERE mhv='$mhv'";
+
+        if ((mysqli_query($mysqli, $sql))&& (mysqli_query($mysqli, $sql1))) {
             echo "Cập nhật thông tin thành công.";
         } else {
             echo "Lỗi: " . mysqli_error($mysqli);

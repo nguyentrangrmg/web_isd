@@ -2,21 +2,40 @@
     session_start();
     include "config.php";
     if(isset($_POST['login'])){
-        $user=$_POST["uname"];
-        $pass=$_POST["psw"];
-        $sql ="SELECT * FROM user WHERE user='".$user."' AND pass='".$pass."'";
-        $row = mysqli_query($mysqli,$sql);
-        $count = mysqli_num_rows($row);
-        if($count>0){
-            $_SESSION['login']= $user;
-            header("Location:index.php");
-        }else{
-          $_SESSION['error'] = "Sai tên đăng nhập hoặc mật khẩu.";
-          header("Location: login.php");
-          exit();
+        $user = $_POST["uname"];
+        $pass = $_POST["psw"];
+        $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+
+        // Truy vấn mật khẩu đã được mã hóa từ cơ sở dữ liệu
+        $sql = "SELECT * FROM user WHERE user='".$user."'";
+        $result = mysqli_query($mysqli, $sql);
+        
+        if(mysqli_num_rows($result) == 1){
+            $row = mysqli_fetch_assoc($result);
+            $db_hashed_pass = $row['pass'];
+
+            // So sánh mật khẩu đã được mã hóa
+            if(password_verify($pass, $db_hashed_pass)){
+              if(isset($_POST['remember'])){
+                setcookie('user',$user,time()+(86400*7));
+                setcookie('pass',$pass,time()+(86400*7));
+              }
+                $_SESSION['login'] = $user;
+                header("Location:index.php");
+                exit();
+            } else {
+                $_SESSION['error'] = "Sai tên đăng nhập hoặc mật khẩu.";
+                header("Location: login.php");
+                exit();
+            }
+        } else {
+            $_SESSION['error'] = "Sai tên đăng nhập hoặc mật khẩu.";
+            header("Location: login.php");
+            exit();
         }
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -40,19 +59,19 @@
             <form id="formAuthentication" class="mb-3" action="login.php" method="post">
               <div class="mb-3">
                 <label for="email" class="form-label"> Tài khoản</label>
-                <input type="text" class="form-control" id="email" name="uname" placeholder="Nhập tài khoản người dùng" autofocus maxlength="20">
+                <input type="text" value="<?php if(isset($_COOKIE['user'])) {echo $_COOKIE['user'];} ?>" class="form-control" id="email" name="uname" placeholder="Nhập tài khoản người dùng" autofocus maxlength="20">
               </div>
               <div class="mb-3 form-password-toggle">
                 <div class="d-flex justify-content-between">
                   <label class="form-label" for="password">Mật khẩu</label>
                 </div>
                 <div class="input-group input-group-merge">
-                  <input type="password" id="password" class="form-control" name="psw" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" maxlength="20">
+                  <input type="password" id="password" value="<?php if(isset($_COOKIE['pass'])) {echo $_COOKIE['pass'];} ?>" class="form-control" name="psw" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" maxlength="20">
                 </div>
               </div>
               <div class="d-flex justify-content-between align-items-center mb-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="formRemember"/>
+                    <input class="form-check-input" name="remember" type="checkbox" <?php if(isset($_COOKIE['user'])) {echo 'checked';} ?> id="formRemember"/>
                     <label class="form-check-label" for="formRemember">Nhớ mật khẩu</label>
                 </div>
                 <a href="forgot-password.php" class="ml-auto">Quên mật khẩu?</a>
@@ -61,6 +80,9 @@
               class="d-flex justify-content-between align-items-center mb-4 extra-spacing">
               </div>  
               <?php 
+              echo "Tài khoản: admin";
+              echo "<br>";
+              echo "Mật khẩu: haylam";
               // Kiểm tra nếu có thông báo lỗi, hiển thị và sau đó xóa biến session để khi F5 lại trang sẽ k hiển thị lại lỗi
               if(isset($_SESSION['error'])){
               echo "<p style='color:red; text-align: center'>".$_SESSION['error']."</p>";
@@ -77,31 +99,4 @@
     </div>
   </div>
 </body>
-<!-- <body>
-<div class="boxcenter">
-    <h2 style="text-align: center;">Đăng Nhập Admin</h2>
-    <form action="login.php" method="post">
-      <div class="imgcontainer">
-        <img src="images/tvclogo.png" alt="Avatar" class="avatar">
-      </div>
-    
-      <div class="container">
-        <label for="uname"><b>Tên đăng nhập</b></label>
-        <input type="text" placeholder="Tên đăng nhập" name="uname" required>
-    
-        <label for="psw"><b>Mật khẩu</b></label>
-        <input type="password" placeholder="Mật khẩu" name="psw" required>
-        <?php 
-            // Kiểm tra nếu có thông báo lỗi, hiển thị và sau đó xóa biến session để khi F5 lại trang sẽ k hiển thị lại lỗi
-            if(isset($_SESSION['error'])){
-              echo "<p style='color:red; text-align: center'>".$_SESSION['error']."</p>";
-              unset($_SESSION['error']);
-          }
-        ?>
-        <button type="submit" name="login">Đăng Nhập</button>
-      </div>
-    </form>
-    
-</div>
-</body> -->
 </html>

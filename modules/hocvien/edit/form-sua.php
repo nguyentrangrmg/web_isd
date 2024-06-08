@@ -12,13 +12,37 @@
         require 'config.php';
         if(isset($_GET['edit'])) {
             $mhv = $_GET['edit'];
-            $query = "SELECT * FROM student WHERE mhv='$mhv'";
+            $mhv_prefix = substr($mhv, 0, 2);
+            $query = "SELECT student.*, jporder.* 
+              FROM student 
+              LEFT JOIN jporder ON student.mdh = jporder.mdh 
+              WHERE student.mhv = '$mhv'";
             $query2 = "SELECT * FROM baolanh WHERE mhv='$mhv'";
             $result = mysqli_query($mysqli, $query);
             $re=mysqli_query($mysqli,$query2);
         if((mysqli_num_rows($result) > 0) && mysqli_num_rows($re)){
             $row = mysqli_fetch_assoc($result);
             $row2 = mysqli_fetch_assoc($re);
+            $lich_su_xk = isset($row['lich_su_xk']) ? $row['lich_su_xk'] : '';
+        $parts = explode('/', $lich_su_xk);
+        $xn1 = $thoi_gian_ld1 = $thoi_gian_ld2 = $xn2 = $thoi_gian_ld3 = $thoi_gian_ld4 = '';
+
+        if (isset($parts[0])) {
+            list($xn1, $time1) = explode(',', $parts[0]);
+            $xn1 = trim(str_replace('Xí nghiệp', '', $xn1)); // Remove 'Xí nghiệp'
+            preg_match('/từ(.*?)đến(.*)/', $time1, $matches1);
+            if (isset($matches1[1])) $thoi_gian_ld1 = trim($matches1[1]);
+            if (isset($matches1[2])) $thoi_gian_ld2 = trim($matches1[2]);
+        }
+
+        if (isset($parts[1])) {
+            list($xn2, $time2) = explode(',', $parts[1]);
+            $xn2 = trim(str_replace('Xí nghiệp', '', $xn2)); // Remove 'Xí nghiệp'
+            preg_match('/từ(.*?)đến(.*)/', $time2, $matches2);
+            if (isset($matches2[1])) $thoi_gian_ld3 = trim($matches2[1]);
+            if (isset($matches2[2])) $thoi_gian_ld4 = trim($matches2[2]);
+        }
+        
         ?>
     <a>
       <?php if (isset($_GET['error_message'])) {
@@ -30,13 +54,13 @@
   <div class="loai_hv">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link <?php if ($row['type_hv'] == '1') echo 'active'; ?>" href="#" style="text-decoration: none;color:black" >Thực tập sinh số 1</a>
+                <a class="nav-link <?php if ($mhv_prefix == 'T1') echo 'active'; ?>" href="#" style="text-decoration: none;color:black" >Thực tập sinh số 1</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($row['type_hv'] == '3') echo 'active'; ?>" href="#" style="text-decoration: none;color:black" >Thực tập sinh số 3</a>
+                <a class="nav-link <?php if ($mhv_prefix == 'T3') echo 'active'; ?>" href="#" style="text-decoration: none;color:black" >Thực tập sinh số 3</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($row['type_hv'] == 'dd') echo 'active'; ?>" href="#" style="text-decoration: none;color:black" >Kỹ năng đặc định</a>
+                <a class="nav-link <?php if ($mhv_prefix == 'DD') echo 'active'; ?>" href="#" style="text-decoration: none;color:black" >Kỹ năng đặc định</a>
             </li>
         </ul>
     </div>
@@ -59,158 +83,18 @@
     
     </a>
     <form action="modules/hocvien/edit/edit.php?edit=sua&mhv=<?php echo $row['mhv']; ?>" method="POST" style="width: 1100px;" enctype="multipart/form-data">
-    <!-- <div class="row">
-        <div class="col-md-4">
-            <label for="ho_ten" class="form-label">Mã học viên:</label>
-            <input name="mhv" class="form-control" id="mhv" value="<?php echo $row['mhv']; ?>" disabled>
-        </div>
-        <div class="col-md-4">
-              <label for="type_hv" class="form-label">Kiểu học viên:</label>
-              <select class="form-select" id="type_hv" name="type_hv" style="width:180px"disabled>
-                    <option value="1" <?php if ($row['type_hv'] == '1') echo 'selected'; ?>>Thực tập sinh số 1</option>
-                    <option value="3" <?php if ($row['type_hv'] == '3') echo 'selected'; ?>>Thực tập sinh số 3</option>
-                    <option value="dd" <?php if ($row['type_hv'] == 'dd') echo 'selected'; ?>>Kỹ năng đặc định</option>
-              </select>
-            </div>
-        <div class="col-md-4">
-            <label for="file_anh" class="form-label">Chọn file ảnh học viên:</label>
-            <input type="file" class="form-control" id="file_anh" name="file_anh" accept="image/*">
-        </div>
-        <div class="col-md-4">
-        <label for="file_anh" class="form-label"></label>
-              <p><?php
-              $anh_path = $row['file_anh'];           
-              $target_dir = "modules/hocvien/anhhv/";
-              $target_file = $target_dir.$anh_path;
-               echo "<img src='".$target_file."' width='80px'>" ?></p>
-        </div>
-        <div class="col-md-4">
-            <label for="ng_bao_lanh" class="form-label">Người bảo lãnh:</label>
-            <input type="text" class="form-control" id="ng_bao_lanh" name="ng_bao_lanh">
-        </div>
-        <div class="col-md-4">
-            <label for="gioi_tinh" class="form-label">Giới tính</label>
-            <input type="text" class="form-control" id="gioi_tinh" name="gioi_tinh" maxlength="10">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ho_ten" class="form-label">Họ và tên:</label>
-            <input type="text" class="form-control" id="ho_ten" name="ho_ten" value="<?php echo $row['ho_ten']; ?>">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ngay_sinh" class="form-label">Ngày sinh:</label>
-            <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" value="<?php echo $row['ngay_sinh']; ?>">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="sdt" class="form-label">Số điện thoại:</label>
-            <input type="text" class="form-control" id="sdt" name="sdt" value="<?php echo $row['sdt']; ?>">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ho_chieu" class="form-label">Hộ chiếu:</label>
-            <input type="text" class="form-control" id="ho_chieu" name="ho_chieu" value="<?php echo $row['ho_chieu']; ?>">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ngay_cap_hc" class="form-label">Ngày cấp Hộ chiếu:</label>
-            <input type="date" class="form-control" id="ngay_cap_hc" name="ngay_cap_hc">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="noi_cap_hc" class="form-label">Nơi cấp Hộ chiếu:</label>
-            <input type="text" class="form-control" id="noi_cap_hc" name="noi_cap_hc">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="CCCD" class="form-label">Căn cước công dân:</label>
-            <input type="text" class="form-control" id="CCCD" name="CCCD" value="<?php echo $row['CCCD']; ?>">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ngay_cap_cccd" class="form-label">Ngày cấp CCCD:</label>
-            <input type="date" class="form-control" id="ngay_cap_cccd" name="ngay_cap_cccd">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="noi_cap_cccd" class="form-label">Nơi cấp CCCD:</label>
-            <input type="text" class="form-control" id="noi_cap_cccd" name="noi_cap_cccd">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="ho_khau" class="form-label">Hộ khẩu:</label>
-            <input type="text" class="form-control" id="ho_khau" name="ho_khau">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="mb-3">
-            <label for="dia_chi" class="form-label">Địa chỉ thường trú:</label>
-            <input type="text" class="form-control" id="dia_chi" name="dia_chi">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="row">
-            <div class="col-md-5">
-              <label for="status" class="form-label">Trạng thái:</label>
-              <select class="form-select" id="status" name="status" style="width:130px">
-                <option value="Đang đào tạo" <?php if ($row['status'] == 'Đang đào tạo') echo 'selected'; ?>>Đang đào tạo</option>
-                <option value="Đang làm việc" <?php if ($row['status'] == 'Đang làm việc') echo 'selected'; ?>>Đang làm việc</option>
-                <option value="Đã về nước" <?php if ($row['status'] == 'Đã về nước') echo 'selected'; ?>>Đã về nước</option>
-              </select>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-    <div class="col-md-4">
-        <div class="mb-3">
-            <label for="ngay_thi" class="form-label">Ngày thi tuyển:</label>
-            <input type="date" class="form-control" id="ngay_thi" name="ngay_thi" value="<?php echo $row['ngay_thi']; ?>">
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="mb-3">
-            <label for="ngay_nhaphoc" class="form-label">Ngày nhập học:</label>
-            <input type="date" class="form-control" id="ngay_nhaphoc" name="ngay_nhaphoc" value="<?php echo $row['ngay_nhaphoc']; ?>">
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="mb-3">
-            <label for="order_name" class="form-label">Tên đơn hàng:</label>
-            <input type="text" class="form-control" id="order_name" name="order_name" value="<?php echo $row['order_name']; ?>">
-        </div>
-    </div>
-    </div> -->
+    
     <div class="row">
     <div class="col-md-4">
             <label for="ho_ten" class="form-label">Mã học viên:</label>
-            <input name="mhv" class="form-control" id="mhv" value="<?php echo $row['mhv']; ?>" disabled>
+            <input name="mhv" class="form-control" id="mhv" value="<?php echo $row['mhv']; ?>" readonly>
         </div>
         <div class="col-md-4">
               <label for="type_hv" class="form-label">Kiểu học viên:</label>
               <select class="form-select" id="type_hv" name="type_hv" disabled>
-                    <option value="1" <?php if ($row['type_hv'] == '1') echo 'selected'; ?>>Thực tập sinh số 1</option>
-                    <option value="3" <?php if ($row['type_hv'] == '3') echo 'selected'; ?>>Thực tập sinh số 3</option>
-                    <option value="dd" <?php if ($row['type_hv'] == 'dd') echo 'selected'; ?>>Kỹ năng đặc định</option>
+                    <option value="1" <?php if ($mhv_prefix == 'T1') echo 'selected'; ?>>Thực tập sinh số 1</option>
+                    <option value="3" <?php if ($mhv_prefix == 'T3') echo 'selected'; ?>>Thực tập sinh số 3</option>
+                    <option value="dd" <?php if ($mhv_prefix == 'DD') echo 'selected'; ?>>Kỹ năng đặc định</option>
               </select>
             </div>
       </div>
@@ -353,7 +237,7 @@
                                         class="card-description"
                                         style="font-style: italic;">(Ảnh 4x6, kích thước tối đa
                                         50MB)</span></label>
-                                        <div class="anh"><input type="file" class="form-control" name="file_anh" id="file_anh" required></div>
+                                        <div class="anh"><input type="file" class="form-control" name="file_anh" id="file_anh"></div>
                             </div>
                         </div>
                     </div>
@@ -383,6 +267,7 @@
                 </div>
             </div>
         </div>
+        <br>
                             <!-- Chưa link form -->
                             <div class="col-14 grid-margin">
                                 <div class="card">
@@ -449,6 +334,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <!-- Bên dưới dùng php nhưng mà lười code quá -->
                             <div class="col-14 grid-margin">
                                 <div class="card">
@@ -458,7 +344,7 @@
                                                 <div class="col-md-4 col-form-label">
                                                     <div class="form-group row ">
                                                         <label for="order_name" class="form-label">Tên đơn hàng:</label>
-                                                        <input style="margin-left:10px" type="text" value="<?php echo $row['order_name'] ?>" class="form-control" id="order_name" name="order_name" maxlength="20" disabled>
+                                                        <input style="margin-left:10px" type="text" value="<?php echo $row['ten_dh'] ?>" class="form-control" id="order_name" name="order_name" maxlength="20" disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -467,7 +353,7 @@
                                                     <div class="form-group row"><label for="ngay_thi" class="col-sm-9">Ngày
                                                             thi tuyển</label>
                                                         <div class="col-sm-12">
-                                                        <input type="date" class="form-control" id="ngay_thi" name="ngay_thi">
+                                                        <input type="date" class="form-control" id="ngay_thi" name="ngay_thi" value="<?php echo $row['ngay_thi'] ?>">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -477,7 +363,7 @@
                                                     <div class="form-group row"><label for="ngay_nhaphoc" class="col-sm-9">Ngày
                                                             nhập học<code>*</code></label>
                                                         <div class="col-sm-12">
-                                                        <input type="date" class="form-control" id="ngay_nhaphoc" name="ngay_nhaphoc" required>
+                                                        <input type="date" class="form-control" id="ngay_nhaphoc" name="ngay_nhaphoc" value="<?php echo $row['ngay_nhaphoc'] ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -487,7 +373,7 @@
                                                     <div class="form-group row"><label class="col-sm-9">Ngày
                                                             dự kiến xuất cảnh</label>
                                                         <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
+                                                            <input type="date" class="form-control" id="ngay_DKXC" name="ngay_DKXC" value="<?php echo $row['ngay_DKXC'] ?>"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -497,7 +383,7 @@
                                                     <div class="form-group row"><label class="col-sm-9">Ngày
                                                             dự kiến về nước</label>
                                                         <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
+                                                            <input type="date" class="form-control" id="dukien_venuoc" name="dukien_venuoc" value="<?php echo $row['dukien_venuoc'] ?>"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -507,67 +393,7 @@
                                                     <div class="form-group row"><label class="col-sm-9">Ngày
                                                             xuất cảnh</label>
                                                         <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group row"><label class="col-sm-9">Ngành
-                                                            nghề</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9">Xí
-                                                            nghiệp</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9">Địa chỉ</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" required />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9" for="phone_number">Số điện
-                                                            thoại</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="tel" id="phone_number" class="form-control"
-                                                                pattern="[0-9]+" required />
-                                                            <!-- require number -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9">Nghiệp đoàn</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9">Nơi làm việc</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
+                                                            <input type="date" class="form-control" id="ngayXC" name="ngayXC" value="<?php echo $row['ngayXC'] ?>"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -577,71 +403,76 @@
                             </div>
                             <div class="col-14 grid-margin">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <h5 style="font-weight: bold;">Lịch sử xuất khẩu lao động</h5>
-                                            <div class="row">
-                                                <div class="col-md-8 col-form-label">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9">Nơi làm việc</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group row"><label class="col-sm-9">Thời gian lao
-                                                            động từ</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group row"><label class="col-sm-9">Đến</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-9">Nơi làm việc</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group row"><label class="col-sm-9">Thời gian lao
-                                                            động từ</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group row"><label class="col-sm-9">Đến</label>
-                                                        <div class="col-sm-12">
-                                                            <input type="date" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Textarea">Ghi chú</label>
-                                                <textarea class="form-control" id="Textarea" rows="5" maxlength="200"></textarea>
-                                            </div>
-                                    </div>
+                                <div class="card-body">
+            <h5 style="font-weight: bold;">Lịch sử xuất khẩu lao động</h5>
+            <div class="row">
+                <div class="col-md-8 col-form-label">
+                    <div class="form-group row">
+                        <label class="col-sm-9">Xí nghiệp 1</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="xn1" name="xn1" value="<?php echo htmlspecialchars($xn1); ?>"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-sm-9">Thời gian lao động từ</label>
+                        <div class="col-sm-12">
+                            <input type="date" class="form-control" id="thoi_gian_ld1" name="thoi_gian_ld1" value="<?php echo htmlspecialchars($thoi_gian_ld1); ?>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-sm-9">Đến</label>
+                        <div class="col-sm-12">
+                            <input type="date" class="form-control" id="thoi_gian_ld2" name="thoi_gian_ld2" value="<?php echo htmlspecialchars($thoi_gian_ld2); ?>"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <label class="col-sm-9">Xí nghiệp 2</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="xn2" name="xn2" value="<?php echo htmlspecialchars($xn2); ?>"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-sm-9">Thời gian lao động từ</label>
+                        <div class="col-sm-12">
+                            <input type="date" class="form-control" id="thoi_gian_ld3" name="thoi_gian_ld3" value="<?php echo htmlspecialchars($thoi_gian_ld3); ?>"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-sm-9">Đến</label>
+                        <div class="col-sm-12">
+                            <input type="date" class="form-control" id="thoi_gian_ld4" name="thoi_gian_ld4" value="<?php echo htmlspecialchars($thoi_gian_ld4); ?>"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Textarea">Ghi chú</label>
+                <textarea class="form-control" id="note" name="note" rows="5" maxlength="200"><?php echo $row['note']; ?></textarea>
+            </div>
+        </div>
                                 </div>
                             </div>
-        <button type="submit" class="btn btn-primary">Lưu</button>
-        <a href="index.php" class="btn btn-secondary">Quay lại</a>
+                            <div style="text-align: right; margin-top: 10px;">
+                        <a href="?chucnang=hocvien" class="btn btn-light" type="button" style="font-size: 15px; margin-right:5px">Huỷ</a>
+                        <button type="submit" class="btn btn-primary" style="font-size: 15px;">Tạo mới</button>
+                    </div>
+        
     </form>
     <?php
         }} else {
