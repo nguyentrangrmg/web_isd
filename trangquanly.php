@@ -158,6 +158,13 @@
                                             <i class="icon-head mr-2"></i> Đổi mật khẩu
                                         </button>
                                     </form>    
+                                    <form  method="get" action="#">
+                                        <input name="chucnang" value="doi-gmail" style="display:none">
+                                        <button type="submit" class="dropdown-item preview-item" href="">
+                                            <input type="hidden" name="user" value="<?php echo $user ?>">
+                                            <i class="icon-head mr-2"></i> Đổi Gmail
+                                        </button>
+                                    </form>    
                                     
                                         <a class="dropdown-item preview-item" href="index.php?dangxuat=1">
                                             <i class="icon-outbox mr-2"></i> Đăng Xuất
@@ -189,9 +196,12 @@
                                         case 'thung-rac':
                                             include 'modules/thung-rac/hv/bin_hocvien.php';
                                             break;
-                                            case 'doi-mat-khau':
-                                                include 'changepassword_form.php';
-                                                break;
+                                        case 'doi-mat-khau':
+                                            include 'changepassword_form.php';
+                                            break;
+                                        case 'doi-gmail':
+                                            include 'changegmail.php';
+                                            break;
                                         default:
                                         include 'modules/menu.php';
                                         break;

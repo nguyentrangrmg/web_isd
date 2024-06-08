@@ -80,6 +80,9 @@
               class="d-flex justify-content-between align-items-center mb-4 extra-spacing">
               </div>  
               <?php 
+              echo "Tài khoản: admin";
+              echo "<br>";
+              echo "Mật khẩu: haylam";
               // Kiểm tra nếu có thông báo lỗi, hiển thị và sau đó xóa biến session để khi F5 lại trang sẽ k hiển thị lại lỗi
               if(isset($_SESSION['error'])){
               echo "<p style='color:red; text-align: center'>".$_SESSION['error']."</p>";
